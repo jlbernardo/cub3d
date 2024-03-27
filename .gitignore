@@ -1,0 +1,6 @@
+/obj
+cub3d
+./MLX
+/libft/*.o
+/libft/*/*.o
+/libft/libft.a
