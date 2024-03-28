@@ -6,7 +6,7 @@
 /*   By: Juliany Bernardo <julberna@student.42sp    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 18:15:38 by Juliany Ber       #+#    #+#             */
-/*   Updated: 2024/03/27 20:12:19 by Juliany Ber      ###   ########.fr       */
+/*   Updated: 2024/03/27 21:45:15 by Juliany Ber      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 # include <string.h>
 # include <sys/stat.h>
 
+# define SIZE	64
 # define WIDTH	1024
 # define HEIGHT	512
 
@@ -31,9 +32,14 @@ typedef struct s_mini
 {
 	int			px;
 	int			py;
+	int			mx;
+	int			my;
 	int			size;
-	int32_t		color;
+	char		*path;
+	char		**matrix;
 	mlx_image_t	*player;
+	mlx_image_t	*floor;
+	mlx_image_t	*wall;
 }				t_mini;
 
 typedef struct s_game
@@ -43,15 +49,22 @@ typedef struct s_game
 }				t_game;
 
 /* main calls */
+void	check(t_game *cub, int argc, char **argv);
 void	init(t_game *cub);
 void	game(t_game *cub);
-void	finisher(t_game *cub);
+void	over(t_game *cub);
 
 /* initializer */
 void	mini_map(t_game *cub);
 void	draw_player(t_game *cub);
+void	draw_matrix(t_game *cub);
 
 /* main game */
 void	actions(void *param);
+
+/* utils */
+void	get_size(t_game *cub);
+void	create_matrix(t_game *cub);
+void	color_block(mlx_image_t *img, int color);
 
 #endif
