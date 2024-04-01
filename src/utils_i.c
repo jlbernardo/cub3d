@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_i.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Juliany Bernardo <julberna@student.42sp    +#+  +:+       +#+        */
+/*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 21:29:32 by Juliany Ber       #+#    #+#             */
-/*   Updated: 2024/03/27 21:46:03 by Juliany Ber      ###   ########.fr       */
+/*   Updated: 2024/03/31 18:30:06 by julberna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ void	create_matrix(t_game *cub)
 
 	i = -1;
 	get_size(cub);
-	cub->map.matrix = ft_calloc(cub->map.my, sizeof(char *));
-	while (++i < cub->map.my)
+	cub->map.matrix = ft_calloc(cub->map.y, sizeof(char *));
+	while (++i < cub->map.y)
 		cub->map.matrix[i] = get_next_line(fd);
 	get_next_line(fd);
 	close(fd);
@@ -33,31 +33,16 @@ void	get_size(t_game *cub)
 
 	fd = open(cub->map.path, O_RDONLY);
 	string = get_next_line(fd);
-	cub->map.mx = 0;
-	cub->map.my = 0;
+	cub->map.x = 0;
+	cub->map.y = 0;
 	while (string)
 	{
-		if ((int)ft_strlen(string) > cub->map.mx)
-			cub->map.mx = ft_strlen(string);
-		cub->map.my++;
+		if ((int)ft_strlen(string) > cub->map.x)
+			cub->map.x = ft_strlen(string);
+		cub->map.y++;
 		free(string);
 		string = get_next_line(fd);
 	}
 	free(string);
 	close(fd);
-}
-
-void	color_block(mlx_image_t *img, int color)
-{
-	int	x;
-	int	y;
-
-	x = 0;
-	while (x < (int)img->width)
-	{
-		y = -1;
-		while (++y < (int)img->height)
-			mlx_put_pixel(img, x, y, color);
-		x++;
-	}
 }
