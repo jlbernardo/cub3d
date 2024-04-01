@@ -6,7 +6,7 @@
 /*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/31 18:13:41 by julberna          #+#    #+#             */
-/*   Updated: 2024/04/01 01:35:15 by julberna         ###   ########.fr       */
+/*   Updated: 2024/04/01 14:38:19 by julberna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ void	draw(void *param)
 	draw_matrix(cub);
 	draw_player(cub);
 	raycast(cub);
-	mlx_put_pixel(cub->gen, 0, 0, 0xFF0000FF);
 	mlx_image_to_window(cub->mlx, cub->gen, 0, 0);
 }
 
