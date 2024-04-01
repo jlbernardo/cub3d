@@ -6,7 +6,7 @@
 /*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 20:01:10 by Juliany Ber       #+#    #+#             */
-/*   Updated: 2024/04/01 16:34:17 by julberna         ###   ########.fr       */
+/*   Updated: 2024/04/01 19:10:09 by julberna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,21 +40,19 @@ void	actions(void *param)
 	}
 	if (mlx_is_key_down(cub->mlx, MLX_KEY_RIGHT)
 		|| mlx_is_key_down(cub->mlx, MLX_KEY_D))
-	{
 		cub->p1.angle -= 0.1;
-		if (cub->p1.angle < 0)
-			cub->p1.angle += 2 * PI;
-		cub->p1.delta_x = cos(cub->p1.angle) * 5;
-		cub->p1.delta_y = sin(cub->p1.angle) * 5;
-
-	}
 	if (mlx_is_key_down(cub->mlx, MLX_KEY_LEFT)
 		|| mlx_is_key_down(cub->mlx, MLX_KEY_A))
-	{
 		cub->p1.angle += 0.1;
-		if (cub->p1.angle > 2 * PI)
-			cub->p1.angle -= 2 * PI;
-		cub->p1.delta_x = cos(cub->p1.angle) * 5;
-		cub->p1.delta_y = sin(cub->p1.angle) * 5;
-	}
+	after_move_setting(cub);
+}
+
+void	after_move_setting(t_game *cub)
+{
+	if (cub->p1.angle < 0)
+		cub->p1.angle += 2 * PI;
+	if (cub->p1.angle > 2 * PI)
+		cub->p1.angle -= 2 * PI;
+	cub->p1.delta_x = cos(cub->p1.angle) * 5;
+	cub->p1.delta_y = sin(cub->p1.angle) * 5;
 }

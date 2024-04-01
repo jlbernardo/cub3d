@@ -6,51 +6,53 @@
 /*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/01 15:44:30 by julberna          #+#    #+#             */
-/*   Updated: 2024/04/01 15:45:10 by julberna         ###   ########.fr       */
+/*   Updated: 2024/04/01 19:39:42 by julberna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
 int		absolute(int num);
+void	algo_setup(t_draw *line, int point_a[X_AND_Y], int point_b[X_AND_Y]);
 
-void	line(t_game *cub, int x1, int y1, int x2, int y2)
+void	line(t_game *cub, int point_a[X_AND_Y], int point_b[X_AND_Y])
 {
-	int	dx;
-	int	dy;
-	int	sx;
-	int	sy;
-	int	error;
+	t_draw	line;
 
-	sx = 1;
-	sy = 1;
-	dx = absolute(x2 - x1);
-	dy = absolute(y2 - y1);
-	if (x1 > x2)
-		sx = -1;
-	if (y1 > y2)
-		sy = -1;
-	error = dx - dy;
+	algo_setup(&line, point_a, point_b);
 	while (true)
 	{
-		mlx_put_pixel(cub->gen, y1, x1, 0x21F2FCFF);
-		if (x1 == x2 && y1 == y2)
+		mlx_put_pixel(cub->gen, point_a[Y], point_a[X], 0x21F2FCFF);
+		if (point_a[X] == point_b[X] && point_a[Y] == point_b[Y])
 			break ;
-		if (error * 2 >= -dy)
+		if (line.error * 2 >= -line.dy)
 		{
-			if (x1 == x2)
+			if (point_a[X] == point_b[X])
 				break ;
-			error -= dy;
-			x1 += sx;
+			line.error -= line.dy;
+			point_a[X] += line.sx;
 		}
-		if (error * 2 <= dx)
+		if (line.error * 2 <= line.dx)
 		{
-			if (y1 == y2)
+			if (point_a[Y] == point_b[Y])
 				break ;
-			error += dx;
-			y1 += sy;
+			line.error += line.dx;
+			point_a[Y] += line.sy;
 		}
 	}
+}
+
+void	algo_setup(t_draw *line, int point_a[X_AND_Y], int point_b[X_AND_Y])
+{
+	line->sx = 1;
+	line->sy = 1;
+	line->dx = absolute(point_b[X] - point_a[X]);
+	line->dy = absolute(point_b[Y] - point_a[Y]);
+	if (point_a[X] > point_b[X])
+		line->sx = -1;
+	if (point_a[Y] > point_b[Y])
+		line->sy = -1;
+	line->error = line->dx - line->dy;
 }
 
 int	absolute(int num)
