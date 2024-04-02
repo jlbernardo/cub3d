@@ -6,7 +6,7 @@
 /*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 18:15:38 by Juliany Ber       #+#    #+#             */
-/*   Updated: 2024/04/01 19:33:22 by julberna         ###   ########.fr       */
+/*   Updated: 2024/04/01 23:53:03 by julberna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,27 +32,24 @@
 # define X			0
 # define Y			1
 
-typedef struct s_cast
+typedef struct s_point
 {
-	int			ray_x;
-	int			ray_y;
-	int			map_x;
-	int			map_y;
-	int			count;
-	int			map_pos;
-	int			depth_of_field;
-	float		x_offset;
-	float		y_offset;
-	float		angle;
-}				t_cast;
+	double		x;
+	double		y;
+}				t_point;
+
+typedef struct s_vector
+{
+	double		x;
+	double		y;
+}				t_vector;
 
 typedef struct s_player
 {
-	int		x;
-	int		y;
-	float	angle;
-	float	delta_x;
-	float	delta_y;
+	int			x;
+	int			y;
+	t_vector	dir;
+	t_vector	plane;
 }				t_player;
 
 typedef struct s_matrix
@@ -66,7 +63,6 @@ typedef struct s_matrix
 typedef struct s_game
 {
 	mlx_t		*mlx;
-	t_cast		ray;
 	t_player	p1;
 	t_matrix	map;
 	mlx_image_t	*gen;
