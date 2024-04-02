@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycast.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aperis-p <aperis-p@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/31 20:27:07 by julberna          #+#    #+#             */
-/*   Updated: 2024/04/01 01:32:33 by julberna         ###   ########.fr       */
+/*   Updated: 2024/04/01 21:05:17 by aperis-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,60 +18,91 @@ void	line(t_game *cub, int x1, int y1, int x2, int y2);
 
 void	raycast(t_game *cub)
 {
-	int	x1;
-	int	x2;
-	int	y1;
-	int	y2;
+	int		i;
+	float	atan;
 
-	x1 = cub->p1.x;
-	y1 = cub->p1.y;
-	x2 = cub->p1.x + cub->p1.delta_x * 5;
-	y2 = cub->p1.y + cub->p1.delta_y * 5;
-	line(cub, x1, y1, x2, y2);
-}
-
-void	line(t_game *cub, int x1, int y1, int x2, int y2)
-{
-	int	dx;
-	int	dy;
-	int	sx;
-	int	sy;
-	int	error;
-
-	sx = 1;
-	sy = 1;
-	dx = absolute(x2 - x1);
-	dy = absolute(y2 - y1);
-	if (x1 > x2)
-		sx = -1;
-	if (y1 > y2)
-		sy = -1;
-	error = dx - dy;
-	while (true)
+	i = 0;
+	cub->ray.angle = cub->p1.angle;
+	cub->ray.count = 1;
+	while (i < cub->ray.count)
 	{
-		mlx_put_pixel(cub->gen, y1, x1, 0x21F2FCFF);
-		if (x1 == x2 && y1 == y2)
-			break ;
-		if (error * 2 >= -dy)
+		cub->ray.depth_of_field = 0;
+		atan = (float)-tan(cub->ray.angle);
+		if ((float)cos(cub->ray.angle) > 0.001)
 		{
-			if (x1 == x2)
-				break ;
-			error -= dy;
-			x1 += sx;
+			cub->ray.ray_x = (((int)cub->p1.x >> 6) << 6)  + SIZE;
+			cub->ray.ray_y = (cub->p1.x - cub->ray.ray_x) * atan + cub->p1.y;
+			cub->ray.x_offset = SIZE;
+			cub->ray.y_offset = -cub->ray.x_offset * atan;
+		}
+		else if ((float)cos(cub->ray.angle) < -0.001)
+		{
+			cub->ray.ray_x = (((int)cub->p1.x >> 6) << 6) - 0.0001;
+			cub->ray.ray_y = (cub->p1.x - cub->ray.ray_x) * atan + cub->p1.y;
+			cub->ray.x_offset = -SIZE;
+			cub->ray.y_offset = -cub->ray.x_offset * atan;
+		}
+		else
+		{
+			cub->ray.ray_x = cub->p1.x;
+			cub->ray.ray_y = cub->p1.y;
+			cub->ray.depth_of_field = 8;
 		}
 		if (error * 2 <= dx)
 		{
-			if (y1 == y2)
-				break ;
-			error += dx;
-			y1 += sy;
+			if (cub->map.matrix[(int)cub->ray.ray_x / SIZE][(int)cub->ray.ray_y / SIZE] == '1')
+			{
+				cub->ray.depth_of_field = 8;
+			}
+			else
+			{
+				cub->ray.ray_x += cub->ray.x_offset;
+				cub->ray.ray_y += cub->ray.y_offset;
+				cub->ray.depth_of_field++;
+			}
 		}
+		line(cub, cub->p1.x, cub->p1.y, cub->ray.ray_x, cub->ray.ray_y);
+		i++;
 	}
+	
+	// while (i < cub->ray.count)
+	// {
+	// 	cub->ray.depth_of_field = 0;
+	// 	atan = -tan(cub->ray.angle);
+	// 	if (cub->ray.angle > PI / 2 && cub->ray.angle < 3 * PI / 2)
+	// 	{
+	// 		cub->ray.ray_x = cub->p1.x;
+	// 		cub->ray.ray_y = (cub->p1.x - cub->ray.ray_x) * atan + cub->p1.y;
+	// 		cub->ray.x_offset = -SIZE;
+	// 		cub->ray.y_offset = -cub->ray.x_offset * atan;
+	// 	}
+	// 	if (cub->ray.angle < PI / 2 || cub->ray.angle > 3 * PI / 2)
+	// 	{
+	// 		cub->ray.ray_x = cub->p1.x + SIZE;
+	// 		cub->ray.ray_y = (cub->p1.x - cub->ray.ray_x) * atan + cub->p1.y;
+	// 		cub->ray.x_offset = SIZE;
+	// 		cub->ray.y_offset = -cub->ray.x_offset * atan;
+	// 	}
+	// 	if (cub->ray.angle == 0 || cub->ray.angle == PI)
+	// 	{
+	// 		cub->ray.ray_x = cub->p1.x;
+	// 		cub->ray.ray_y = cub->p1.y;
+	// 		cub->ray.depth_of_field = 8;
+	// 	}
+	// 	while (cub->ray.depth_of_field < 8)
+	// 	{
+	// 		if (cub->ray.ray_x < (cub->map.x * SIZE) && cub->ray.ray_y < (cub->map.y * SIZE)
+	// 			&& cub->map.matrix[cub->ray.ray_y / SIZE][cub->ray.ray_x / SIZE] == '1')
+	// 			cub->ray.depth_of_field = 8;
+	// 		else
+	// 		{
+	// 			cub->ray.ray_x += cub->ray.x_offset;
+	// 			cub->ray.ray_y += cub->ray.y_offset;
+	// 			cub->ray.depth_of_field++;
+	// 		}
+	// 	}
+	// 	line(cub, cub->p1.x, cub->p1.y, cub->ray.ray_x, cub->ray.ray_y);
+	// 	i++;
+	// }
 }
 
-int	absolute(int num)
-{
-	if (num < 0)
-		return (-num);
-	return (num);
-}

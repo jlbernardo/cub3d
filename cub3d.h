@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aperis-p <aperis-p@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 18:15:38 by Juliany Ber       #+#    #+#             */
-/*   Updated: 2024/04/01 01:23:42 by julberna         ###   ########.fr       */
+/*   Updated: 2024/04/01 21:04:09 by aperis-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,24 @@
 # define HEIGHT	512
 # define PI		3.141592653589793238462643383279502884197169
 
+typedef struct s_cast
+{
+	float			ray_x;
+	float			ray_y;
+	float			map_x;
+	float			map_y;
+	int			count;
+	int			map_pos;
+	int			depth_of_field;
+	float		x_offset;
+	float		y_offset;
+	float		angle;
+}				t_cast;
+
 typedef struct s_player
 {
-	int		x;
-	int		y;
+	float		x;
+	float		y;
 	float	angle;
 	float	delta_x;
 	float	delta_y;
@@ -40,8 +54,8 @@ typedef struct s_player
 
 typedef struct s_matrix
 {
-	int			x;
-	int			y;
+	float			x;
+	float			y;
 	char		*path;
 	char		**matrix;
 }				t_matrix;
