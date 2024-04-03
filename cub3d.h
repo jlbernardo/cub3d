@@ -6,7 +6,7 @@
 /*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 18:15:38 by Juliany Ber       #+#    #+#             */
-/*   Updated: 2024/04/03 01:17:56 by julberna         ###   ########.fr       */
+/*   Updated: 2024/04/03 02:02:48 by julberna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,25 @@ typedef struct s_vector
 	double		y;
 }				t_vector;
 
+typedef struct s_ray
+{
+	int			side;
+	bool		hit;
+	double		camera_x;
+	double		perp_wall_dist;
+	t_coord		delta_dist;
+	t_coord		side_dist;
+	t_coord		step;
+	t_coord		map;
+	t_vector	dir;
+}				t_ray;
+
 typedef struct s_game
 {
 	char		**map_matrix;
 	char		*map_path;
 	mlx_t		*mlx;
+	t_ray		ray;
 	t_coord		map;
 	t_coord		p1;
 	t_vector	direction;
@@ -65,19 +79,6 @@ typedef struct s_draw
 	int			error;
 }				t_draw;
 
-typedef struct s_ray
-{
-	int			side;
-	bool		hit;
-	double		camera_x;
-	double		perp_wall_dist;
-	t_coord		delta_dist;
-	t_coord		side_dist;
-	t_coord		step;
-	t_coord		map;
-	t_vector	dir;
-}				t_ray;
-
 /* main calls */
 void		check(t_game *cub, int argc, char **argv);
 void		init(t_game *cub);
@@ -91,11 +92,11 @@ void		draw_matrix(t_game *cub);
 void		raycast(t_game *cub, int i);
 void		line(t_game *cub, t_coord start, t_coord end, int color);
 void		draw_block(t_game *cub, int x, int y, int color);
-void		initial_ray_setup(t_ray *ray, t_game *cub, int i);
-void		calculate_delta_distance(t_ray *ray);
-void		calculate_step_and_initial_side_distance(t_ray *ray, t_game *cub);
-void		calculate_wall_distance(t_ray *ray, t_game *cub);
-void		draw_line(t_game *cub, t_ray *ray, int i);
+void		initial_ray_setup(t_game *cub, int i);
+void		calculate_delta_distance(t_game *cub);
+void		calculate_step_and_initial_side_distance(t_game *cub);
+void		calculate_wall_distance(t_game *cub);
+void		draw_line(t_game *cub, int i);
 
 /* main game */
 void		actions(void *param);

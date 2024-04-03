@@ -6,7 +6,7 @@
 /*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 20:01:10 by Juliany Ber       #+#    #+#             */
-/*   Updated: 2024/04/03 00:47:45 by julberna         ###   ########.fr       */
+/*   Updated: 2024/04/03 02:05:50 by julberna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,14 @@ void	actions(void *param)
 	if (mlx_is_key_down(cub->mlx, MLX_KEY_DOWN)
 		|| mlx_is_key_down(cub->mlx, MLX_KEY_S))
 	{
+		cub->p1.x -= cub->ray.dir.x;
+		cub->p1.y -= cub->ray.dir.y;
 	}
 	if (mlx_is_key_down(cub->mlx, MLX_KEY_UP)
 		|| mlx_is_key_down(cub->mlx, MLX_KEY_W))
 	{
+		cub->p1.x += cub->ray.dir.x;
+		cub->p1.y += cub->ray.dir.y;
 	}
 	if (mlx_is_key_down(cub->mlx, MLX_KEY_RIGHT)
 		|| mlx_is_key_down(cub->mlx, MLX_KEY_D))
