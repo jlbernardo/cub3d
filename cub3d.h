@@ -6,7 +6,7 @@
 /*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 18:15:38 by Juliany Ber       #+#    #+#             */
-/*   Updated: 2024/04/03 02:02:48 by julberna         ###   ########.fr       */
+/*   Updated: 2024/04/03 16:00:45 by julberna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,10 +63,14 @@ typedef struct s_game
 	char		*map_path;
 	mlx_t		*mlx;
 	t_ray		ray;
+	double		time;
+	double		old_time;
+	double		move_speed;
+	double		rotation_speed;
+	t_vector	camera_plane;
+	t_vector	direction;
 	t_coord		map;
 	t_coord		p1;
-	t_vector	direction;
-	t_vector	camera_plane;
 	mlx_image_t	*gen;
 }				t_game;
 
@@ -97,6 +101,8 @@ void		calculate_delta_distance(t_game *cub);
 void		calculate_step_and_initial_side_distance(t_game *cub);
 void		calculate_wall_distance(t_game *cub);
 void		draw_line(t_game *cub, int i);
+void		rotate_right(t_game *cub);
+void		calculate_frames_per_second(t_game *cub);
 
 /* main game */
 void		actions(void *param);

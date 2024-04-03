@@ -6,7 +6,7 @@
 /*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 21:28:39 by julberna          #+#    #+#             */
-/*   Updated: 2024/04/03 02:01:48 by julberna         ###   ########.fr       */
+/*   Updated: 2024/04/03 16:01:05 by julberna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,13 @@
 
 void	initial_ray_setup(t_game *cub, int i)
 {
+	cub->time = 0;
+	cub->old_time = 0;
 	cub->ray.hit = false;
 	cub->ray.camera_x = 2 * i / (double)WIDTH - 1;
+	cub->ray.map = coordinate(cub->p1.x, cub->p1.y);
 	cub->ray.dir.x = cub->direction.x + cub->camera_plane.x * cub->ray.camera_x;
 	cub->ray.dir.y = cub->direction.y + cub->camera_plane.y * cub->ray.camera_x;
-	cub->ray.map = coordinate(cub->p1.x, cub->p1.y);
 }
 
 void	calculate_delta_distance(t_game *cub)

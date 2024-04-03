@@ -6,7 +6,7 @@
 /*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/31 20:27:07 by julberna          #+#    #+#             */
-/*   Updated: 2024/04/03 02:00:58 by julberna         ###   ########.fr       */
+/*   Updated: 2024/04/03 15:54:43 by julberna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,18 @@ void	raycast(t_game *cub, int i)
 		calculate_wall_distance(cub);
 		draw_line(cub, i);
 	}
+	calculate_frames_per_second(cub);
+}
+
+void	calculate_frames_per_second(t_game *cub)
+{
+	double	frame_time;
+
+	cub->old_time = cub->time;
+	cub->time = mlx_get_time();
+	frame_time = (cub->time - cub->old_time) / 1000.0;
+	cub->move_speed = frame_time * 5.0;
+	cub->rotation_speed = frame_time * 3.0;
 }
 
 void	draw_line(t_game *cub, int i)
