@@ -6,7 +6,7 @@
 /*   By: aperis-p <aperis-p@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/31 20:27:07 by julberna          #+#    #+#             */
-/*   Updated: 2024/04/01 21:05:17 by aperis-p         ###   ########.fr       */
+/*   Updated: 2024/04/02 18:59:42 by aperis-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 #include <stdio.h>
 
 int	absolute(int num);
-void	line(t_game *cub, int x1, int y1, int x2, int y2);
 
 void	raycast(t_game *cub)
 {
@@ -26,6 +25,7 @@ void	raycast(t_game *cub)
 	cub->ray.count = 1;
 	while (i < cub->ray.count)
 	{
+		// HORIZONTAL COLLISION DETECTION 
 		cub->ray.depth_of_field = 0;
 		atan = (float)-tan(cub->ray.angle);
 		if ((float)cos(cub->ray.angle) > 0.001)
@@ -48,42 +48,44 @@ void	raycast(t_game *cub)
 			cub->ray.ray_y = cub->p1.y;
 			cub->ray.depth_of_field = 8;
 		}
-		if (error * 2 <= dx)
+		while (cub->ray.depth_of_field < 8)
 		{
-			if (cub->map.matrix[(int)cub->ray.ray_x / SIZE][(int)cub->ray.ray_y / SIZE] == '1')
+			if(cub->ray.ray_x >= 0 && cub->ray.ray_y >= 0)
 			{
-				cub->ray.depth_of_field = 8;
+				if (cub->map.matrix[(int)cub->ray.ray_x / SIZE][(int)cub->ray.ray_y / SIZE] == '1')
+				{
+					cub->ray.depth_of_field = 8;
+					line(cub, cub->p1.x, cub->p1.y, cub->ray.ray_x, cub->ray.ray_y);
+				}
 			}
+			else if(cub->ray.ray_x < 0 || cub->ray.ray_y < 0)
+				return ;
 			else
 			{
 				cub->ray.ray_x += cub->ray.x_offset;
 				cub->ray.ray_y += cub->ray.y_offset;
 				cub->ray.depth_of_field++;
-			}
+			}				
 		}
-		line(cub, cub->p1.x, cub->p1.y, cub->ray.ray_x, cub->ray.ray_y);
-		i++;
-	}
-	
-	// while (i < cub->ray.count)
-	// {
+		// line(cub, cub->p1.x, cub->p1.y, cub->ray.ray_x, cub->ray.ray_y);
+		//VERTICAL COLLISION DETECTION
 	// 	cub->ray.depth_of_field = 0;
-	// 	atan = -tan(cub->ray.angle);
-	// 	if (cub->ray.angle > PI / 2 && cub->ray.angle < 3 * PI / 2)
+	// 	atan = 1.0 * atan;
+	// 	if ((float)sin(cub->ray.angle) > 0.001)
 	// 	{
-	// 		cub->ray.ray_x = cub->p1.x;
-	// 		cub->ray.ray_y = (cub->p1.x - cub->ray.ray_x) * atan + cub->p1.y;
-	// 		cub->ray.x_offset = -SIZE;
-	// 		cub->ray.y_offset = -cub->ray.x_offset * atan;
+	// 		cub->ray.ray_y = (((int)cub->p1.y >> 6) << 6) - 0.0001;
+	// 		cub->ray.ray_x = (cub->p1.y - cub->ray.ray_y) * atan + cub->p1.x;
+	// 		cub->ray.y_offset = -SIZE;
+	// 		cub->ray.x_offset = -cub->ray.y_offset * atan;
 	// 	}
-	// 	if (cub->ray.angle < PI / 2 || cub->ray.angle > 3 * PI / 2)
+	// 	else if ((float)sin(cub->ray.angle) < -0.001)
 	// 	{
-	// 		cub->ray.ray_x = cub->p1.x + SIZE;
-	// 		cub->ray.ray_y = (cub->p1.x - cub->ray.ray_x) * atan + cub->p1.y;
-	// 		cub->ray.x_offset = SIZE;
-	// 		cub->ray.y_offset = -cub->ray.x_offset * atan;
+	// 		cub->ray.ray_y = (((int)cub->p1.y >> 6) << 6) + SIZE;
+	// 		cub->ray.ray_x = (cub->p1.y - cub->ray.ray_y) * atan + cub->p1.x;
+	// 		cub->ray.y_offset = SIZE;
+	// 		cub->ray.x_offset = -cub->ray.y_offset * atan;
 	// 	}
-	// 	if (cub->ray.angle == 0 || cub->ray.angle == PI)
+	// 	else
 	// 	{
 	// 		cub->ray.ray_x = cub->p1.x;
 	// 		cub->ray.ray_y = cub->p1.y;
@@ -91,9 +93,11 @@ void	raycast(t_game *cub)
 	// 	}
 	// 	while (cub->ray.depth_of_field < 8)
 	// 	{
-	// 		if (cub->ray.ray_x < (cub->map.x * SIZE) && cub->ray.ray_y < (cub->map.y * SIZE)
-	// 			&& cub->map.matrix[cub->ray.ray_y / SIZE][cub->ray.ray_x / SIZE] == '1')
+	// 		if (cub->map.matrix[(int)cub->ray.ray_x / SIZE][(int)cub->ray.ray_y / SIZE] == '1')
+	// 		{
 	// 			cub->ray.depth_of_field = 8;
+	// 			line(cub, cub->p1.x, cub->p1.y, cub->ray.ray_x, cub->ray.ray_y);
+	// 		}
 	// 		else
 	// 		{
 	// 			cub->ray.ray_x += cub->ray.x_offset;
@@ -101,8 +105,7 @@ void	raycast(t_game *cub)
 	// 			cub->ray.depth_of_field++;
 	// 		}
 	// 	}
-	// 	line(cub, cub->p1.x, cub->p1.y, cub->ray.ray_x, cub->ray.ray_y);
-	// 	i++;
-	// }
+		i++;
+	}
+	// line(cub, cub->p1.x, cub->p1.y, cub->ray.ray_x, cub->ray.ray_y);
 }
-

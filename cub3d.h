@@ -6,7 +6,7 @@
 /*   By: aperis-p <aperis-p@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 18:15:38 by Juliany Ber       #+#    #+#             */
-/*   Updated: 2024/04/01 21:04:09 by aperis-p         ###   ########.fr       */
+/*   Updated: 2024/04/02 16:32:58 by aperis-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,9 @@
 # define WIDTH	1024
 # define HEIGHT	512
 # define PI		3.141592653589793238462643383279502884197169
+# define X_AND_Y	2
+# define X			0
+# define Y			1
 
 typedef struct s_cast
 {
@@ -63,12 +66,13 @@ typedef struct s_matrix
 typedef struct s_game
 {
 	mlx_t		*mlx;
+	t_cast		ray;
 	t_player	p1;
 	t_matrix	map;
 	mlx_image_t	*gen;
 }				t_game;
 
-/* main calls */
+/*  calls */
 void	check(t_game *cub, int argc, char **argv);
 void	init(t_game *cub);
 void	game(t_game *cub);
@@ -79,11 +83,21 @@ void	draw(void *cub);
 void	raycast(t_game *cub);
 void	draw_player(t_game *cub);
 void	draw_matrix(t_game *cub);
+void	line(t_game *cub, int x1, int y1, int x2, int y2);
 void	draw_block(t_game *cub, int x, int y, int color);
 void	steep(t_game *cub, int delta_x, int delta_y);
 void	shallow(t_game *cub, int delta_x, int delta_y);
 
-/* main game */
+typedef struct s_draw
+{
+	int			dx;
+	int			dy;
+	int			sx;
+	int			sy;
+	int			error;
+}				t_draw;
+
+/*  game */
 void	actions(void *param);
 
 /* utils */
