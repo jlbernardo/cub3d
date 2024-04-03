@@ -6,7 +6,7 @@
 /*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/31 18:13:41 by julberna          #+#    #+#             */
-/*   Updated: 2024/04/01 14:38:19 by julberna         ###   ########.fr       */
+/*   Updated: 2024/04/02 23:39:34 by julberna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ void	draw(void *param)
 	cub = param;
 	mlx_delete_image(cub->mlx, cub->gen);
 	cub->gen = mlx_new_image(cub->mlx, WIDTH, HEIGHT);
-	draw_matrix(cub);
-	draw_player(cub);
-	raycast(cub);
+	// draw_matrix(cub);
+	// draw_player(cub);
+	raycast(cub, -1);
 	mlx_image_to_window(cub->mlx, cub->gen, 0, 0);
 }
 
@@ -51,9 +51,9 @@ void	draw_matrix(t_game *cub)
 		y = -1;
 		while (++y < cub->map.y)
 		{
-			if (cub->map.matrix[y][x] == '1')
+			if (cub->map_matrix[y][x] == '1')
 				draw_block(cub, x * SIZE, y * SIZE, 0xFFFFFFFF);
-			else if (cub->map.matrix[y][x] == '0')
+			else if (cub->map_matrix[y][x] == '0')
 				draw_block(cub, x * SIZE, y * SIZE, 0x000000FF);
 		}
 		x++;

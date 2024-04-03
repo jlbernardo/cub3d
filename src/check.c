@@ -19,5 +19,5 @@ void	check(t_game *cub, int argc, char **argv)
 		write(STDERR_FILENO, "Wrong number of arguments.\n", 27);
 		exit(EXIT_FAILURE);
 	}
-	cub->map.path = argv[1];
+	cub->map_path = argv[1];
 }

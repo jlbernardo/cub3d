@@ -6,7 +6,7 @@
 /*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 20:01:10 by Juliany Ber       #+#    #+#             */
-/*   Updated: 2024/04/01 19:10:09 by julberna         ###   ########.fr       */
+/*   Updated: 2024/04/03 00:47:45 by julberna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,30 +29,20 @@ void	actions(void *param)
 	if (mlx_is_key_down(cub->mlx, MLX_KEY_DOWN)
 		|| mlx_is_key_down(cub->mlx, MLX_KEY_S))
 	{
-		cub->p1.x -= cub->p1.delta_x;
-		cub->p1.y -= cub->p1.delta_y;
 	}
 	if (mlx_is_key_down(cub->mlx, MLX_KEY_UP)
 		|| mlx_is_key_down(cub->mlx, MLX_KEY_W))
 	{
-		cub->p1.x += cub->p1.delta_x;
-		cub->p1.y += cub->p1.delta_y;
 	}
 	if (mlx_is_key_down(cub->mlx, MLX_KEY_RIGHT)
 		|| mlx_is_key_down(cub->mlx, MLX_KEY_D))
-		cub->p1.angle -= 0.1;
+		;
 	if (mlx_is_key_down(cub->mlx, MLX_KEY_LEFT)
 		|| mlx_is_key_down(cub->mlx, MLX_KEY_A))
-		cub->p1.angle += 0.1;
-	after_move_setting(cub);
+		;
+	// after_move_setting(cub);
 }
 
-void	after_move_setting(t_game *cub)
-{
-	if (cub->p1.angle < 0)
-		cub->p1.angle += 2 * PI;
-	if (cub->p1.angle > 2 * PI)
-		cub->p1.angle -= 2 * PI;
-	cub->p1.delta_x = cos(cub->p1.angle) * 5;
-	cub->p1.delta_y = sin(cub->p1.angle) * 5;
-}
+// void	after_move_setting(t_game *cub)
+// {
+// }

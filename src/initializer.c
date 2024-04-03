@@ -6,7 +6,7 @@
 /*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 19:29:16 by Juliany Ber       #+#    #+#             */
-/*   Updated: 2024/04/01 23:47:02 by julberna         ###   ########.fr       */
+/*   Updated: 2024/04/03 01:08:57 by julberna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,8 @@ void	init(t_game *cub)
 {
 	create_matrix(cub);
 	cub->mlx = mlx_init(WIDTH, HEIGHT, "cub3d?", false);
-	cub->p1.x = 300;
-	cub->p1.y = 300;
-	cub->p1.dir.x = 1;
-	cub->p1.dir.y = 0;
-	cub->p1.plane.x = 0;
-	cub->p1.plane.y = 0.66;
+	cub->p1 = coordinate(4, 4);
+	cub->direction = vector(1, 0);
+	cub->camera_plane = vector(0, 0.66);
 	draw(cub);
 }
