@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   bresenham.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aperis-p <aperis-p@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/01 15:44:30 by julberna          #+#    #+#             */
-/*   Updated: 2024/04/03 01:49:30 by julberna         ###   ########.fr       */
+/*   Updated: 2024/04/03 20:55:13 by aperis-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ void	line(t_game *cub, t_coord start, t_coord end, int color)
 	algo_setup(&line, start, end);
 	while (true)
 	{
+		if(start.x < 0 || start.y < 0)
+			return ;
 		mlx_put_pixel(cub->gen, start.y, start.x, color);
 		if (start.x == end.x && start.y == end.y)
 			break ;

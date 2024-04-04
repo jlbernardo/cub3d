@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aperis-p <aperis-p@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 18:15:38 by Juliany Ber       #+#    #+#             */
-/*   Updated: 2024/04/03 16:00:45 by julberna         ###   ########.fr       */
+/*   Updated: 2024/04/03 19:45:55 by aperis-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,7 @@ void		calculate_wall_distance(t_game *cub);
 void		draw_line(t_game *cub, int i);
 void		rotate_right(t_game *cub);
 void		calculate_frames_per_second(t_game *cub);
+void		rotate_left(t_game *cub);
 
 /* main game */
 void		actions(void *param);
