@@ -6,7 +6,7 @@
 /*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 18:15:38 by Juliany Ber       #+#    #+#             */
-/*   Updated: 2024/04/01 19:33:22 by julberna         ###   ########.fr       */
+/*   Updated: 2024/04/03 23:11:03 by julberna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,83 +24,92 @@
 # include <string.h>
 # include <sys/stat.h>
 
-# define SIZE		64
-# define HEIGHT		512
-# define WIDTH		1024
-# define PI			3.141592653589793238462643383279502884197169
-# define X_AND_Y	2
+# define HEIGHT		480
+# define WIDTH		640
 # define X			0
 # define Y			1
 
-typedef struct s_cast
+typedef struct s_coord
 {
-	int			ray_x;
-	int			ray_y;
-	int			map_x;
-	int			map_y;
-	int			count;
-	int			map_pos;
-	int			depth_of_field;
-	float		x_offset;
-	float		y_offset;
-	float		angle;
-}				t_cast;
+	double		x;
+	double		y;
+}				t_coord;
 
-typedef struct s_player
+typedef struct s_vector
 {
-	int		x;
-	int		y;
-	float	angle;
-	float	delta_x;
-	float	delta_y;
-}				t_player;
+	double		x;
+	double		y;
+}				t_vector;
 
-typedef struct s_matrix
+typedef struct s_ray
 {
-	int			x;
-	int			y;
-	char		*path;
-	char		**matrix;
-}				t_matrix;
+	int			side;
+	bool		hit;
+	double		camera_x;
+	double		perp_wall_dist;
+	t_coord		delta_dist;
+	t_coord		side_dist;
+	t_coord		step;
+	t_coord		map;
+	t_vector	dir;
+}				t_ray;
 
 typedef struct s_game
 {
+	char		**map_matrix;
+	char		*map_path;
 	mlx_t		*mlx;
-	t_cast		ray;
-	t_player	p1;
-	t_matrix	map;
-	mlx_image_t	*gen;
+	t_ray		ray;
+	double		time;
+	double		old_time;
+	double		move_speed;
+	double		rotation_speed;
+	t_vector	camera_plane;
+	t_vector	direction;
+	t_coord		map;
+	t_coord		p1;
+	mlx_image_t	*screen;
 }				t_game;
 
 typedef struct s_draw
 {
-	int			dx;
-	int			dy;
-	int			sx;
-	int			sy;
 	int			error;
+	int			step_x;
+	int			step_y;
+	int			delta_x;
+	int			delta_y;
 }				t_draw;
 
 /* main calls */
-void	check(t_game *cub, int argc, char **argv);
-void	init(t_game *cub);
-void	game(t_game *cub);
-void	over(t_game *cub);
+void		check(t_game *cub, int argc, char **argv);
+void		init(t_game *cub);
+void		game(t_game *cub);
+void		over(t_game *cub);
 
-/* draw elements */
-void	draw(void *cub);
-void	raycast(t_game *cub);
-void	draw_player(t_game *cub);
-void	draw_matrix(t_game *cub);
-void	line(t_game *cub, int a[2], int b[2]);
-void	draw_block(t_game *cub, int x, int y, int color);
+/* raycast */
+void		raycast(t_game *cub);
+void		draw_line(t_game *cub, int i);
+void		calculate_wall_distance(t_game *cub);
+void		initial_ray_setup(t_game *cub, int i);
+void		calculate_delta_distance(t_game *cub);
+void		calculate_frames_per_second(t_game *cub);
+void		calculate_step_and_initial_side_distance(t_game *cub);
+
+/* bresenham */
+void		algo_setup(t_draw *line, t_coord start, t_coord end);
+void		line(t_game *cub, t_coord start, t_coord end, int color);
 
 /* main game */
-void	actions(void *param);
-void	after_move_setting(t_game *cub);
+void		actions(void *param);
+void		walk_back(t_game *cub);
+void		walk_forward(t_game *cub);
+void		rotate_left(t_game *cub);
+void		rotate_right(t_game *cub);
 
 /* utils */
-void	get_size(t_game *cub);
-void	create_matrix(t_game *cub);
+void		get_size(t_game *cub);
+void		create_matrix(t_game *cub);
+t_coord		coordinate(double x, double y);
+t_vector	vector(double x, double y);
 
 #endif
