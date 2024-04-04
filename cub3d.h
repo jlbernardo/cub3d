@@ -6,7 +6,7 @@
 /*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 18:15:38 by Juliany Ber       #+#    #+#             */
-/*   Updated: 2024/04/04 16:09:34 by julberna         ###   ########.fr       */
+/*   Updated: 2024/04/04 17:36:05 by julberna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,14 @@
 # include <string.h>
 # include <sys/stat.h>
 
-# define HEIGHT		480
-# define WIDTH		640
+# define HEIGHT		1080
+# define WIDTH		1220
 # define X			0
 # define Y			1
+# define NO			0
+# define SO			1
+# define EA			2
+# define WE			3
 
 typedef struct s_coord
 {
@@ -89,6 +93,7 @@ void		over(t_game *cub);
 /* raycast */
 void		raycast(t_game *cub);
 void		draw_line(t_game *cub, int i);
+void		wall_side(t_game *cub, int axis);
 void		calculate_wall_distance(t_game *cub);
 void		initial_ray_setup(t_game *cub, int i);
 void		calculate_delta_distance(t_game *cub);
