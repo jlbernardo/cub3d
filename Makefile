@@ -14,8 +14,9 @@ INCLUDE	= -I./libft -I. -I./.MLX42/include/MLX42
 SDIR	= src/
 ODIR	= obj/
 
-SRC		= $(addprefix $(SDIR), cub3d.c check.c initializer.c draw.c raycast.c \
-								raycast_utils.c game.c bresenham.c over.c utils_i.c)
+SRC		= $(addprefix $(SDIR), cub3d.c check.c initializer.c raycast.c \
+								raycast_utils.c game.c bresenham.c over.c \
+								actions.c utils.c)
 OBJ		= $(SRC:$(SDIR)%.c=$(ODIR)%.o)
 
 BLU 	=	\033[1;36m

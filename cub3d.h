@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aperis-p <aperis-p@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 18:15:38 by Juliany Ber       #+#    #+#             */
-/*   Updated: 2024/04/03 19:45:55 by aperis-p         ###   ########.fr       */
+/*   Updated: 2024/04/03 22:37:39 by julberna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,8 @@
 # include <string.h>
 # include <sys/stat.h>
 
-# define SIZE		64
 # define HEIGHT		512
 # define WIDTH		1024
-# define PI			3.141592653589793238462643383279502884197169
-# define X_AND_Y	2
 # define X			0
 # define Y			1
 
@@ -71,16 +68,16 @@ typedef struct s_game
 	t_vector	direction;
 	t_coord		map;
 	t_coord		p1;
-	mlx_image_t	*gen;
+	mlx_image_t	*screen;
 }				t_game;
 
 typedef struct s_draw
 {
-	int			dx;
-	int			dy;
-	int			sx;
-	int			sy;
 	int			error;
+	int			step_x;
+	int			step_y;
+	int			delta_x;
+	int			delta_y;
 }				t_draw;
 
 /* main calls */
@@ -89,25 +86,25 @@ void		init(t_game *cub);
 void		game(t_game *cub);
 void		over(t_game *cub);
 
-/* draw elements */
-void		draw(void *cub);
-void		draw_player(t_game *cub);
-void		draw_matrix(t_game *cub);
-void		raycast(t_game *cub, int i);
-void		line(t_game *cub, t_coord start, t_coord end, int color);
-void		draw_block(t_game *cub, int x, int y, int color);
+/* raycast */
+void		raycast(void *param);
+void		draw_line(t_game *cub, int i);
+void		calculate_wall_distance(t_game *cub);
 void		initial_ray_setup(t_game *cub, int i);
 void		calculate_delta_distance(t_game *cub);
-void		calculate_step_and_initial_side_distance(t_game *cub);
-void		calculate_wall_distance(t_game *cub);
-void		draw_line(t_game *cub, int i);
-void		rotate_right(t_game *cub);
 void		calculate_frames_per_second(t_game *cub);
-void		rotate_left(t_game *cub);
+void		calculate_step_and_initial_side_distance(t_game *cub);
+
+/* bresenham */
+void		algo_setup(t_draw *line, t_coord start, t_coord end);
+void		line(t_game *cub, t_coord start, t_coord end, int color);
 
 /* main game */
 void		actions(void *param);
-void		after_move_setting(t_game *cub);
+void		walk_back(t_game *cub);
+void		walk_front(t_game *cub);
+void		rotate_left(t_game *cub);
+void		rotate_right(t_game *cub);
 
 /* utils */
 void		get_size(t_game *cub);
