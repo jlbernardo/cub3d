@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycast_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aperis-p <aperis-p@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 21:28:39 by julberna          #+#    #+#             */
-/*   Updated: 2024/04/04 17:38:48 by julberna         ###   ########.fr       */
+/*   Updated: 2024/04/04 20:39:48 by aperis-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,30 @@ void	wall_side(t_game *cub, int axis)
 		cub->ray.side = NO;
 }
 
+void draw_ceiling_floor(t_game *cub)
+{
+	int x;
+	int y;
+
+	x = 0;
+	y = 0;
+	cub->ceiling_floor = mlx_new_image(cub->mlx, WIDTH, HEIGHT);
+	while (x <= HEIGHT)
+	{
+		while (y <= WIDTH)
+		{
+			if(x < HEIGHT / 2)
+				mlx_put_pixel(cub->ceiling_floor, y, x, 0xEEF5FFff);
+			else
+				mlx_put_pixel(cub->ceiling_floor, y, x, 0xA5DD9Bff);
+			y++;	
+		}
+		y = 0;
+		x++;
+	} 
+	mlx_image_to_window(cub->mlx, cub->ceiling_floor, 0, 0);
+}
+
 void	draw_line(t_game *cub, int i)
 {
 	int		line_height;
@@ -57,11 +81,11 @@ void	draw_line(t_game *cub, int i)
 
 	line_height = (int)(HEIGHT / cub->ray.perp_wall_dist);
 	start.y = i;
-	start.x = -line_height + HEIGHT / 3;
+	start.x = -line_height / 2 + HEIGHT / 2;
 	if (start.x < 0)
 		start.x = 0;
 	end.y = i;
-	end.x = line_height + HEIGHT / 3;
+	end.x = line_height / 2 + HEIGHT / 2;
 	if (end.x >= HEIGHT)
 		end.x = HEIGHT - 1;
 	if (cub->ray.side == NO)
