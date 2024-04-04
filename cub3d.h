@@ -6,7 +6,7 @@
 /*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 18:15:38 by Juliany Ber       #+#    #+#             */
-/*   Updated: 2024/04/03 22:37:39 by julberna         ###   ########.fr       */
+/*   Updated: 2024/04/03 23:11:03 by julberna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@
 # include <string.h>
 # include <sys/stat.h>
 
-# define HEIGHT		512
-# define WIDTH		1024
+# define HEIGHT		480
+# define WIDTH		640
 # define X			0
 # define Y			1
 
@@ -87,7 +87,7 @@ void		game(t_game *cub);
 void		over(t_game *cub);
 
 /* raycast */
-void		raycast(void *param);
+void		raycast(t_game *cub);
 void		draw_line(t_game *cub, int i);
 void		calculate_wall_distance(t_game *cub);
 void		initial_ray_setup(t_game *cub, int i);
@@ -102,7 +102,7 @@ void		line(t_game *cub, t_coord start, t_coord end, int color);
 /* main game */
 void		actions(void *param);
 void		walk_back(t_game *cub);
-void		walk_front(t_game *cub);
+void		walk_forward(t_game *cub);
 void		rotate_left(t_game *cub);
 void		rotate_right(t_game *cub);
 

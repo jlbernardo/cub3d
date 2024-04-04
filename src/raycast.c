@@ -6,19 +6,17 @@
 /*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/31 20:27:07 by julberna          #+#    #+#             */
-/*   Updated: 2024/04/03 22:26:53 by julberna         ###   ########.fr       */
+/*   Updated: 2024/04/03 23:02:34 by julberna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	raycast(void *param)
+void	raycast(t_game	*cub)
 {
 	int		i;
-	t_game	*cub;
 
 	i = -1;
-	cub = param;
 	mlx_delete_image(cub->mlx, cub->screen);
 	cub->screen = mlx_new_image(cub->mlx, WIDTH, HEIGHT);
 	while (++i < WIDTH)
@@ -67,7 +65,7 @@ void	calculate_step_and_initial_side_distance(t_game *cub)
 	else
 	{
 		cub->ray.step.x = 1;
-		cub->ray.side_dist.x = (cub->ray.map.x + 1 - cub->p1.x)
+		cub->ray.side_dist.x = (cub->ray.map.x + 1.0 - cub->p1.x)
 			* cub->ray.delta_dist.x;
 	}
 	if (cub->ray.dir.y < 0)
@@ -79,7 +77,7 @@ void	calculate_step_and_initial_side_distance(t_game *cub)
 	else
 	{
 		cub->ray.step.y = 1;
-		cub->ray.side_dist.y = (cub->ray.map.y + 1 - cub->p1.y)
+		cub->ray.side_dist.y = (cub->ray.map.y + 1.0 - cub->p1.y)
 			* cub->ray.delta_dist.y;
 	}
 }
