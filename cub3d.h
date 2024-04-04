@@ -6,7 +6,7 @@
 /*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 18:15:38 by Juliany Ber       #+#    #+#             */
-/*   Updated: 2024/04/04 15:59:04 by julberna         ###   ########.fr       */
+/*   Updated: 2024/04/04 16:09:34 by julberna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@
 # include <string.h>
 # include <sys/stat.h>
 
-# define HEIGHT		1080
-# define WIDTH		1220
+# define HEIGHT		480
+# define WIDTH		640
 # define X			0
 # define Y			1
 
