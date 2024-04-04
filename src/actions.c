@@ -6,7 +6,7 @@
 /*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 22:29:12 by julberna          #+#    #+#             */
-/*   Updated: 2024/04/03 23:28:33 by julberna         ###   ########.fr       */
+/*   Updated: 2024/04/04 16:13:16 by julberna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ void	walk_forward(t_game *cub)
 	const int	x2 = (int)cub->p1.x;
 	const int	y2 = (int)(cub->p1.y + cub->direction.y * cub->move_speed);
 
-	if (cub->map_matrix[x1][y1] == '0')
+	if (cub->map_matrix[y1][x1] == '0')
 		cub->p1.x += cub->direction.x * cub->move_speed;
-	if (cub->map_matrix[x2][y2] == '0')
+	if (cub->map_matrix[y2][x2] == '0')
 		cub->p1.y += cub->direction.y * cub->move_speed;
 }
 
@@ -32,9 +32,9 @@ void	walk_back(t_game *cub)
 	const int	x2 = (int)cub->p1.x;
 	const int	y2 = (int)(cub->p1.y - cub->direction.y * cub->move_speed);
 
-	if (cub->map_matrix[x1][y1] == '0')
+	if (cub->map_matrix[y1][x1] == '0')
 		cub->p1.x -= cub->direction.x * cub->move_speed;
-	if (cub->map_matrix[x2][y2] == '0')
+	if (cub->map_matrix[y2][x2] == '0')
 		cub->p1.y -= cub->direction.y * cub->move_speed;
 }
 

@@ -6,7 +6,7 @@
 /*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 20:01:10 by Juliany Ber       #+#    #+#             */
-/*   Updated: 2024/04/04 15:57:11 by julberna         ###   ########.fr       */
+/*   Updated: 2024/04/04 16:10:41 by julberna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,5 +38,7 @@ void	actions(void *param)
 	if (mlx_is_key_down(cub->mlx, MLX_KEY_LEFT)
 		|| mlx_is_key_down(cub->mlx, MLX_KEY_A))
 		rotate_left(cub);
+	printf("(%d, %d) - %c\n", (int)cub->p1.x, (int)cub->p1.y,
+		cub->map_matrix[(int)cub->p1.y][(int)cub->p1.x]);
 	raycast(cub);
 }
