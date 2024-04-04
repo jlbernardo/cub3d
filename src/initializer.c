@@ -6,7 +6,7 @@
 /*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 19:29:16 by Juliany Ber       #+#    #+#             */
-/*   Updated: 2024/04/03 23:23:03 by julberna         ###   ########.fr       */
+/*   Updated: 2024/04/04 16:01:24 by julberna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ void	init(t_game *cub)
 	cub->p1 = coordinate(22, 12);
 	cub->direction = vector(-1, 0);
 	cub->camera_plane = vector(0, 0.66);
+	cub->rotation_speed = 0.02;
+	cub->move_speed = 0.06;
 	raycast(cub);
 }
 

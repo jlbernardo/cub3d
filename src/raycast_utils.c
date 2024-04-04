@@ -6,7 +6,7 @@
 /*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 21:28:39 by julberna          #+#    #+#             */
-/*   Updated: 2024/04/03 23:07:41 by julberna         ###   ########.fr       */
+/*   Updated: 2024/04/04 16:01:10 by julberna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,11 @@ void	draw_line(t_game *cub, int i)
 
 	line_height = (int)(HEIGHT / cub->ray.perp_wall_dist);
 	start.y = i;
-	start.x = -line_height / 2 + HEIGHT / 2;
+	start.x = -line_height / 2 + HEIGHT / 3;
 	if (start.x < 0)
 		start.x = 0;
 	end.y = i;
-	end.x = line_height / 2 + HEIGHT / 2;
+	end.x = line_height / 2 + HEIGHT / 3;
 	if (end.x >= HEIGHT)
 		end.x = HEIGHT - 1;
 	if (cub->ray.side == X)
@@ -65,6 +65,4 @@ void	calculate_frames_per_second(t_game *cub)
 	cub->old_time = cub->time;
 	cub->time = mlx_get_time();
 	frame_time = (cub->time - cub->old_time) / 1000.0;
-	cub->move_speed = frame_time * 5.0;
-	cub->rotation_speed = frame_time * 3.0;
 }
