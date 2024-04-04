@@ -6,99 +6,78 @@
 /*   By: aperis-p <aperis-p@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/31 20:27:07 by julberna          #+#    #+#             */
-/*   Updated: 2024/04/04 13:10:48 by aperis-p         ###   ########.fr       */
+/*   Updated: 2024/04/04 13:52:14 by aperis-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-#include <stdio.h>
 
-
-void	raycast(t_game *cub)
+void	raycast(t_game	*cub)
 {
 	int		i;
-	float	atan;
 
-	i = 0;
-	cub->ray.angle = cub->p1.angle;
-	cub->ray.count = 1;
-	while (i < cub->ray.count)
+	i = -1;
+	mlx_delete_image(cub->mlx, cub->screen);
+	cub->screen = mlx_new_image(cub->mlx, WIDTH, HEIGHT);
+	while (++i < WIDTH)
 	{
-		cub->ray.depth_of_field = 0;
-		atan = -1 / tan(cub->ray.angle);
-		if (cub->ray.angle > PI)
-		{
-			cub->ray.ray_y = cub->p1.y;
-			cub->ray.ray_x = (cub->p1.y - cub->ray.ray_y) * atan + cub->p1.x;
-			cub->ray.y_offset = -SIZE;
-			cub->ray.x_offset = -cub->ray.y_offset * atan;
-		}
-		else if (cub->ray.angle < PI)
-		{
-			cub->ray.ray_y = cub->p1.y + SIZE;
-			cub->ray.ray_x = (cub->p1.y - cub->ray.ray_y) * atan + cub->p1.x;
-			cub->ray.y_offset = SIZE;
-			cub->ray.x_offset = -cub->ray.y_offset * atan;
-		}
-		else
-		{
-			cub->ray.ray_x = cub->p1.x;
-			cub->ray.ray_y = cub->p1.y;
-			cub->ray.depth_of_field = 8;
-		}
-		while (cub->ray.depth_of_field < 8)
-		{
-			if (cub->ray.ray_x < (cub->map.x * SIZE) && cub->ray.ray_y < (cub->map.y * SIZE)
-				&& cub->map.matrix[cub->ray.ray_y / SIZE][cub->ray.ray_x / SIZE] == '1')
-				cub->ray.depth_of_field = 8;
-			else
-			{
-				cub->ray.ray_x += cub->ray.x_offset;
-				cub->ray.ray_y += cub->ray.y_offset;
-				cub->ray.depth_of_field++;
-			}
-		}
-		line(cub, cub->p1.x, cub->p1.y, cub->ray.ray_x, cub->ray.ray_y);
-		i++;
+		initial_ray_setup(cub, i);
+		calculate_delta_distance(cub);
+		calculate_step_and_initial_side_distance(cub);
+		calculate_wall_distance(cub);
+		draw_line(cub, i);
 	}
-	while (i < cub->ray.count)
-	{
-		cub->ray.depth_of_field = 0;
-		atan = -tan(cub->ray.angle);
-		if (cub->ray.angle > PI / 2 && cub->ray.angle < 3 * PI / 2)
-		{
-			cub->ray.ray_x = cub->p1.x;
-			cub->ray.ray_y = (cub->p1.x - cub->ray.ray_x) * atan + cub->p1.y;
-			cub->ray.x_offset = -SIZE;
-			cub->ray.y_offset = -cub->ray.x_offset * atan;
-		}
-		if (cub->ray.angle < PI / 2 || cub->ray.angle > 3 * PI / 2)
-		{
-			cub->ray.ray_x = cub->p1.x + SIZE;
-			cub->ray.ray_y = (cub->p1.x - cub->ray.ray_x) * atan + cub->p1.y;
-			cub->ray.x_offset = SIZE;
-			cub->ray.y_offset = -cub->ray.x_offset * atan;
-		}
-		if (cub->ray.angle == 0 || cub->ray.angle == PI)
-		{
-			cub->ray.ray_x = cub->p1.x;
-			cub->ray.ray_y = cub->p1.y;
-			cub->ray.depth_of_field = 8;
-		}
-		while (cub->ray.depth_of_field < 8)
-		{
-			if (cub->ray.ray_x < (cub->map.x * SIZE) && cub->ray.ray_y < (cub->map.y * SIZE)
-				&& cub->map.matrix[cub->ray.ray_y / SIZE][cub->ray.ray_x / SIZE] == '1')
-				cub->ray.depth_of_field = 8;
-			else
-			{
-				cub->ray.ray_x += cub->ray.x_offset;
-				cub->ray.ray_y += cub->ray.y_offset;
-				cub->ray.depth_of_field++;
-			}
-		}
-		line(cub, cub->p1.x, cub->p1.y, cub->ray.ray_x, cub->ray.ray_y);
-		i++;
-	}
+	calculate_frames_per_second(cub);
+	mlx_image_to_window(cub->mlx, cub->screen, 0, 0);
 }
 
+void	initial_ray_setup(t_game *cub, int i)
+{
+	cub->time = 0;
+	cub->old_time = 0;
+	cub->ray.hit = false;
+	cub->ray.camera_x = 2 * i / (double)WIDTH - 1;
+	cub->ray.map = coordinate(cub->p1.x, cub->p1.y);
+	cub->ray.dir.x = cub->direction.x + cub->camera_plane.x * cub->ray.camera_x;
+	cub->ray.dir.y = cub->direction.y + cub->camera_plane.y * cub->ray.camera_x;
+}
+
+void	calculate_delta_distance(t_game *cub)
+{
+	if (cub->ray.dir.x == 0)
+		cub->ray.delta_dist.x = 1e30;
+	else
+		cub->ray.delta_dist.x = fabs(1 / cub->ray.dir.x);
+	if (cub->ray.dir.y == 0)
+		cub->ray.delta_dist.y = 1e30;
+	else
+		cub->ray.delta_dist.y = fabs(1 / cub->ray.dir.y);
+}
+
+void	calculate_step_and_initial_side_distance(t_game *cub)
+{
+	if (cub->ray.dir.x < 0)
+	{
+		cub->ray.step.x = -1;
+		cub->ray.side_dist.x = (cub->p1.x - cub->ray.map.x)
+			* cub->ray.delta_dist.x;
+	}
+	else
+	{
+		cub->ray.step.x = 1;
+		cub->ray.side_dist.x = (cub->ray.map.x + 1.0 - cub->p1.x)
+			* cub->ray.delta_dist.x;
+	}
+	if (cub->ray.dir.y < 0)
+	{
+		cub->ray.step.y = -1;
+		cub->ray.side_dist.y = (cub->p1.y - cub->ray.map.y)
+			* cub->ray.delta_dist.y;
+	}
+	else
+	{
+		cub->ray.step.y = 1;
+		cub->ray.side_dist.y = (cub->ray.map.y + 1.0 - cub->p1.y)
+			* cub->ray.delta_dist.y;
+	}
+}

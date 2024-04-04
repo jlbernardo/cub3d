@@ -6,56 +6,48 @@
 /*   By: aperis-p <aperis-p@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/01 15:44:30 by julberna          #+#    #+#             */
-/*   Updated: 2024/04/04 13:11:46 by aperis-p         ###   ########.fr       */
+/*   Updated: 2024/04/04 13:52:30 by aperis-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int		absolute(int num);
-
-void	line(t_game *cub, int x1, int y1, int x2, int y2)
+void	line(t_game *cub, t_coord start, t_coord end, int color)
 {
-	int	dx;
-	int	dy;
-	int	sx;
-	int	sy;
-	int	error;
+	t_draw	line;
 
-	sx = 1;
-	sy = 1;
-	dx = absolute(x2 - x1);
-	dy = absolute(y2 - y1);
-	if (x1 > x2)
-		sx = -1;
-	if (y1 > y2)
-		sy = -1;
-	error = dx - dy;
+	algo_setup(&line, start, end);
 	while (true)
 	{
-		mlx_put_pixel(cub->gen, y1, x1, 0x21F2FCFF);
-		if (x1 == x2 && y1 == y2)
+		mlx_put_pixel(cub->screen, start.y, start.x, color);
+		if (start.x == end.x && start.y == end.y)
 			break ;
-		if (error * 2 >= -dy)
+		if (line.error * 2 >= -line.delta_y)
 		{
-			if (x1 == x2)
+			if (start.x == end.x)
 				break ;
-			error -= dy;
-			x1 += sx;
+			line.error -= line.delta_y;
+			start.x += line.step_x;
 		}
-		if (error * 2 <= dx)
+		if (line.error * 2 <= line.delta_x)
 		{
-			if (y1 == y2)
+			if (start.y == end.y)
 				break ;
-			error += dx;
-			y1 += sy;
+			line.error += line.delta_x;
+			start.y += line.step_y;
 		}
 	}
 }
 
-int	absolute(int num)
+void	algo_setup(t_draw *line, t_coord start, t_coord end)
 {
-	if (num < 0)
-		return (-num);
-	return (num);
+	line->step_x = 1;
+	line->step_y = 1;
+	line->delta_x = fabs(end.x - start.x);
+	line->delta_y = fabs(end.y - start.y);
+	if (start.x > end.x)
+		line->step_x = -1;
+	if (start.y > end.y)
+		line->step_y = -1;
+	line->error = line->delta_x - line->delta_y;
 }
