@@ -6,7 +6,7 @@
 /*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 18:15:38 by Juliany Ber       #+#    #+#             */
-/*   Updated: 2024/04/04 21:22:41 by julberna         ###   ########.fr       */
+/*   Updated: 2024/04/04 21:27:27 by julberna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ typedef struct s_game
 	t_coord		map;
 	t_coord		p1;
 	mlx_image_t	*screen;
+	mlx_image_t	*ceiling_floor;
 }				t_game;
 
 typedef struct s_draw
@@ -99,6 +100,7 @@ void		initial_ray_setup(t_game *cub, int i);
 void		calculate_delta_distance(t_game *cub);
 void		calculate_frames_per_second(t_game *cub);
 void		calculate_step_and_initial_side_distance(t_game *cub);
+void		draw_ceiling_floor(t_game *cub);
 
 /* bresenham */
 void		algo_setup(t_draw *line, t_coord start, t_coord end);
