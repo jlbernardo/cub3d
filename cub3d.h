@@ -6,7 +6,7 @@
 /*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 18:15:38 by Juliany Ber       #+#    #+#             */
-/*   Updated: 2024/04/04 21:27:27 by julberna         ###   ########.fr       */
+/*   Updated: 2024/04/04 21:32:41 by julberna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 # include <string.h>
 # include <sys/stat.h>
 
+# define HORIZON	2.5
 # define HEIGHT		1080
 # define WIDTH		1220
 # define X			0
