@@ -6,7 +6,7 @@
 /*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 21:28:39 by julberna          #+#    #+#             */
-/*   Updated: 2024/04/04 17:38:48 by julberna         ###   ########.fr       */
+/*   Updated: 2024/04/04 17:45:56 by julberna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,11 +57,11 @@ void	draw_line(t_game *cub, int i)
 
 	line_height = (int)(HEIGHT / cub->ray.perp_wall_dist);
 	start.y = i;
-	start.x = -line_height + HEIGHT / 3;
+	start.x = -line_height + HEIGHT / 2;
 	if (start.x < 0)
 		start.x = 0;
 	end.y = i;
-	end.x = line_height + HEIGHT / 3;
+	end.x = line_height + HEIGHT / 2;
 	if (end.x >= HEIGHT)
 		end.x = HEIGHT - 1;
 	if (cub->ray.side == NO)
