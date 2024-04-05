@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aperis-p <aperis-p@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 18:15:38 by Juliany Ber       #+#    #+#             */
-/*   Updated: 2024/04/04 20:44:42 by aperis-p         ###   ########.fr       */
+/*   Updated: 2024/04/04 21:32:41 by julberna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 # include <string.h>
 # include <sys/stat.h>
 
+# define HORIZON	2.5
 # define HEIGHT		1080
 # define WIDTH		1220
 # define X			0
@@ -109,9 +110,10 @@ void		line(t_game *cub, t_coord start, t_coord end, int color);
 /* main game */
 void		actions(void *param);
 void		walk_back(t_game *cub);
-void		walk_forward(t_game *cub);
 void		rotate_left(t_game *cub);
+void		walk_forward(t_game *cub);
 void		rotate_right(t_game *cub);
+void		walk_sideways(t_game *cub, int key);
 
 /* utils */
 void		get_size(t_game *cub);

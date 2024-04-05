@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aperis-p <aperis-p@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 20:01:10 by Juliany Ber       #+#    #+#             */
-/*   Updated: 2024/04/04 20:36:25 by aperis-p         ###   ########.fr       */
+/*   Updated: 2024/04/04 21:27:35 by julberna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,13 @@ void	actions(void *param)
 	if (mlx_is_key_down(cub->mlx, MLX_KEY_UP)
 		|| mlx_is_key_down(cub->mlx, MLX_KEY_W))
 		walk_forward(cub);
-	if (mlx_is_key_down(cub->mlx, MLX_KEY_RIGHT)
-		|| mlx_is_key_down(cub->mlx, MLX_KEY_D))
+	if (mlx_is_key_down(cub->mlx, MLX_KEY_A))
+		walk_sideways(cub, MLX_KEY_A);
+	if (mlx_is_key_down(cub->mlx, MLX_KEY_D))
+		walk_sideways(cub, MLX_KEY_D);
+	if (mlx_is_key_down(cub->mlx, MLX_KEY_RIGHT))
 		rotate_right(cub);
-	if (mlx_is_key_down(cub->mlx, MLX_KEY_LEFT)
-		|| mlx_is_key_down(cub->mlx, MLX_KEY_A))
+	if (mlx_is_key_down(cub->mlx, MLX_KEY_LEFT))
 		rotate_left(cub);
 	raycast(cub);
 }

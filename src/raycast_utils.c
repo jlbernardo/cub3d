@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycast_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aperis-p <aperis-p@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 21:28:39 by julberna          #+#    #+#             */
-/*   Updated: 2024/04/04 20:44:18 by aperis-p         ###   ########.fr       */
+/*   Updated: 2024/04/04 21:32:52 by julberna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void	draw_ceiling_floor(t_game *cub)
 	{
 		while (y <= WIDTH)
 		{
-			if (x < HEIGHT / 2)
+			if (x < (int)(HEIGHT / HORIZON))
 				mlx_put_pixel(cub->ceiling_floor, y, x, 0xEEF5FFff);
 			else
 				mlx_put_pixel(cub->ceiling_floor, y, x, 0xA5DD9Bff);
@@ -81,11 +81,11 @@ void	draw_line(t_game *cub, int i)
 
 	line_height = (int)(HEIGHT / cub->ray.perp_wall_dist);
 	start.y = i;
-	start.x = -line_height / 2 + HEIGHT / 2;
+	start.x = (int)(-line_height + HEIGHT / HORIZON);
 	if (start.x < 0)
 		start.x = 0;
 	end.y = i;
-	end.x = line_height / 2 + HEIGHT / 2;
+	end.x = (int)(line_height + HEIGHT / HORIZON);
 	if (end.x >= HEIGHT)
 		end.x = HEIGHT - 1;
 	if (cub->ray.side == NO)
