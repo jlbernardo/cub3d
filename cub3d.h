@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aperis-p <aperis-p@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 18:15:38 by Juliany Ber       #+#    #+#             */
-/*   Updated: 2024/04/04 21:32:41 by julberna         ###   ########.fr       */
+/*   Updated: 2024/04/05 18:17:48 by aperis-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ typedef struct s_game
 	t_vector	direction;
 	t_coord		map;
 	t_coord		p1;
+	t_map_data	map_data;
 	mlx_image_t	*screen;
 	mlx_image_t	*ceiling_floor;
 }				t_game;
@@ -85,6 +86,16 @@ typedef struct s_draw
 	int			delta_x;
 	int			delta_y;
 }				t_draw;
+
+typedef struct s_map_data
+{
+	char		*north_tex_path;
+	char		*east_tex_path;
+	char		*south_tex_path;
+	char		*west_tex_path;
+	uint32_t	ceiling_color;
+	uint32_t	floor_color;
+}				t_map_data;
 
 /* main calls */
 void		check(t_game *cub, int argc, char **argv);
