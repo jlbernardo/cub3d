@@ -16,7 +16,7 @@ ODIR	= obj/
 
 SRC		= $(addprefix $(SDIR), cub3d.c check.c initializer.c raycast.c \
 								raycast_utils.c game.c bresenham.c over.c \
-								actions.c utils.c)
+								actions.c utils.c map_parsing.c map_parsing_utils.c)
 OBJ		= $(SRC:$(SDIR)%.c=$(ODIR)%.o)
 
 BLU 	=	\033[1;36m

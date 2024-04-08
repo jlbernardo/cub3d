@@ -6,7 +6,7 @@
 /*   By: aperis-p <aperis-p@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 18:15:38 by Juliany Ber       #+#    #+#             */
-/*   Updated: 2024/04/05 18:17:48 by aperis-p         ###   ########.fr       */
+/*   Updated: 2024/04/07 22:05:15 by aperis-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ typedef struct s_ray
 
 typedef struct s_game
 {
+	int			p1_start_direction;
 	char		**map_matrix;
 	char		*map_path;
 	mlx_t		*mlx;
@@ -93,6 +94,7 @@ typedef struct s_map_data
 	char		*east_tex_path;
 	char		*south_tex_path;
 	char		*west_tex_path;
+	char		**raw_data;
 	uint32_t	ceiling_color;
 	uint32_t	floor_color;
 }				t_map_data;
@@ -131,5 +133,12 @@ void		get_size(t_game *cub);
 void		create_matrix(t_game *cub);
 t_coord		coordinate(double x, double y);
 t_vector	vector(double x, double y);
+
+/* map parsing */
+int			ft_isspace(char c);
+int			ft_blank_line(char *line);
+int			count_rows(int fd);
+char		**get_raw_data(char *map_path);
+
 
 #endif
