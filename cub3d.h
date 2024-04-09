@@ -6,7 +6,7 @@
 /*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 18:15:38 by Juliany Ber       #+#    #+#             */
-/*   Updated: 2024/04/09 00:30:27 by julberna         ###   ########.fr       */
+/*   Updated: 2024/04/09 18:42:11 by julberna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ typedef struct s_ray
 
 typedef struct s_game
 {
+	int				buffer[HEIGHT];
 	char			**map_matrix;
 	char			*map_path;
 	mlx_t			*mlx;
@@ -69,15 +70,13 @@ typedef struct s_game
 	double			old_time;
 	double			move_speed;
 	double			rotation_speed;
-	int	buffer[HEIGHT];
 	t_vector		camera_plane;
 	t_vector		direction;
 	t_coord			map;
 	t_coord			p1;
 	mlx_image_t		*screen;
 	mlx_image_t		*ceiling_floor;
-	mlx_image_t		*wall;
-	mlx_texture_t	*wall_t;
+	mlx_texture_t	*wall;
 }				t_game;
 
 typedef struct s_draw
@@ -98,18 +97,18 @@ void		over(t_game *cub);
 /* raycast */
 void		raycast(t_game *cub);
 void		draw_line(t_game *cub, int i);
+void		draw_ceiling_floor(t_game *cub);
 void		wall_side(t_game *cub, int axis);
 void		calculate_wall_distance(t_game *cub);
 void		initial_ray_setup(t_game *cub, int i);
 void		calculate_delta_distance(t_game *cub);
 void		calculate_frames_per_second(t_game *cub);
 void		calculate_step_and_initial_side_distance(t_game *cub);
-void		draw_ceiling_floor(t_game *cub);
 
 /* bresenham */
-void		algo_setup(t_draw *line, t_coord start, t_coord end);
-void		line(t_game *cub, t_coord start, t_coord end, int color, int buffer[HEIGHT]);
 int			get_color(t_game *cub, double texture_x, double texture_y);
+void		line(t_game *cub, t_coord start, t_coord end, int color, int buffer[HEIGHT]);
+void		algo_setup(t_draw *line, t_coord start, t_coord end);
 
 /* game mechanics */
 void		actions(void *param);

@@ -6,7 +6,7 @@
 /*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 21:28:39 by julberna          #+#    #+#             */
-/*   Updated: 2024/04/09 01:25:00 by julberna         ###   ########.fr       */
+/*   Updated: 2024/04/09 18:41:56 by julberna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ void	draw_line(t_game *cub, int i)
 	{
 		wall_x = cub->p1.x + cub->ray.perp_wall_dist * cub->ray.dir.x;
 		wall_x -= floor(wall_x);
-		texture_x = (wall_x * (double)512);
+		texture_x = 512 - (wall_x * (double)512);
 		step = 1.0 * 512 / line_height;
 		texture_position = (start.x - HEIGHT / HORIZON + line_height / HORIZON) * step;
 		y = start.x;
@@ -129,17 +129,23 @@ int	get_color(t_game *cub, double texture_x, double texture_y)
 	int	g;
 	int	b;
 	int	a;
-	int		*p;
+	int	*p;
 
-	p = (int *)cub->wall->pixels + 4 + (int)texture_x + (int)texture_y * 512;
-	r = *(p + 0);
-	g = *(p + 1);
-	b = *(p + 2);
-	a = 255;
-	// r = cub->wall->pixels[(uint32_t)(512 * texture_y + texture_x + 0)] & 0xFF;
-	// g = cub->wall->pixels[(uint32_t)(512 * texture_y + texture_x + 1)] & 0xFF;
-	// b = cub->wall->pixels[(uint32_t)(512 * texture_y + texture_x + 2)] & 0xFF;
-	// a = cub->wall->pixels[(uint32_t)(512 * texture_y + texture_x + 3)] & 0xFF;
+	p = (int *)cub->wall->pixels + (int)texture_x + (int)texture_y * 512;
+	r = ((*p) & 0xFF) >> 0;
+	g = ((*p) & 0xFF00) >> 8;
+	b = ((*p) & 0xFF0000) >> 16;
+	a = ((*p) & 0xFF000000) >> 24;
+
+	/* code below is more performatic */
+	// int32_t	pixel;
+
+	// pixel = *((int32_t *)cub->wall->pixels + \
+	// (size_t)(texture_y * 512 + texture_x));
+	// pixel = ((pixel & 0xFF) << 24) | ((pixel & 0xFF00) << 8) | \
+	// ((pixel & 0xFF0000) >> 8) | ((pixel & 0xFF000000) >> 24);
+	// return (pixel);
+
 	return (r << 24 | g << 16 | b << 8 | a);
 }
 
