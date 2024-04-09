@@ -6,7 +6,7 @@
 /*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 18:15:38 by Juliany Ber       #+#    #+#             */
-/*   Updated: 2024/04/09 18:51:35 by julberna         ###   ########.fr       */
+/*   Updated: 2024/04/09 19:28:46 by julberna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,9 +104,9 @@ void		initial_ray_setup(t_game *cub, int i);
 void		calculate_delta_distance(t_game *cub);
 void		calculate_frames_per_second(t_game *cub);
 void		calculate_step_and_initial_side_distance(t_game *cub);
+void		put_texture(t_game *cub, t_coord start, t_coord end, int line_height);
 
 /* bresenham */
-int			get_color(mlx_texture_t *texture, int texture_x, int texture_y);
 void		line(t_game *cub, t_coord start, t_coord end, int color, int buffer[HEIGHT]);
 void		algo_setup(t_draw *line, t_coord start, t_coord end);
 
@@ -119,6 +119,7 @@ void		rotate_right(t_game *cub);
 void		walk_sideways(t_game *cub, int key);
 
 /* utils */
+int			get_color(mlx_texture_t *texture, int texture_x, int texture_y);
 void		get_size(t_game *cub);
 void		create_matrix(t_game *cub);
 t_coord		coordinate(double x, double y);
