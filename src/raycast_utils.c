@@ -6,7 +6,7 @@
 /*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 21:28:39 by julberna          #+#    #+#             */
-/*   Updated: 2024/04/04 21:32:52 by julberna         ###   ########.fr       */
+/*   Updated: 2024/04/08 21:15:40 by julberna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,9 +62,9 @@ void	draw_ceiling_floor(t_game *cub)
 		while (y <= WIDTH)
 		{
 			if (x < (int)(HEIGHT / HORIZON))
-				mlx_put_pixel(cub->ceiling_floor, y, x, 0xEEF5FFff);
+				mlx_put_pixel(cub->ceiling_floor, y, x, 0xe7fbffff);
 			else
-				mlx_put_pixel(cub->ceiling_floor, y, x, 0xA5DD9Bff);
+				mlx_put_pixel(cub->ceiling_floor, y, x, 0x344e41ff);
 			y++;
 		}
 		y = 0;
@@ -75,27 +75,70 @@ void	draw_ceiling_floor(t_game *cub)
 
 void	draw_line(t_game *cub, int i)
 {
-	int		line_height;
-	t_coord	start;
-	t_coord	end;
+	int			y;
+	int			line_height;
+	double		texture_position;
+	double		texture_x;
+	double		texture_y;
+	double		wall_x;
+	double		step;
+	t_coord		end;
+	t_coord		start;
+	uint32_t	color;
 
 	line_height = (int)(HEIGHT / cub->ray.perp_wall_dist);
 	start.y = i;
-	start.x = (int)(-line_height + HEIGHT / HORIZON);
+	start.x = (int)(-line_height / HORIZON + HEIGHT / HORIZON);
 	if (start.x < 0)
 		start.x = 0;
 	end.y = i;
-	end.x = (int)(line_height + HEIGHT / HORIZON);
+	end.x = (int)(line_height / HORIZON + HEIGHT / HORIZON);
 	if (end.x >= HEIGHT)
 		end.x = HEIGHT - 1;
 	if (cub->ray.side == NO)
-		line(cub, start, end, 0x00f5d4ff);
+	{
+		wall_x = cub->p1.x + cub->ray.perp_wall_dist * cub->ray.dir.x;
+		wall_x -= floor(wall_x);
+		texture_x = (wall_x * (double)512);
+		step = 1.0 * 512 / line_height;
+		texture_position = (start.x - HEIGHT / HORIZON + line_height / HORIZON) * step;
+		y = start.x;
+		while (y < end.x)
+		{
+			texture_y = (int)(texture_position) & (512 - 1);
+			texture_position += step;
+			color = get_color(cub, texture_x, texture_y);
+			cub->buffer[y] = color;
+			y++;
+		}
+		line(cub, start, end, 0x00000000, cub->buffer);
+	}
 	else if (cub->ray.side == SO)
-		line(cub, start, end, 0x00bbf9ff);
+		line(cub, start, end, 0xffe45eff, NULL);
 	else if (cub->ray.side == EA)
-		line(cub, start, end, 0xfee440ff);
+		line(cub, start, end, 0x7fc8f8ff, NULL);
 	else if (cub->ray.side == WE)
-		line(cub, start, end, 0xf15bb5ff);
+		line(cub, start, end, 0xf9f9f9ff, NULL);
+}
+
+uint32_t	get_color(t_game *cub, double texture_x, double texture_y)
+{
+	uint8_t	r;
+	uint8_t	g;
+	uint8_t	b;
+	uint8_t	a;
+	uint8_t		*p;
+
+	p = cub->wall->pixels + (int)texture_x + ((int)texture_y * 512);
+	r = *p;
+	g = *(p + 1);
+	b = *(p + 2);
+	a = *(p + 3);
+	// r = cub->wall->pixels[(uint32_t)(512 * texture_y + texture_x) & 0xFF];
+	// g = cub->wall->pixels[(uint32_t)(512 * texture_y + texture_x + 1) & 0xFF];
+	// b = cub->wall->pixels[(uint32_t)(512 * texture_y + texture_x + 2) & 0xFF];
+	// a = 0xFF;
+	return (r << 24 | g << 16 | b << 8 | a);
 }
 
 void	calculate_frames_per_second(t_game *cub)
