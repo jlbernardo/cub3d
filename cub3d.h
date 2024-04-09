@@ -6,7 +6,7 @@
 /*   By: aperis-p <aperis-p@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 18:15:38 by Juliany Ber       #+#    #+#             */
-/*   Updated: 2024/04/07 22:05:15 by aperis-p         ###   ########.fr       */
+/*   Updated: 2024/04/08 19:41:12 by aperis-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,17 @@ typedef struct s_ray
 	t_vector	dir;
 }				t_ray;
 
+typedef struct s_map_data
+{
+	char		*north_tex_path;
+	char		*east_tex_path;
+	char		*south_tex_path;
+	char		*west_tex_path;
+	char		**raw_data;
+	uint32_t	c_color;
+	uint32_t	f_color;
+}				t_map_data;
+
 typedef struct s_game
 {
 	int			p1_start_direction;
@@ -88,22 +99,19 @@ typedef struct s_draw
 	int			delta_y;
 }				t_draw;
 
-typedef struct s_map_data
+typedef struct s_get_map_helper
 {
-	char		*north_tex_path;
-	char		*east_tex_path;
-	char		*south_tex_path;
-	char		*west_tex_path;
-	char		**raw_data;
-	uint32_t	ceiling_color;
-	uint32_t	floor_color;
-}				t_map_data;
+	char		*position_bkp;
+	char		**line_bkp;
+	int			rows;
+	_Bool		broken_map;
+}				t_get_map_helper;
 
 /* main calls */
 void		check(t_game *cub, int argc, char **argv);
-void		init(t_game *cub);
+_Bool		init(t_game *cub);
 void		game(t_game *cub);
-void		over(t_game *cub);
+int			over(t_game *cub);
 
 /* raycast */
 void		raycast(t_game *cub);
@@ -133,12 +141,19 @@ void		get_size(t_game *cub);
 void		create_matrix(t_game *cub);
 t_coord		coordinate(double x, double y);
 t_vector	vector(double x, double y);
+void		ft_free_split(char **split);
+int			free_data(t_game *cub);
+void		ft_print_matrix(char **matrix);
 
 /* map parsing */
 int			ft_isspace(char c);
 int			ft_blank_line(char *line);
 int			count_rows(int fd);
 char		**get_raw_data(char *map_path);
-
+int			parsing_suite(t_game *cub);
+int			get_texture_path(t_game *cub);
+int			get_colors(t_game *cub);
+int			get_map(t_game *cub);
+int			get_player_direction(t_game *cub);
 
 #endif

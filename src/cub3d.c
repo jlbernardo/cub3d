@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Juliany Bernardo <julberna@student.42sp    +#+  +:+       +#+        */
+/*   By: aperis-p <aperis-p@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 16:26:50 by Juliany Ber       #+#    #+#             */
-/*   Updated: 2024/03/27 20:43:23 by Juliany Ber      ###   ########.fr       */
+/*   Updated: 2024/04/08 18:31:57 by aperis-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ int	main(int argc, char **argv)
 	t_game	cub;
 
 	check(&cub, argc, argv);
-	init(&cub);
+	if (!init(&cub))
+		free_data(&cub);
 	game(&cub);
-	over(&cub);
-	return (EXIT_SUCCESS);
+	return (over(&cub));
 }

@@ -40,3 +40,12 @@ int parsing_suite(t_game *cub)
 		return (false);
 	return (true);
 }
+
+void	ft_print_matrix(char **matrix)
+{
+	while (*matrix)
+	{
+		ft_printf("%s", *matrix);
+		matrix++;
+	}
+}

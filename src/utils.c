@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aperis-p <aperis-p@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 21:29:32 by Juliany Ber       #+#    #+#             */
-/*   Updated: 2024/04/03 22:12:59 by julberna         ###   ########.fr       */
+/*   Updated: 2024/04/08 16:31:20 by aperis-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,4 +28,25 @@ t_vector	vector(double x, double y)
 	vector.x = x;
 	vector.y = y;
 	return (vector);
+}
+
+void	ft_free_split(char **split)
+{
+	int	i;
+
+	i = 0;
+	while (split[i])
+	{
+		if (split[i])
+		{
+			free(split[i]);
+			split[i] = NULL;
+		}
+		i++;
+	}
+	if (split)
+	{
+		free(split);
+		split = NULL;
+	}
 }
