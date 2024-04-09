@@ -6,13 +6,13 @@
 /*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/01 15:44:30 by julberna          #+#    #+#             */
-/*   Updated: 2024/04/08 18:32:01 by julberna         ###   ########.fr       */
+/*   Updated: 2024/04/08 23:32:18 by julberna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	line(t_game *cub, t_coord start, t_coord end, int color, uint32_t buffer[HEIGHT])
+void	line(t_game *cub, t_coord start, t_coord end, int color, unsigned int buffer[HEIGHT])
 {
 	int		i;
 	t_draw	line;

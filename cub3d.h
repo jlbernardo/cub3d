@@ -6,7 +6,7 @@
 /*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 18:15:38 by Juliany Ber       #+#    #+#             */
-/*   Updated: 2024/04/08 19:26:19 by julberna         ###   ########.fr       */
+/*   Updated: 2024/04/08 23:33:10 by julberna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ typedef struct s_game
 	double			old_time;
 	double			move_speed;
 	double			rotation_speed;
-	uint32_t		buffer[HEIGHT];
+	unsigned int	buffer[HEIGHT];
 	t_vector		camera_plane;
 	t_vector		direction;
 	t_coord			map;
@@ -108,8 +108,8 @@ void		draw_ceiling_floor(t_game *cub);
 
 /* bresenham */
 void		algo_setup(t_draw *line, t_coord start, t_coord end);
-void		line(t_game *cub, t_coord start, t_coord end, int color, uint32_t buffer[HEIGHT]);
-uint32_t	get_color(t_game *cub, double texture_x, double texture_y);
+void		line(t_game *cub, t_coord start, t_coord end, int color, int buffer[HEIGHT]);
+int			get_color(t_game *cub, double texture_x, double texture_y);
 
 /* game mechanics */
 void		actions(void *param);

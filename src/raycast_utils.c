@@ -6,7 +6,7 @@
 /*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 21:28:39 by julberna          #+#    #+#             */
-/*   Updated: 2024/04/08 21:15:40 by julberna         ###   ########.fr       */
+/*   Updated: 2024/04/08 23:17:38 by julberna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ void	draw_line(t_game *cub, int i)
 	double		step;
 	t_coord		end;
 	t_coord		start;
-	uint32_t	color;
+	int	color;
 
 	line_height = (int)(HEIGHT / cub->ray.perp_wall_dist);
 	start.y = i;
@@ -112,6 +112,7 @@ void	draw_line(t_game *cub, int i)
 			y++;
 		}
 		line(cub, start, end, 0x00000000, cub->buffer);
+		ft_bzero(cub->buffer, 980);
 	}
 	else if (cub->ray.side == SO)
 		line(cub, start, end, 0xffe45eff, NULL);
@@ -121,23 +122,23 @@ void	draw_line(t_game *cub, int i)
 		line(cub, start, end, 0xf9f9f9ff, NULL);
 }
 
-uint32_t	get_color(t_game *cub, double texture_x, double texture_y)
+int	get_color(t_game *cub, double texture_x, double texture_y)
 {
-	uint8_t	r;
-	uint8_t	g;
-	uint8_t	b;
-	uint8_t	a;
-	uint8_t		*p;
+	int	r;
+	int	g;
+	int	b;
+	int	a;
+	int		*p;
 
-	p = cub->wall->pixels + (int)texture_x + ((int)texture_y * 512);
-	r = *p;
+	p = (int *)cub->wall->pixels + (int)texture_x + (int)texture_y * 512;
+	r = *(p + 0);
 	g = *(p + 1);
 	b = *(p + 2);
-	a = *(p + 3);
-	// r = cub->wall->pixels[(uint32_t)(512 * texture_y + texture_x) & 0xFF];
-	// g = cub->wall->pixels[(uint32_t)(512 * texture_y + texture_x + 1) & 0xFF];
-	// b = cub->wall->pixels[(uint32_t)(512 * texture_y + texture_x + 2) & 0xFF];
-	// a = 0xFF;
+	a = 255;
+	// r = cub->wall->pixels[(uint32_t)(512 * texture_y + texture_x + 0)] & 0xFF;
+	// g = cub->wall->pixels[(uint32_t)(512 * texture_y + texture_x + 1)] & 0xFF;
+	// b = cub->wall->pixels[(uint32_t)(512 * texture_y + texture_x + 2)] & 0xFF;
+	// a = cub->wall->pixels[(uint32_t)(512 * texture_y + texture_x + 3)] & 0xFF;
 	return (r << 24 | g << 16 | b << 8 | a);
 }
 
