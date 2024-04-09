@@ -6,7 +6,7 @@
 /*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 21:28:39 by julberna          #+#    #+#             */
-/*   Updated: 2024/04/09 18:52:11 by julberna         ###   ########.fr       */
+/*   Updated: 2024/04/09 18:53:59 by julberna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,20 +100,20 @@ void	draw_line(t_game *cub, int i)
 		wall_x = cub->p1.x + cub->ray.perp_wall_dist * cub->ray.dir.x;
 		wall_x -= floor(wall_x);
 		texture_x = cub->wall->width - (wall_x * (double)cub->wall->width);
-		step = 1.0 * cub->wall->height / line_height;
+		step = (double)cub->wall->height / line_height;
 		texture_position = (start.x - HEIGHT / HORIZON + line_height / HORIZON) * step;
 		y = start.x;
-		ft_bzero(cub->buffer, 980);
+		ft_bzero(cub->buffer, HEIGHT);
 		while (y < end.x)
 		{
-			texture_y = (int)(texture_position) & (cub->wall->height - 1);
+			texture_y = (int)texture_position & (cub->wall->height - 1);
 			texture_position += step;
 			color = get_color(cub->wall, texture_x, texture_y);
 			cub->buffer[y] = color;
 			y++;
 		}
 		line(cub, start, end, 0x00000000, cub->buffer);
-		ft_bzero(cub->buffer, 980);
+		ft_bzero(cub->buffer, HEIGHT);
 	}
 	else if (cub->ray.side == SO)
 		line(cub, start, end, 0xffe45eff, NULL);
