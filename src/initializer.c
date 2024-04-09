@@ -6,7 +6,7 @@
 /*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 19:29:16 by Juliany Ber       #+#    #+#             */
-/*   Updated: 2024/04/08 21:39:06 by julberna         ###   ########.fr       */
+/*   Updated: 2024/04/09 01:23:26 by julberna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	init(t_game *cub)
 	cub->camera_plane = vector(0, 0.66);
 	cub->rotation_speed = 0.02;
 	cub->move_speed = 0.06;
-	cub->wall_t = mlx_load_png("assets/wall-4.png");
+	cub->wall_t = mlx_load_png("assets/wall-5.png");
 	cub->wall = mlx_texture_to_image(cub->mlx, cub->wall_t);
 	draw_ceiling_floor(cub);
 	raycast(cub);

@@ -6,7 +6,7 @@
 /*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 18:15:38 by Juliany Ber       #+#    #+#             */
-/*   Updated: 2024/04/08 23:33:10 by julberna         ###   ########.fr       */
+/*   Updated: 2024/04/09 00:30:27 by julberna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ typedef struct s_game
 	double			old_time;
 	double			move_speed;
 	double			rotation_speed;
-	unsigned int	buffer[HEIGHT];
+	int	buffer[HEIGHT];
 	t_vector		camera_plane;
 	t_vector		direction;
 	t_coord			map;
