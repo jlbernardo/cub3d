@@ -6,7 +6,7 @@
 /*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 21:28:39 by julberna          #+#    #+#             */
-/*   Updated: 2024/04/09 18:45:06 by julberna         ###   ########.fr       */
+/*   Updated: 2024/04/09 18:52:11 by julberna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,16 +99,16 @@ void	draw_line(t_game *cub, int i)
 	{
 		wall_x = cub->p1.x + cub->ray.perp_wall_dist * cub->ray.dir.x;
 		wall_x -= floor(wall_x);
-		texture_x = 512 - (wall_x * (double)512);
-		step = 1.0 * 512 / line_height;
+		texture_x = cub->wall->width - (wall_x * (double)cub->wall->width);
+		step = 1.0 * cub->wall->height / line_height;
 		texture_position = (start.x - HEIGHT / HORIZON + line_height / HORIZON) * step;
 		y = start.x;
 		ft_bzero(cub->buffer, 980);
 		while (y < end.x)
 		{
-			texture_y = (int)(texture_position) & (512 - 1);
+			texture_y = (int)(texture_position) & (cub->wall->height - 1);
 			texture_position += step;
-			color = get_color(cub, texture_x, texture_y);
+			color = get_color(cub->wall, texture_x, texture_y);
 			cub->buffer[y] = color;
 			y++;
 		}
@@ -123,7 +123,7 @@ void	draw_line(t_game *cub, int i)
 		line(cub, start, end, 0xf9f9f9ff, NULL);
 }
 
-int	get_color(t_game *cub, int texture_x, int texture_y)
+int	get_color(mlx_texture_t *texture, int texture_x, int texture_y)
 {
 	int	r;
 	int	g;
@@ -131,23 +131,21 @@ int	get_color(t_game *cub, int texture_x, int texture_y)
 	int	a;
 	int	*p;
 
-	p = (int *)cub->wall->pixels + texture_x + texture_y * 512;
+	p = (int *)texture->pixels + texture_x + texture_y * texture->width;
 	r = ((*p) & 0xFF) >> 0;
 	g = ((*p) & 0xFF00) >> 8;
 	b = ((*p) & 0xFF0000) >> 16;
 	a = ((*p) & 0xFF000000) >> 24;
-
+	return (r << 24 | g << 16 | b << 8 | a);
+}
 	/* code below is more performatic */
 	// int32_t	pixel;
 
-	// pixel = *((int32_t *)cub->wall->pixels + \
-	// (size_t)(texture_y * 512 + texture_x));
+	// pixel = *((int32_t *)texture->pixels + \
+	// (size_t)(texture_y * texture->width + texture_x));
 	// pixel = ((pixel & 0xFF) << 24) | ((pixel & 0xFF00) << 8) | \
 	// ((pixel & 0xFF0000) >> 8) | ((pixel & 0xFF000000) >> 24);
 	// return (pixel);
-
-	return (r << 24 | g << 16 | b << 8 | a);
-}
 
 void	calculate_frames_per_second(t_game *cub)
 {
