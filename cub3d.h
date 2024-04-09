@@ -6,7 +6,7 @@
 /*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 18:15:38 by Juliany Ber       #+#    #+#             */
-/*   Updated: 2024/04/09 19:28:46 by julberna         ###   ########.fr       */
+/*   Updated: 2024/04/09 19:41:34 by julberna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,6 @@ typedef struct s_ray
 
 typedef struct s_game
 {
-	int				buffer[HEIGHT];
 	char			**map_matrix;
 	char			*map_path;
 	mlx_t			*mlx;
@@ -87,6 +86,17 @@ typedef struct s_draw
 	int				delta_x;
 	int				delta_y;
 }				t_draw;
+
+typedef struct s_texture
+{
+	int				buffer[HEIGHT];
+	int				color;
+	double			x;
+	double			y;
+	double			step;
+	double			position;
+	double			surface_x;
+}				t_texture;
 
 /* main calls */
 void		check(t_game *cub, int argc, char **argv);
