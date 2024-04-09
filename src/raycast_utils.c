@@ -6,7 +6,7 @@
 /*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 21:28:39 by julberna          #+#    #+#             */
-/*   Updated: 2024/04/09 18:41:56 by julberna         ###   ########.fr       */
+/*   Updated: 2024/04/09 18:45:06 by julberna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,7 +123,7 @@ void	draw_line(t_game *cub, int i)
 		line(cub, start, end, 0xf9f9f9ff, NULL);
 }
 
-int	get_color(t_game *cub, double texture_x, double texture_y)
+int	get_color(t_game *cub, int texture_x, int texture_y)
 {
 	int	r;
 	int	g;
@@ -131,7 +131,7 @@ int	get_color(t_game *cub, double texture_x, double texture_y)
 	int	a;
 	int	*p;
 
-	p = (int *)cub->wall->pixels + (int)texture_x + (int)texture_y * 512;
+	p = (int *)cub->wall->pixels + texture_x + texture_y * 512;
 	r = ((*p) & 0xFF) >> 0;
 	g = ((*p) & 0xFF00) >> 8;
 	b = ((*p) & 0xFF0000) >> 16;

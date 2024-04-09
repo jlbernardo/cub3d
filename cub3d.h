@@ -6,7 +6,7 @@
 /*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 18:15:38 by Juliany Ber       #+#    #+#             */
-/*   Updated: 2024/04/09 18:42:11 by julberna         ###   ########.fr       */
+/*   Updated: 2024/04/09 18:45:23 by julberna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ void		calculate_frames_per_second(t_game *cub);
 void		calculate_step_and_initial_side_distance(t_game *cub);
 
 /* bresenham */
-int			get_color(t_game *cub, double texture_x, double texture_y);
+int			get_color(t_game *cub, int texture_x, int texture_y);
 void		line(t_game *cub, t_coord start, t_coord end, int color, int buffer[HEIGHT]);
 void		algo_setup(t_draw *line, t_coord start, t_coord end);
 
