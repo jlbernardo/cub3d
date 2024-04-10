@@ -6,7 +6,7 @@
 /*   By: aperis-p <aperis-p@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 21:29:32 by Juliany Ber       #+#    #+#             */
-/*   Updated: 2024/04/08 16:31:20 by aperis-p         ###   ########.fr       */
+/*   Updated: 2024/04/09 19:18:15 by aperis-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	ft_free_split(char **split)
 	i = 0;
 	while (split[i])
 	{
-		if (split[i])
+		if (split[i][0])
 		{
 			free(split[i]);
 			split[i] = NULL;

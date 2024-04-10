@@ -32,16 +32,17 @@ int get_player_direction(t_game *cub)
 void set_map(t_game * cub, t_get_map_helper *helper)
 {
 	int i;
+	char **temp;
 
 	i = 0;
 	cub->map_matrix = (char **)ft_calloc(helper->rows + 1, sizeof(char *));
-	cub->map_data.raw_data = helper->line_bkp;
-	*cub->map_data.raw_data = helper->position_bkp;
-	while(*cub->map_data.raw_data && **cub->map_data.raw_data != '\n')
+	temp = helper->line_bkp;
+	*temp = helper->position_bkp;
+	while(*temp && **temp != '\n')
 	{
-		cub->map_matrix[i] = (char *)ft_calloc(ft_strlen(*cub->map_data.raw_data), sizeof(char));
-		ft_strlcpy(cub->map_matrix[i], *cub->map_data.raw_data, ft_strlen(*cub->map_data.raw_data) + 1);
-		cub->map_data.raw_data++;
+		cub->map_matrix[i] = (char *)ft_calloc(ft_strlen(*temp) + 1, sizeof(char));
+		ft_strlcpy(cub->map_matrix[i], *temp, ft_strlen(*temp) + 1);
+		temp++;
 		i++;
 	}
 	cub->map_matrix[i] = NULL;
@@ -49,30 +50,36 @@ void set_map(t_game * cub, t_get_map_helper *helper)
 
 int find_matrix(t_game *cub, t_get_map_helper *helper)
 {
-	while(*cub->map_data.raw_data)
+	int i;
+	int j;
+
+	i = 0;
+	j = 0;
+	while(cub->map_data.raw_data[i])
 	{
-		if(ft_isspace(**cub->map_data.raw_data))
+		if(ft_isspace(cub->map_data.raw_data[i][j]))
 		{
-			helper->position_bkp = *cub->map_data.raw_data;
-			helper->line_bkp = cub->map_data.raw_data;
-			while(ft_isspace(**cub->map_data.raw_data))
-				(*cub->map_data.raw_data)++;
+			helper->position_bkp = &cub->map_data.raw_data[i][j];
+			helper->line_bkp = &cub->map_data.raw_data[i];
+			while(ft_isspace(cub->map_data.raw_data[i][j]))
+				j++;
 		}
-		if(!ft_isdigit(**cub->map_data.raw_data))
-			cub->map_data.raw_data++;
+		if(!ft_isdigit(cub->map_data.raw_data[i][j]))
+			i++;
 		else
 		{
-			while(*cub->map_data.raw_data)
+			while(cub->map_data.raw_data[i])
 			{
-				if(ft_blank_line(*cub->map_data.raw_data))
+				if(ft_blank_line(cub->map_data.raw_data[i]))
 					helper->broken_map = true;
-				else if (*cub->map_data.raw_data && !helper->broken_map)
+				else if (cub->map_data.raw_data[i] && !helper->broken_map)
 					helper->rows++;
 				else
 					return (false);
-				cub->map_data.raw_data++;
+				i++;
 			}
 		}
+		j = 0;
 	}
 	return (true);
 }
@@ -91,7 +98,6 @@ int	get_map(t_game *cub)
 		return (false);
 	}
 	set_map(cub, &helper);
-	ft_print_matrix(cub->map_matrix);
 	return(true);
 }
 
@@ -150,6 +156,7 @@ int get_colors(t_game *cub)
 				keys |= 1;
 		}
 		temp++;
+		(*temp)++;
 		free(trimmed);
 	}
 	if (keys == 3)
@@ -205,7 +212,7 @@ int get_texture_path(t_game *cub)
 		temp++;
 		free(trimmed);
 	}
-	ft_printf("Textture path not found.\n");
+	ft_printf("Texture path not found.\n");
 	return (false);
 }
 

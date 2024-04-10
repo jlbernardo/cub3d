@@ -6,7 +6,7 @@
 /*   By: aperis-p <aperis-p@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/31 20:27:07 by julberna          #+#    #+#             */
-/*   Updated: 2024/04/08 21:24:30 by aperis-p         ###   ########.fr       */
+/*   Updated: 2024/04/09 15:37:08 by aperis-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	raycast(t_game	*cub)
 
 	i = -1;
 	if(cub->screen)
-		mlx_delete_image(cub->mlx, cub->screen); //This may be causing the segfault with esc key exit
+		mlx_delete_image(cub->mlx, cub->screen);
 	cub->screen = mlx_new_image(cub->mlx, WIDTH, HEIGHT);
 	while (++i < WIDTH)
 	{
