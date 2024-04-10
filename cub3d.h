@@ -6,7 +6,7 @@
 /*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 18:15:38 by Juliany Ber       #+#    #+#             */
-/*   Updated: 2024/04/10 00:52:07 by julberna         ###   ########.fr       */
+/*   Updated: 2024/04/10 18:15:00 by julberna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 # include <string.h>
 # include <sys/stat.h>
 
+# define RATIO		8
 # define HORIZON	2
 # define HEIGHT		980
 # define WIDTH		1020
@@ -75,6 +76,7 @@ typedef struct s_game
 	t_coord			map;
 	t_coord			p1;
 	mlx_image_t		*screen;
+	mlx_image_t		*minimap;
 	mlx_image_t		*ceiling_floor;
 	mlx_texture_t	*texture[4];
 }				t_game;
@@ -108,6 +110,7 @@ void		over(t_game *cub);
 
 /* raycast */
 void		raycast(t_game *cub);
+void		draw_minimap(t_game *cub);
 void		draw_line(t_game *cub, int i);
 void		draw_ceiling_floor(t_game *cub);
 void		wall_side(t_game *cub, int axis);
