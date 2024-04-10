@@ -6,7 +6,7 @@
 /*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 19:29:16 by Juliany Ber       #+#    #+#             */
-/*   Updated: 2024/04/10 00:22:34 by julberna         ###   ########.fr       */
+/*   Updated: 2024/04/10 00:54:18 by julberna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,10 @@ void	init(t_game *cub)
 
 void	load_textures(t_game *cub)
 {
-	cub->light_wall = mlx_load_png("assets/wall-1l.png");
-	cub->shadow_wall = mlx_load_png("assets/wall-1d.png");
+	cub->texture[NO] = mlx_load_png("assets/brick-1l.png");
+	cub->texture[SO] = mlx_load_png("assets/brick-2l.png");
+	cub->texture[EA] = mlx_load_png("assets/brick-1d.png");
+	cub->texture[WE] = mlx_load_png("assets/brick-2d.png");
 }
 
 void	create_matrix(t_game *cub)

@@ -6,7 +6,7 @@
 /*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 18:15:38 by Juliany Ber       #+#    #+#             */
-/*   Updated: 2024/04/10 00:23:05 by julberna         ###   ########.fr       */
+/*   Updated: 2024/04/10 00:52:07 by julberna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,8 +76,7 @@ typedef struct s_game
 	t_coord			p1;
 	mlx_image_t		*screen;
 	mlx_image_t		*ceiling_floor;
-	mlx_texture_t	*light_wall;
-	mlx_texture_t	*shadow_wall;
+	mlx_texture_t	*texture[4];
 }				t_game;
 
 typedef struct s_draw
