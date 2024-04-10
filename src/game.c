@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aperis-p <aperis-p@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 20:01:10 by Juliany Ber       #+#    #+#             */
-/*   Updated: 2024/04/08 18:49:40 by julberna         ###   ########.fr       */
+/*   Updated: 2024/04/10 19:58:25 by aperis-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,10 @@ void	actions(void *param)
 
 	cub = param;
 	if (mlx_is_key_down(cub->mlx, MLX_KEY_ESCAPE))
+	{
+		over(cub);
 		mlx_close_window(cub->mlx);
+	}
 	if (mlx_is_key_down(cub->mlx, MLX_KEY_DOWN)
 		|| mlx_is_key_down(cub->mlx, MLX_KEY_S))
 		walk_back(cub);

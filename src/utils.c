@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aperis-p <aperis-p@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 21:29:32 by Juliany Ber       #+#    #+#             */
-/*   Updated: 2024/04/03 22:12:59 by julberna         ###   ########.fr       */
+/*   Updated: 2024/04/10 19:26:31 by aperis-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,4 +28,25 @@ t_vector	vector(double x, double y)
 	vector.x = x;
 	vector.y = y;
 	return (vector);
+}
+
+void	free_matrix(char **matrix)
+{
+	int	i;
+
+	i = 0;
+	while (matrix[i])
+	{
+		if (matrix[i][0])
+		{
+			free(matrix[i]);
+			matrix[i] = NULL;
+		}
+		i++;
+	}
+	if (matrix)
+	{
+		free(matrix);
+		matrix = NULL;
+	}
 }
