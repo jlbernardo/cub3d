@@ -6,7 +6,7 @@
 /*   By: aperis-p <aperis-p@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 18:15:38 by Juliany Ber       #+#    #+#             */
-/*   Updated: 2024/04/08 19:41:12 by aperis-p         ###   ########.fr       */
+/*   Updated: 2024/04/10 19:26:12 by aperis-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,6 @@ typedef struct s_draw
 
 typedef struct s_get_map_helper
 {
-	char		*position_bkp;
 	char		**line_bkp;
 	int			rows;
 	_Bool		broken_map;
@@ -141,7 +140,7 @@ void		get_size(t_game *cub);
 void		create_matrix(t_game *cub);
 t_coord		coordinate(double x, double y);
 t_vector	vector(double x, double y);
-void		ft_free_split(char **split);
+void		free_matrix(char **split);
 int			free_data(t_game *cub);
 void		ft_print_matrix(char **matrix);
 
@@ -150,10 +149,10 @@ int			ft_isspace(char c);
 int			ft_blank_line(char *line);
 int			count_rows(int fd);
 char		**get_raw_data(char *map_path);
-int			parsing_suite(t_game *cub);
+_Bool		parsing_suite(t_game *cub);
 int			get_texture_path(t_game *cub);
-int			get_colors(t_game *cub);
-int			get_map(t_game *cub);
-int			get_player_direction(t_game *cub);
+_Bool		get_colors(t_game *cub);
+_Bool		get_map(t_game *cub);
+_Bool		get_player_direction(t_game *cub);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: aperis-p <aperis-p@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 21:29:32 by Juliany Ber       #+#    #+#             */
-/*   Updated: 2024/04/09 19:18:15 by aperis-p         ###   ########.fr       */
+/*   Updated: 2024/04/10 19:26:31 by aperis-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,23 +30,23 @@ t_vector	vector(double x, double y)
 	return (vector);
 }
 
-void	ft_free_split(char **split)
+void	free_matrix(char **matrix)
 {
 	int	i;
 
 	i = 0;
-	while (split[i])
+	while (matrix[i])
 	{
-		if (split[i][0])
+		if (matrix[i][0])
 		{
-			free(split[i]);
-			split[i] = NULL;
+			free(matrix[i]);
+			matrix[i] = NULL;
 		}
 		i++;
 	}
-	if (split)
+	if (matrix)
 	{
-		free(split);
-		split = NULL;
+		free(matrix);
+		matrix = NULL;
 	}
 }
