@@ -3,23 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   bresenham.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aperis-p <aperis-p@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/01 15:44:30 by julberna          #+#    #+#             */
-/*   Updated: 2024/04/04 13:52:30 by aperis-p         ###   ########.fr       */
+/*   Updated: 2024/04/09 21:21:23 by julberna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	line(t_game *cub, t_coord start, t_coord end, int color)
+void	line(t_game *cub, t_coord start, t_coord end, int buffer[HEIGHT])
 {
+	int		i;
 	t_draw	line;
 
+	i = (int)start.x;
 	algo_setup(&line, start, end);
 	while (true)
 	{
-		mlx_put_pixel(cub->screen, start.y, start.x, color);
+		mlx_put_pixel(cub->screen, start.y, start.x, buffer[i++]);
 		if (start.x == end.x && start.y == end.y)
 			break ;
 		if (line.error * 2 >= -line.delta_y)

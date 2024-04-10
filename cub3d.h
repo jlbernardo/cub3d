@@ -6,7 +6,7 @@
 /*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 18:15:38 by Juliany Ber       #+#    #+#             */
-/*   Updated: 2024/04/04 21:32:41 by julberna         ###   ########.fr       */
+/*   Updated: 2024/04/09 23:48:48 by julberna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@
 # include <string.h>
 # include <sys/stat.h>
 
-# define HORIZON	2.5
-# define HEIGHT		1080
-# define WIDTH		1220
+# define HORIZON	2
+# define HEIGHT		980
+# define WIDTH		1020
 # define X			0
 # define Y			1
 # define NO			0
@@ -36,55 +36,70 @@
 
 typedef struct s_coord
 {
-	double		x;
-	double		y;
+	double			x;
+	double			y;
 }				t_coord;
 
 typedef struct s_vector
 {
-	double		x;
-	double		y;
+	double			x;
+	double			y;
 }				t_vector;
 
 typedef struct s_ray
 {
-	int			side;
-	bool		hit;
-	double		camera_x;
-	double		perp_wall_dist;
-	t_coord		delta_dist;
-	t_coord		side_dist;
-	t_coord		step;
-	t_coord		map;
-	t_vector	dir;
+	int				line_height;
+	int				side;
+	bool			hit;
+	double			camera_x;
+	double			perp_wall_dist;
+	t_coord			delta_dist;
+	t_coord			side_dist;
+	t_coord			step;
+	t_coord			map;
+	t_vector		dir;
 }				t_ray;
 
 typedef struct s_game
 {
-	char		**map_matrix;
-	char		*map_path;
-	mlx_t		*mlx;
-	t_ray		ray;
-	double		time;
-	double		old_time;
-	double		move_speed;
-	double		rotation_speed;
-	t_vector	camera_plane;
-	t_vector	direction;
-	t_coord		map;
-	t_coord		p1;
-	mlx_image_t	*screen;
-	mlx_image_t	*ceiling_floor;
+	char			**map_matrix;
+	char			*map_path;
+	mlx_t			*mlx;
+	t_ray			ray;
+	double			time;
+	double			old_time;
+	double			move_speed;
+	double			rotation_speed;
+	t_vector		camera_plane;
+	t_vector		direction;
+	t_coord			map;
+	t_coord			p1;
+	mlx_image_t		*screen;
+	mlx_image_t		*ceiling_floor;
+	mlx_texture_t	*light_wall;
+	mlx_texture_t	*shadow_wall;
 }				t_game;
 
 typedef struct s_draw
 {
-	int			error;
-	int			step_x;
-	int			step_y;
-	int			delta_x;
-	int			delta_y;
+	int				error;
+	int				step_x;
+	int				step_y;
+	int				delta_x;
+	int				delta_y;
 }				t_draw;
+
+typedef struct s_texture
+{
+	int				buffer[HEIGHT];
+	int				color;
+	double			x;
+	double			y;
+	double			step;
+	double			position;
+	double			surface_x;
+	mlx_texture_t	*img;
+}				t_texture;
 
 /* main calls */
 void		check(t_game *cub, int argc, char **argv);
@@ -94,20 +109,23 @@ void		over(t_game *cub);
 
 /* raycast */
 void		raycast(t_game *cub);
+void		darker_color(t_texture *tex);
 void		draw_line(t_game *cub, int i);
+void		draw_ceiling_floor(t_game *cub);
 void		wall_side(t_game *cub, int axis);
 void		calculate_wall_distance(t_game *cub);
 void		initial_ray_setup(t_game *cub, int i);
 void		calculate_delta_distance(t_game *cub);
 void		calculate_frames_per_second(t_game *cub);
+void		pick_a_side(t_game *cub, int side, t_texture *tex);
 void		calculate_step_and_initial_side_distance(t_game *cub);
-void		draw_ceiling_floor(t_game *cub);
+void		put_texture(t_game *cub, t_coord start, t_coord end, int side);
 
 /* bresenham */
+void		line(t_game *cub, t_coord start, t_coord end, int buffer[HEIGHT]);
 void		algo_setup(t_draw *line, t_coord start, t_coord end);
-void		line(t_game *cub, t_coord start, t_coord end, int color);
 
-/* main game */
+/* game mechanics */
 void		actions(void *param);
 void		walk_back(t_game *cub);
 void		rotate_left(t_game *cub);
@@ -116,6 +134,7 @@ void		rotate_right(t_game *cub);
 void		walk_sideways(t_game *cub, int key);
 
 /* utils */
+int			get_color(t_texture tex);
 void		get_size(t_game *cub);
 void		create_matrix(t_game *cub);
 t_coord		coordinate(double x, double y);

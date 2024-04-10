@@ -6,7 +6,7 @@
 /*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 21:28:39 by julberna          #+#    #+#             */
-/*   Updated: 2024/04/04 21:32:52 by julberna         ###   ########.fr       */
+/*   Updated: 2024/04/10 00:08:46 by julberna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,9 +62,9 @@ void	draw_ceiling_floor(t_game *cub)
 		while (y <= WIDTH)
 		{
 			if (x < (int)(HEIGHT / HORIZON))
-				mlx_put_pixel(cub->ceiling_floor, y, x, 0xEEF5FFff);
+				mlx_put_pixel(cub->ceiling_floor, y, x, 0xe7fbffff);
 			else
-				mlx_put_pixel(cub->ceiling_floor, y, x, 0xA5DD9Bff);
+				mlx_put_pixel(cub->ceiling_floor, y, x, 0x344e41ff);
 			y++;
 		}
 		y = 0;
@@ -75,27 +75,19 @@ void	draw_ceiling_floor(t_game *cub)
 
 void	draw_line(t_game *cub, int i)
 {
-	int		line_height;
-	t_coord	start;
-	t_coord	end;
+	t_coord		end;
+	t_coord		start;
 
-	line_height = (int)(HEIGHT / cub->ray.perp_wall_dist);
+	cub->ray.line_height = (int)(HEIGHT / cub->ray.perp_wall_dist);
 	start.y = i;
-	start.x = (int)(-line_height + HEIGHT / HORIZON);
+	start.x = (int)(-cub->ray.line_height / HORIZON + HEIGHT / HORIZON);
 	if (start.x < 0)
 		start.x = 0;
 	end.y = i;
-	end.x = (int)(line_height + HEIGHT / HORIZON);
+	end.x = (int)(cub->ray.line_height / HORIZON + HEIGHT / HORIZON);
 	if (end.x >= HEIGHT)
 		end.x = HEIGHT - 1;
-	if (cub->ray.side == NO)
-		line(cub, start, end, 0x00f5d4ff);
-	else if (cub->ray.side == SO)
-		line(cub, start, end, 0x00bbf9ff);
-	else if (cub->ray.side == EA)
-		line(cub, start, end, 0xfee440ff);
-	else if (cub->ray.side == WE)
-		line(cub, start, end, 0xf15bb5ff);
+	put_texture(cub, start, end, cub->ray.side);
 }
 
 void	calculate_frames_per_second(t_game *cub)
