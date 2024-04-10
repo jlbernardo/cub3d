@@ -6,13 +6,13 @@
 /*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/01 15:44:30 by julberna          #+#    #+#             */
-/*   Updated: 2024/04/09 18:31:41 by julberna         ###   ########.fr       */
+/*   Updated: 2024/04/09 21:21:23 by julberna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	line(t_game *cub, t_coord start, t_coord end, int color, int buffer[HEIGHT])
+void	line(t_game *cub, t_coord start, t_coord end, int buffer[HEIGHT])
 {
 	int		i;
 	t_draw	line;
@@ -21,10 +21,7 @@ void	line(t_game *cub, t_coord start, t_coord end, int color, int buffer[HEIGHT]
 	algo_setup(&line, start, end);
 	while (true)
 	{
-		if (buffer == NULL)
-			mlx_put_pixel(cub->screen, start.y, start.x, color);
-		else
-			mlx_put_pixel(cub->screen, start.y, start.x, buffer[i++]);
+		mlx_put_pixel(cub->screen, start.y, start.x, buffer[i++]);
 		if (start.x == end.x && start.y == end.y)
 			break ;
 		if (line.error * 2 >= -line.delta_y)

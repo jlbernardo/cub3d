@@ -6,34 +6,48 @@
 /*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 18:57:39 by julberna          #+#    #+#             */
-/*   Updated: 2024/04/09 19:50:14 by julberna         ###   ########.fr       */
+/*   Updated: 2024/04/09 21:25:59 by julberna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	put_texture(t_game *cub, t_coord start, t_coord end, int line_height)
+void	put_texture(t_game *cub, t_coord start, t_coord end, int side)
 {
-	int			i;
-	double		surface_x;
-	t_texture	image;
+	int				i;
+	double			surface_x;
+	t_texture		tex;
+	mlx_texture_t	*img;
 
+	choose_side(cub, side, img);
 	surface_x = cub->p1.x + cub->ray.perp_wall_dist * cub->ray.dir.x;
 	surface_x -= floor(surface_x);
-	image.x = cub->wall->width - (surface_x * (double)cub->wall->width);
-	image.step = (double)cub->wall->height / line_height;
-	image.position
-		= (start.x - HEIGHT / HORIZON + line_height / HORIZON) * image.step;
+	tex.x = img->width - (surface_x * (double)img->width);
+	tex.step = (double)img->height / cub->ray.line_height;
+	tex.position = (start.x - HEIGHT / HORIZON + cub->ray.line_height / HORIZON)
+		* tex.step;
 	i = start.x;
 	while (i < end.x)
 	{
-		image.y = (int)image.position & (cub->wall->height - 1);
-		image.position += image.step;
-		image.color = get_color(cub->wall, image.x, image.y);
-		image.buffer[i] = image.color;
+		tex.y = (int)tex.position & (img->height - 1);
+		tex.position += tex.step;
+		tex.color = get_color(img, tex.x, tex.y);
+		tex.buffer[i] = tex.color;
 		i++;
 	}
-	line(cub, start, end, 0x00000000, image.buffer);
+	line(cub, start, end, tex.buffer);
+}
+
+void	choose_side(t_game *cub, int side, mlx_texture_t *img)
+{
+	if (side == NO)
+		img = cub->wall;
+	if (side == SO)
+		img = cub->wall;
+	if (side == EA)
+		img = cub->wall;
+	if (side == WE)
+		img = cub->wall;
 }
 
 int	get_color(mlx_texture_t *texture, int texture_x, int texture_y)

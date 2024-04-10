@@ -6,7 +6,7 @@
 /*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 18:15:38 by Juliany Ber       #+#    #+#             */
-/*   Updated: 2024/04/09 19:41:34 by julberna         ###   ########.fr       */
+/*   Updated: 2024/04/09 21:22:25 by julberna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ typedef struct s_vector
 
 typedef struct s_ray
 {
+	int				line_height;
 	int				side;
 	bool			hit;
 	double			camera_x;
@@ -114,10 +115,10 @@ void		initial_ray_setup(t_game *cub, int i);
 void		calculate_delta_distance(t_game *cub);
 void		calculate_frames_per_second(t_game *cub);
 void		calculate_step_and_initial_side_distance(t_game *cub);
-void		put_texture(t_game *cub, t_coord start, t_coord end, int line_height);
+void		put_texture(t_game *cub, t_coord start, t_coord end, int side);
 
 /* bresenham */
-void		line(t_game *cub, t_coord start, t_coord end, int color, int buffer[HEIGHT]);
+void		line(t_game *cub, t_coord start, t_coord end, int buffer[HEIGHT]);
 void		algo_setup(t_draw *line, t_coord start, t_coord end);
 
 /* game mechanics */
