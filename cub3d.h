@@ -6,7 +6,7 @@
 /*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 18:15:38 by Juliany Ber       #+#    #+#             */
-/*   Updated: 2024/04/09 22:39:20 by julberna         ###   ########.fr       */
+/*   Updated: 2024/04/09 23:48:48 by julberna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,8 @@ typedef struct s_game
 	t_coord			p1;
 	mlx_image_t		*screen;
 	mlx_image_t		*ceiling_floor;
-	mlx_texture_t	*wall;
+	mlx_texture_t	*light_wall;
+	mlx_texture_t	*shadow_wall;
 }				t_game;
 
 typedef struct s_draw
@@ -108,6 +109,7 @@ void		over(t_game *cub);
 
 /* raycast */
 void		raycast(t_game *cub);
+void		darker_color(t_texture *tex);
 void		draw_line(t_game *cub, int i);
 void		draw_ceiling_floor(t_game *cub);
 void		wall_side(t_game *cub, int axis);
@@ -132,7 +134,7 @@ void		rotate_right(t_game *cub);
 void		walk_sideways(t_game *cub, int key);
 
 /* utils */
-int			get_color(mlx_texture_t *texture, int texture_x, int texture_y);
+int			get_color(t_texture tex);
 void		get_size(t_game *cub);
 void		create_matrix(t_game *cub);
 t_coord		coordinate(double x, double y);
