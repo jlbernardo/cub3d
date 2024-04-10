@@ -6,7 +6,7 @@
 /*   By: aperis-p <aperis-p@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 19:29:16 by Juliany Ber       #+#    #+#             */
-/*   Updated: 2024/04/08 21:18:15 by aperis-p         ###   ########.fr       */
+/*   Updated: 2024/04/10 20:01:41 by aperis-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 _Bool	init(t_game *cub)
 {
 	cub->map_data.raw_data = get_raw_data(cub->map_path);
-	if(!parsing_suite(cub))
+	load_textures(cub);
+	if (!parsing_suite(cub))
 		return (false);
 	cub->direction = vector(-1, 0);
 	cub->camera_plane = vector(0, 0.66);
@@ -25,4 +26,12 @@ _Bool	init(t_game *cub)
 	draw_ceiling_floor(cub);
 	raycast(cub);
 	return (true);
+}
+
+void	load_textures(t_game *cub)
+{
+	cub->texture[NO] = mlx_load_png("assets/brick-1l.png");
+	cub->texture[SO] = mlx_load_png("assets/brick-2l.png");
+	cub->texture[EA] = mlx_load_png("assets/brick-1d.png");
+	cub->texture[WE] = mlx_load_png("assets/brick-2d.png");
 }
