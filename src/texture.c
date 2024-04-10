@@ -6,7 +6,7 @@
 /*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 18:57:39 by julberna          #+#    #+#             */
-/*   Updated: 2024/04/10 00:09:10 by julberna         ###   ########.fr       */
+/*   Updated: 2024/04/10 00:53:52 by julberna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	put_texture(t_game *cub, t_coord start, t_coord end, int side)
 	tex.position = (start.x - HEIGHT / HORIZON
 			+ cub->ray.line_height / HORIZON) * tex.step;
 	i = start.x;
-	while (i < end.x + 1git stat)
+	while (i <= end.x)
 	{
 		tex.y = (int)tex.position & (tex.img->height - 1);
 		tex.position += tex.step;
@@ -35,15 +35,10 @@ void	put_texture(t_game *cub, t_coord start, t_coord end, int side)
 void	pick_a_side(t_game *cub, int side, t_texture *tex)
 {
 	if (side == NO || side == SO)
-	{
-		tex->img = cub->light_wall;
 		tex->surface_x = cub->p1.x + cub->ray.perp_wall_dist * cub->ray.dir.x;
-	}
 	if (side == EA || side == WE)
-	{
-		tex->img = cub->shadow_wall;
 		tex->surface_x = cub->p1.y + cub->ray.perp_wall_dist * cub->ray.dir.y;
-	}
+	tex->img = cub->texture[side];
 	tex->surface_x -= floor(tex->surface_x);
 	tex->x = (int)(tex->surface_x * (double)tex->img->width);
 	tex->step = (double)tex->img->height / cub->ray.line_height;
