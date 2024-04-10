@@ -6,18 +6,18 @@
 /*   By: aperis-p <aperis-p@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/31 20:27:07 by julberna          #+#    #+#             */
-/*   Updated: 2024/04/09 15:37:08 by aperis-p         ###   ########.fr       */
+/*   Updated: 2024/04/10 20:06:28 by aperis-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	raycast(t_game	*cub)
+void	raycast(t_game *cub)
 {
-	int		i;
+	int	i;
 
 	i = -1;
-	if(cub->screen)
+	if (cub->screen)
 		mlx_delete_image(cub->mlx, cub->screen);
 	cub->screen = mlx_new_image(cub->mlx, WIDTH, HEIGHT);
 	while (++i < WIDTH)
