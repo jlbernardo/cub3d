@@ -6,7 +6,7 @@
 /*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 18:15:38 by Juliany Ber       #+#    #+#             */
-/*   Updated: 2024/04/09 21:22:25 by julberna         ###   ########.fr       */
+/*   Updated: 2024/04/09 22:39:20 by julberna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,7 @@ typedef struct s_texture
 	double			step;
 	double			position;
 	double			surface_x;
+	mlx_texture_t	*img;
 }				t_texture;
 
 /* main calls */
@@ -114,6 +115,7 @@ void		calculate_wall_distance(t_game *cub);
 void		initial_ray_setup(t_game *cub, int i);
 void		calculate_delta_distance(t_game *cub);
 void		calculate_frames_per_second(t_game *cub);
+void		pick_a_side(t_game *cub, int side, t_texture *tex);
 void		calculate_step_and_initial_side_distance(t_game *cub);
 void		put_texture(t_game *cub, t_coord start, t_coord end, int side);
 

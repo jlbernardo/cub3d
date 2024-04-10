@@ -6,7 +6,7 @@
 /*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 21:28:39 by julberna          #+#    #+#             */
-/*   Updated: 2024/04/09 21:20:46 by julberna         ###   ########.fr       */
+/*   Updated: 2024/04/09 22:41:00 by julberna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,14 +87,7 @@ void	draw_line(t_game *cub, int i)
 	end.x = (int)(cub->ray.line_height / HORIZON + HEIGHT / HORIZON);
 	if (end.x >= HEIGHT)
 		end.x = HEIGHT - 1;
-	if (cub->ray.side == NO)
-		put_texture(cub, start, end, cub->wall);
-	else if (cub->ray.side == SO)
-		put_texture(cub, start, end, cub->wall);
-	else if (cub->ray.side == EA)
-		put_texture(cub, start, end, cub->wall);
-	else if (cub->ray.side == WE)
-		put_texture(cub, start, end, cub->wall);
+	put_texture(cub, start, end, cub->ray.side);
 }
 
 void	calculate_frames_per_second(t_game *cub)
