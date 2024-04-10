@@ -6,7 +6,7 @@
 /*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 18:15:38 by Juliany Ber       #+#    #+#             */
-/*   Updated: 2024/04/09 23:48:48 by julberna         ###   ########.fr       */
+/*   Updated: 2024/04/10 00:23:05 by julberna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,6 @@ void		over(t_game *cub);
 
 /* raycast */
 void		raycast(t_game *cub);
-void		darker_color(t_texture *tex);
 void		draw_line(t_game *cub, int i);
 void		draw_ceiling_floor(t_game *cub);
 void		wall_side(t_game *cub, int axis);
@@ -136,6 +135,7 @@ void		walk_sideways(t_game *cub, int key);
 /* utils */
 int			get_color(t_texture tex);
 void		get_size(t_game *cub);
+void		load_textures(t_game *cub);
 void		create_matrix(t_game *cub);
 t_coord		coordinate(double x, double y);
 t_vector	vector(double x, double y);

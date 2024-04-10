@@ -6,7 +6,7 @@
 /*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 19:29:16 by Juliany Ber       #+#    #+#             */
-/*   Updated: 2024/04/09 23:50:08 by julberna         ###   ########.fr       */
+/*   Updated: 2024/04/10 00:22:34 by julberna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,21 @@
 void	init(t_game *cub)
 {
 	create_matrix(cub);
+	load_textures(cub);
 	cub->mlx = mlx_init(WIDTH, HEIGHT, "cub3d?", false);
 	cub->p1 = coordinate(22, 12);
 	cub->direction = vector(-1, 0);
 	cub->camera_plane = vector(0, 0.66);
 	cub->rotation_speed = 0.02;
 	cub->move_speed = 0.06;
-	cub->light_wall = mlx_load_png("assets/wall-1l.png");
-	cub->shadow_wall = mlx_load_png("assets/wall-1d.png");
 	draw_ceiling_floor(cub);
 	raycast(cub);
+}
+
+void	load_textures(t_game *cub)
+{
+	cub->light_wall = mlx_load_png("assets/wall-1l.png");
+	cub->shadow_wall = mlx_load_png("assets/wall-1d.png");
 }
 
 void	create_matrix(t_game *cub)
