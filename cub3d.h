@@ -6,7 +6,7 @@
 /*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 18:15:38 by Juliany Ber       #+#    #+#             */
-/*   Updated: 2024/04/10 23:57:02 by julberna         ###   ########.fr       */
+/*   Updated: 2024/04/11 00:12:45 by julberna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 
 # define RATIO		6
 # define HORIZON	2
+# define MAP_OFFSET	10
 # define HEIGHT		600
 # define WIDTH		1200
 # define X			0
