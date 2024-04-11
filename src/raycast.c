@@ -6,7 +6,7 @@
 /*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/31 20:27:07 by julberna          #+#    #+#             */
-/*   Updated: 2024/04/11 01:04:06 by julberna         ###   ########.fr       */
+/*   Updated: 2024/04/11 18:39:27 by julberna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ void	raycast(t_game	*cub)
 	int		i;
 
 	i = -1;
-	mlx_delete_image(cub->mlx, cub->screen);
+	if (cub->screen)
+		mlx_delete_image(cub->mlx, cub->screen);
 	cub->screen = mlx_new_image(cub->mlx, WIDTH, HEIGHT);
 	while (++i < WIDTH)
 	{

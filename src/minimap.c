@@ -6,7 +6,7 @@
 /*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 18:00:41 by julberna          #+#    #+#             */
-/*   Updated: 2024/04/11 16:31:15 by julberna         ###   ########.fr       */
+/*   Updated: 2024/04/11 18:39:54 by julberna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,9 @@ void	draw_minimap(t_game *cub)
 		while (++x < cub->map.y)
 		{
 			if (cub->map_matrix[x][y] == '0')
-				put_square(cub, x, y, 0xffffff66);
+				put_square(cub, x, y, 0xffffff88);
 			else if (cub->map_matrix[x][y] != '\n')
-				put_square(cub, x, y, 0x00000066);
+				put_square(cub, x, y, 0x00000088);
 		}
 	}
 	mlx_image_to_window(cub->mlx, cub->minimap, MAP_OFFSET, MAP_OFFSET);
@@ -48,14 +48,15 @@ void	draw_player_on_minimap(t_game *cub)
 
 	size_x = (cub->mini_size.x / cub->map.x);
 	size_y = (cub->mini_size.y / cub->map.y);
-	mlx_delete_image(cub->mlx, cub->miniplayer);
+	if (cub->miniplayer)
+		mlx_delete_image(cub->mlx, cub->miniplayer);
 	cub->miniplayer = mlx_new_image(cub->mlx, size_x, size_y);
 	i = -1;
 	while (++i < size_x)
 	{
 		j = -1;
 		while (++j < size_y)
-			mlx_put_pixel(cub->miniplayer, j, i, 0xc1121fff);
+			mlx_put_pixel(cub->miniplayer, j, i, 0xc1121f88);
 	}
 	mlx_image_to_window(cub->mlx, cub->miniplayer,
 		cub->p1.x * (cub->mini_size.x / cub->map.x) + size_x,

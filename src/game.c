@@ -6,7 +6,7 @@
 /*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 20:01:10 by Juliany Ber       #+#    #+#             */
-/*   Updated: 2024/04/11 16:53:33 by julberna         ###   ########.fr       */
+/*   Updated: 2024/04/11 18:33:58 by julberna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,5 +41,5 @@ void	actions(void *param)
 	if (mlx_is_key_down(cub->mlx, MLX_KEY_LEFT))
 		rotate_left(cub);
 	raycast(cub);
-	// draw_player_on_minimap(cub);
+	draw_player_on_minimap(cub);
 }
