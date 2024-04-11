@@ -6,7 +6,7 @@
 /*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 18:15:38 by Juliany Ber       #+#    #+#             */
-/*   Updated: 2024/04/11 00:12:45 by julberna         ###   ########.fr       */
+/*   Updated: 2024/04/11 00:38:55 by julberna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ typedef struct s_game
 	t_coord			p1;
 	mlx_image_t		*screen;
 	mlx_image_t		*minimap;
+	mlx_image_t		*miniplayer;
 	mlx_image_t		*ceiling_floor;
 	mlx_texture_t	*texture[4];
 }				t_game;
@@ -117,6 +118,7 @@ void		draw_minimap(t_game *cub);
 void		draw_line(t_game *cub, int i);
 void		draw_ceiling_floor(t_game *cub);
 void		wall_side(t_game *cub, int axis);
+void		draw_player_on_minimap(t_game *cub);
 void		calculate_wall_distance(t_game *cub);
 void		initial_ray_setup(t_game *cub, int i);
 void		calculate_delta_distance(t_game *cub);

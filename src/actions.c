@@ -6,7 +6,7 @@
 /*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 22:29:12 by julberna          #+#    #+#             */
-/*   Updated: 2024/04/04 21:22:05 by julberna         ###   ########.fr       */
+/*   Updated: 2024/04/11 01:27:33 by julberna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ void	walk_forward(t_game *cub)
 		cub->p1.x += cub->direction.x * cub->move_speed;
 	if (cub->map_matrix[y2][x2] == '0')
 		cub->p1.y += cub->direction.y * cub->move_speed;
+	cub->miniplayer->instances->x = cub->p1.x * (cub->mini_size.x / cub->map.x) + (cub->mini_size.x / cub->map.x);
+	cub->miniplayer->instances->y = cub->p1.y * (cub->mini_size.y / cub->map.y) + (cub->mini_size.y / cub->map.y);
 }
 
 void	walk_back(t_game *cub)
@@ -36,6 +38,8 @@ void	walk_back(t_game *cub)
 		cub->p1.x -= cub->direction.x * cub->move_speed;
 	if (cub->map_matrix[y2][x2] == '0')
 		cub->p1.y -= cub->direction.y * cub->move_speed;
+	cub->miniplayer->instances->x = cub->p1.x * (cub->mini_size.x / cub->map.x) + (cub->mini_size.x / cub->map.x);
+	cub->miniplayer->instances->y = cub->p1.y * (cub->mini_size.y / cub->map.y) + (cub->mini_size.y / cub->map.y);
 }
 
 void	rotate_left(t_game *cub)
