@@ -6,7 +6,7 @@
 /*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 18:00:41 by julberna          #+#    #+#             */
-/*   Updated: 2024/04/11 01:27:29 by julberna         ###   ########.fr       */
+/*   Updated: 2024/04/11 16:31:15 by julberna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,9 @@ void	draw_minimap(t_game *cub)
 		while (++x < cub->map.y)
 		{
 			if (cub->map_matrix[x][y] == '0')
-				put_square(cub, x, y, 0xffffffff);
+				put_square(cub, x, y, 0xffffff66);
 			else if (cub->map_matrix[x][y] != '\n')
-				put_square(cub, x, y, 0x000000ff);
+				put_square(cub, x, y, 0x00000066);
 		}
 	}
 	mlx_image_to_window(cub->mlx, cub->minimap, MAP_OFFSET, MAP_OFFSET);
@@ -60,6 +60,8 @@ void	draw_player_on_minimap(t_game *cub)
 	mlx_image_to_window(cub->mlx, cub->miniplayer,
 		cub->p1.x * (cub->mini_size.x / cub->map.x) + size_x,
 		cub->p1.y * (cub->mini_size.y / cub->map.y) + size_y);
+	cub->screen->instances->z = 1;
+	cub->miniplayer->instances->z = 3;
 }
 
 void	put_square(t_game *cub, int x, int y, int color)

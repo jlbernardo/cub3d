@@ -6,7 +6,7 @@
 /*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 19:29:16 by Juliany Ber       #+#    #+#             */
-/*   Updated: 2024/04/11 00:48:56 by julberna         ###   ########.fr       */
+/*   Updated: 2024/04/11 16:53:28 by julberna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ void	init(t_game *cub)
 	cub->rotation_speed = 0.02;
 	cub->move_speed = 0.06;
 	draw_ceiling_floor(cub);
-	draw_minimap(cub);
 	raycast(cub);
+	// draw_minimap(cub);
 }
 
 void	load_textures(t_game *cub)
