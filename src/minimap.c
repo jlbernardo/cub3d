@@ -6,7 +6,7 @@
 /*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 18:00:41 by julberna          #+#    #+#             */
-/*   Updated: 2024/04/10 21:12:56 by julberna         ###   ########.fr       */
+/*   Updated: 2024/04/11 00:11:15 by julberna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,16 @@
 
 void	draw_minimap(t_game *cub)
 {
-	int			x;
-	int			y;
+	int	x;
+	int	y;
+	int	size;
 
 	y = -1;
-	cub->minimap = mlx_new_image(cub->mlx,
-			(int)(WIDTH / RATIO), (int)(HEIGHT / RATIO));
+	if (WIDTH < HEIGHT)
+		size = (int)(WIDTH / RATIO);
+	else
+		size = (int)(HEIGHT / RATIO);
+	cub->minimap = mlx_new_image(cub->mlx, size, size);
 	while (++y < cub->map.x)
 	{
 		x = -1;
@@ -36,30 +40,21 @@ void	draw_minimap(t_game *cub)
 
 void	put_square(t_game *cub, int x, int y, int color)
 {
-	int			i;
-	int			j;
-	const int	size_x = cub->minimap->width / cub->map.x;
-	const int	size_y = cub->minimap->height / cub->map.y;
+	int	i;
+	int	j;
+	int	size;
 
-	i = (x * size_x) - 1;
-	while (++i < (x * size_x) + size_x)
+	if (cub->map.x > cub->map.y)
+		size = cub->minimap->width / cub->map.x;
+	else
+		size = cub->minimap->width / cub->map.y;
+	i = (x * size) - 1;
+	while (++i < (x * size) + size)
 	{
-		j = (y * size_y) - 1;
-		while (++j < (y * size_y) + size_y)
+		j = (y * size) - 1;
+		while (++j < (y * size) + size)
 			mlx_put_pixel(cub->minimap, j, i, color);
 	}
+	cub->mini_size.y = i + 9;
+	cub->mini_size.x = j + 9;
 }
-
-// while (i < width)
-// {
-// 	j = -1;
-// 	while (++j < height)
-// 	{
-// 		if (i <= 2 || i >= (width - 3) || j <= 2 || j >= (height - 3))
-// 			color = 0x000000ff;
-// 		else
-// 			color = 0xffffffff;
-// 		mlx_put_pixel(cub->minimap, i, j, color);
-// 	}
-// 	i++;
-// }

@@ -6,7 +6,7 @@
 /*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 21:29:32 by Juliany Ber       #+#    #+#             */
-/*   Updated: 2024/04/03 22:12:59 by julberna         ###   ########.fr       */
+/*   Updated: 2024/04/11 00:01:34 by julberna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,4 +28,14 @@ t_vector	vector(double x, double y)
 	vector.x = x;
 	vector.y = y;
 	return (vector);
+}
+
+bool	not_on_minimap(t_game *cub, t_coord start)
+{
+	if (start.y < cub->minimap->instances->x
+		|| start.y > cub->mini_size.x
+		|| start.x < cub->minimap->instances->y
+		|| start.x > cub->mini_size.y)
+		return (true);
+	return (false);
 }
