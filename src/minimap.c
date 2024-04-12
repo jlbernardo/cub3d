@@ -6,7 +6,7 @@
 /*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 18:00:41 by julberna          #+#    #+#             */
-/*   Updated: 2024/04/12 15:27:37 by julberna         ###   ########.fr       */
+/*   Updated: 2024/04/12 15:34:49 by julberna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,8 @@ void	draw_player_on_minimap(t_game *cub)
 			mlx_put_pixel(cub->miniplayer, y, x, 0xc1121f95);
 	}
 	mlx_image_to_window(cub->mlx, cub->miniplayer,
-		cub->p1.x * rx + MAP_OFFSET - (int)(rx / 3), cub->p1.y * ry + MAP_OFFSET - (int)(rx / 3));
+		cub->p1.x * rx + MAP_OFFSET - (int)(rx / 3),
+		cub->p1.y * ry + MAP_OFFSET - (int)(rx / 3));
 	cub->screen->instances->z = 1;
 	cub->miniplayer->instances->z = 3;
 }

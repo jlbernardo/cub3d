@@ -6,7 +6,7 @@
 /*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 20:01:10 by Juliany Ber       #+#    #+#             */
-/*   Updated: 2024/04/11 18:33:58 by julberna         ###   ########.fr       */
+/*   Updated: 2024/04/12 15:34:26 by julberna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,10 @@ void	actions(void *param)
 
 	cub = param;
 	if (mlx_is_key_down(cub->mlx, MLX_KEY_ESCAPE))
+	{
+		over(cub);
 		mlx_close_window(cub->mlx);
+	}
 	if (mlx_is_key_down(cub->mlx, MLX_KEY_DOWN)
 		|| mlx_is_key_down(cub->mlx, MLX_KEY_S))
 		walk_back(cub);

@@ -6,7 +6,7 @@
 /*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 21:28:39 by julberna          #+#    #+#             */
-/*   Updated: 2024/04/12 13:50:45 by julberna         ###   ########.fr       */
+/*   Updated: 2024/04/12 15:36:12 by julberna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,10 +61,10 @@ void	draw_ceiling_floor(t_game *cub)
 	{
 		while (y < WIDTH)
 		{
-			if (x < floor(HEIGHT / HORIZON))
-				mlx_put_pixel(cub->ceiling_floor, y, x, 0xe7fbffff);
+			if (x < (int)(HEIGHT / HORIZON))
+				mlx_put_pixel(cub->ceiling_floor, y, x, cub->map_data.c_color);
 			else
-				mlx_put_pixel(cub->ceiling_floor, y, x, 0x344e41ff);
+				mlx_put_pixel(cub->ceiling_floor, y, x, cub->map_data.f_color);
 			y++;
 		}
 		y = 0;

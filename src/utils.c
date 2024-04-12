@@ -6,7 +6,7 @@
 /*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 21:29:32 by Juliany Ber       #+#    #+#             */
-/*   Updated: 2024/04/11 00:01:34 by julberna         ###   ########.fr       */
+/*   Updated: 2024/04/12 15:33:32 by julberna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,4 +38,25 @@ bool	not_on_minimap(t_game *cub, t_coord start)
 		|| start.x > cub->mini_size.y)
 		return (true);
 	return (false);
+}
+
+void	free_matrix(char **matrix)
+{
+	int	i;
+
+	i = 0;
+	while (matrix[i])
+	{
+		if (matrix[i][0])
+		{
+			free(matrix[i]);
+			matrix[i] = NULL;
+		}
+		i++;
+	}
+	if (matrix)
+	{
+		free(matrix);
+		matrix = NULL;
+	}
 }

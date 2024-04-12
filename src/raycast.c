@@ -6,15 +6,15 @@
 /*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/31 20:27:07 by julberna          #+#    #+#             */
-/*   Updated: 2024/04/11 18:39:27 by julberna         ###   ########.fr       */
+/*   Updated: 2024/04/12 15:36:21 by julberna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	raycast(t_game	*cub)
+void	raycast(t_game *cub)
 {
-	int		i;
+	int	i;
 
 	i = -1;
 	if (cub->screen)
