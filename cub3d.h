@@ -6,7 +6,7 @@
 /*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 18:15:38 by Juliany Ber       #+#    #+#             */
-/*   Updated: 2024/04/12 15:35:43 by julberna         ###   ########.fr       */
+/*   Updated: 2024/04/12 16:11:26 by julberna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,17 +24,17 @@
 # include <sys/stat.h>
 # include <unistd.h>
 
-# define HORIZON 2
+# define HORIZON	2
 # define MAP_OFFSET	10
-# define HEIGHT 600
-# define WIDTH 800
+# define HEIGHT		600
+# define WIDTH		800
 # define RATIO		200
-# define X 0
-# define Y 1
-# define NO 0
-# define SO 1
-# define EA 2
-# define WE 3
+# define X			0
+# define Y			1
+# define NO			0
+# define SO			1
+# define EA			2
+# define WE			3
 
 typedef struct s_coord
 {
@@ -91,8 +91,8 @@ typedef struct s_game
 	t_coord			p1;
 	t_map_data		map_data;
 	mlx_image_t		*screen;
-	mlx_image_t		*minimap;
 	mlx_image_t		*miniplayer;
+	mlx_image_t		*minimap;
 	mlx_image_t		*ceiling_floor;
 	mlx_texture_t	*texture[4];
 }					t_game;
@@ -143,6 +143,7 @@ void				calculate_wall_distance(t_game *cub);
 void				initial_ray_setup(t_game *cub, int i);
 void				calculate_delta_distance(t_game *cub);
 void				calculate_frames_per_second(t_game *cub);
+void				put_square(t_game *cub, int y, int x, int color);
 void				pick_a_side(t_game *cub, int side, t_texture *tex);
 void				calculate_step_and_initial_side_distance(t_game *cub);
 void				put_texture(t_game *cub, t_coord start, t_coord end,
