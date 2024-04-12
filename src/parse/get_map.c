@@ -6,7 +6,7 @@
 /*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 19:28:16 by aperis-p          #+#    #+#             */
-/*   Updated: 2024/04/12 17:48:31 by julberna         ###   ########.fr       */
+/*   Updated: 2024/04/12 20:04:17 by julberna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,11 @@ void	get_map(t_game *cub)
 	helper.line_bkp = NULL;
 	helper.rows = 0;
 	helper.broken_map = false;
-	if (!find_matrix(cub, &helper))
-	{
-		ft_printf("Broken map.\n");
-		over(cub, "M");
-	}
+	find_matrix(cub, &helper);
 	set_map(cub, &helper);
 }
 
-bool	find_matrix(t_game *cub, t_get_map_helper *helper)
+void	find_matrix(t_game *cub, t_get_map_helper *helper)
 {
 	int	i;
 	int	j;
@@ -45,10 +41,9 @@ bool	find_matrix(t_game *cub, t_get_map_helper *helper)
 		if (!ft_isdigit(cub->map_data.raw_data[i][j]))
 			i++;
 		else if (!crop_map(cub, helper, &i))
-			return (false);
+			cuberror("Broken map.", cub);
 		j = 0;
 	}
-	return (true);
 }
 
 void	set_map(t_game *cub, t_get_map_helper *helper)

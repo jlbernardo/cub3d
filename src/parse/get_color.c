@@ -6,7 +6,7 @@
 /*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 19:29:07 by aperis-p          #+#    #+#             */
-/*   Updated: 2024/04/12 17:50:11 by julberna         ###   ########.fr       */
+/*   Updated: 2024/04/12 19:55:35 by julberna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	get_colors(t_game *cub)
 	}
 	if (keys == 3)
 		return ;
-	over(cub, "M");
+	cuberror("Ceiling/floor color information missing.", cub);
 }
 
 bool	rgb_to_hex(t_game *cub, char *rgb, char flag)

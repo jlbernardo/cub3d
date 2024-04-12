@@ -6,7 +6,7 @@
 /*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 19:53:32 by Juliany Ber       #+#    #+#             */
-/*   Updated: 2024/04/12 16:45:51 by julberna         ###   ########.fr       */
+/*   Updated: 2024/04/12 20:15:58 by julberna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,4 +32,12 @@ void	over(t_game *cub, char *flag)
 		exit(EXIT_SUCCESS);
 	}
 	exit(EXIT_FAILURE);
+}
+
+void	cuberror(char *message, t_game *cub)
+{
+	write(STDERR_FILENO, "\033[1;31mError!\033[0m\n", 19);
+	write(STDERR_FILENO, message, ft_strlen(message));
+	write(STDERR_FILENO, "\n", 1);
+	over(cub, "M");
 }

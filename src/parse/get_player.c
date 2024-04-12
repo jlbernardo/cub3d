@@ -6,7 +6,7 @@
 /*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 17:29:04 by julberna          #+#    #+#             */
-/*   Updated: 2024/04/12 18:03:43 by julberna         ###   ########.fr       */
+/*   Updated: 2024/04/12 20:05:16 by julberna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,5 +38,5 @@ void	get_player_direction(t_game *cub)
 			return ;
 		}
 	}
-	over(cub, "M");
+	cuberror("Player information not found.", cub);
 }
