@@ -1,44 +1,54 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map_parsing.c                                      :+:      :+:    :+:   */
+/*   get_map.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 19:28:16 by aperis-p          #+#    #+#             */
-/*   Updated: 2024/04/12 16:37:03 by julberna         ###   ########.fr       */
+/*   Updated: 2024/04/12 17:48:31 by julberna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-bool	get_player_direction(t_game *cub)
+void	get_map(t_game *cub)
+{
+	t_get_map_helper	helper;
+
+	helper.line_bkp = NULL;
+	helper.rows = 0;
+	helper.broken_map = false;
+	if (!find_matrix(cub, &helper))
+	{
+		ft_printf("Broken map.\n");
+		over(cub, "M");
+	}
+	set_map(cub, &helper);
+}
+
+bool	find_matrix(t_game *cub, t_get_map_helper *helper)
 {
 	int	i;
 	int	j;
 
-	i = -1;
-	while (cub->map_matrix[++i])
+	i = 0;
+	j = 0;
+	while (cub->map_data.raw_data[i])
 	{
-		j = 0;
-		while ((cub->map_matrix[i][j] && ft_isdigit(cub->map_matrix[i][j]))
-			|| (cub->map_matrix[i][j] && is_space(cub->map_matrix[i][j])))
-			j++;
-		if (cub->map_matrix[i][j] && ft_isalpha(cub->map_matrix[i][j]))
+		if (is_space(cub->map_data.raw_data[i][j]))
 		{
-			if (cub->map_matrix[i][j] == 'N')
-				cub->p1_start_direction = NO;
-			else if (cub->map_matrix[i][j] == 'E')
-				cub->p1_start_direction = EA;
-			else if (cub->map_matrix[i][j] == 'S')
-				cub->p1_start_direction = SO;
-			else if (cub->map_matrix[i][j] == 'W')
-				cub->p1_start_direction = WE;
-			cub->p1 = coordinate(j, i);
-			return (true);
+			helper->line_bkp = &cub->map_data.raw_data[i];
+			while (is_space(cub->map_data.raw_data[i][j]))
+				j++;
 		}
+		if (!ft_isdigit(cub->map_data.raw_data[i][j]))
+			i++;
+		else if (!crop_map(cub, helper, &i))
+			return (false);
+		j = 0;
 	}
-	return (false);
+	return (true);
 }
 
 void	set_map(t_game *cub, t_get_map_helper *helper)
@@ -72,48 +82,5 @@ bool	crop_map(t_game *cub, t_get_map_helper *helper, int *i)
 			return (false);
 		*i = *i + 1;
 	}
-	return (true);
-}
-
-bool	find_matrix(t_game *cub, t_get_map_helper *helper)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	j = 0;
-	while (cub->map_data.raw_data[i])
-	{
-		if (is_space(cub->map_data.raw_data[i][j]))
-		{
-			helper->line_bkp = &cub->map_data.raw_data[i];
-			while (is_space(cub->map_data.raw_data[i][j]))
-				j++;
-		}
-		if (!ft_isdigit(cub->map_data.raw_data[i][j]))
-			i++;
-		else
-		{
-			if (!crop_map(cub, helper, &i))
-				return (false);
-		}
-		j = 0;
-	}
-	return (true);
-}
-
-bool	get_map(t_game *cub)
-{
-	t_get_map_helper	helper;
-
-	helper.line_bkp = NULL;
-	helper.rows = 0;
-	helper.broken_map = false;
-	if (!find_matrix(cub, &helper))
-	{
-		ft_printf("Broken map.\n");
-		return (false);
-	}
-	set_map(cub, &helper);
 	return (true);
 }

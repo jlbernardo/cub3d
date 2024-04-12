@@ -1,20 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   color_parsing.c                                    :+:      :+:    :+:   */
+/*   get_color.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 19:29:07 by aperis-p          #+#    #+#             */
-/*   Updated: 2024/04/12 16:31:29 by julberna         ###   ########.fr       */
+/*   Updated: 2024/04/12 17:50:11 by julberna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	get_rgba(int r, int g, int b, int a)
+void	get_colors(t_game *cub)
 {
-	return (r << 24 | g << 16 | b << 8 | a);
+	char	**temp;
+	char	*trimmed;
+	int		keys;
+
+	temp = cub->map_data.raw_data;
+	keys = 0;
+	while (*temp)
+	{
+		trimmed = ft_strtrim(*temp, " ");
+		if (!ft_strncmp("C", trimmed, 1) && (keys & (1 << 1)) < 1)
+		{
+			if (rgb_to_hex(cub, trimmed, 'C'))
+				keys |= (1 << 1);
+		}
+		if (!ft_strncmp("F", trimmed, 1) && (keys & (1 << 0)) < 1)
+		{
+			if (rgb_to_hex(cub, trimmed, 'F'))
+				keys |= 1;
+		}
+		temp++;
+		free(trimmed);
+	}
+	if (keys == 3)
+		return ;
+	over(cub, "M");
 }
 
 bool	rgb_to_hex(t_game *cub, char *rgb, char flag)
@@ -45,31 +69,7 @@ bool	rgb_to_hex(t_game *cub, char *rgb, char flag)
 	return (false);
 }
 
-bool	get_colors(t_game *cub)
+int	get_rgba(int r, int g, int b, int a)
 {
-	char	**temp;
-	char	*trimmed;
-	int		keys;
-
-	temp = cub->map_data.raw_data;
-	keys = 0;
-	while (*temp)
-	{
-		trimmed = ft_strtrim(*temp, " ");
-		if (!ft_strncmp("C", trimmed, 1) && (keys & (1 << 1)) < 1)
-		{
-			if (rgb_to_hex(cub, trimmed, 'C'))
-				keys |= (1 << 1);
-		}
-		if (!ft_strncmp("F", trimmed, 1) && (keys & (1 << 0)) < 1)
-		{
-			if (rgb_to_hex(cub, trimmed, 'F'))
-				keys |= 1;
-		}
-		temp++;
-		free(trimmed);
-	}
-	if (keys == 3)
-		return (true);
-	return (false);
+	return (r << 24 | g << 16 | b << 8 | a);
 }

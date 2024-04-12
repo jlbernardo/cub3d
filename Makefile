@@ -15,10 +15,10 @@ SDIR	= src/
 ODIR	= obj/
 
 SRC		+= $(addprefix $(SDIR), cub3d.c)
-SRC		+= $(addprefix $(SDIR)parse/, color_parsing.c map_parsing.c parsing_utils.c texture_parsing.c)
+SRC		+= $(addprefix $(SDIR)parse/, parse.c get_color.c get_map.c parsing_utils.c get_texture.c get_player.c)
 SRC		+= $(addprefix $(SDIR)draw/, bresenham.c minimap.c raycast_utils.c raycast.c texture.c)
 SRC		+= $(addprefix $(SDIR)game/, actions.c game.c)
-SRC		+= $(addprefix $(SDIR)utils/, check.c conditionals.c initializer.c over.c utils.c)
+SRC		+= $(addprefix $(SDIR)utils/, conditionals.c initializer.c over.c utils.c)
 
 OBJ		= $(SRC:$(SDIR)%.c=$(ODIR)%.o)
 

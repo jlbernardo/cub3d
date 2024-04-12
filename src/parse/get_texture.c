@@ -1,16 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   texture_parsing.c                                  :+:      :+:    :+:   */
+/*   get_texture.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aperis-p <aperis-p@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 20:06:07 by aperis-p          #+#    #+#             */
-/*   Updated: 2024/04/11 20:09:58 by aperis-p         ###   ########.fr       */
+/*   Updated: 2024/04/12 17:52:18 by julberna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+void	get_texture_path(t_game *cub)
+{
+	char	**temp;
+	char	*trimmed;
+	int		keys;
+
+	temp = cub->map_data.raw_data;
+	keys = 0;
+	while (*temp)
+	{
+		trimmed = ft_strtrim(*temp, "\n ");
+		keys += set_texture_path(cub, trimmed);
+		if (keys == 15)
+		{
+			free(trimmed);
+			return ;
+		}
+		temp++;
+		free(trimmed);
+	}
+	ft_printf("Texture path not found.\n");
+	over(cub, "M");
+}
 
 int	set_texture_path(t_game *cub, char *trimmed)
 {
@@ -38,28 +62,4 @@ int	set_texture_path(t_game *cub, char *trimmed)
 		keys |= 1;
 	}
 	return (keys);
-}
-
-int	get_texture_path(t_game *cub)
-{
-	char	**temp;
-	char	*trimmed;
-	int		keys;
-
-	temp = cub->map_data.raw_data;
-	keys = 0;
-	while (*temp)
-	{
-		trimmed = ft_strtrim(*temp, "\n ");
-		keys += set_texture_path(cub, trimmed);
-		if (keys == 15)
-		{
-			free(trimmed);
-			return (true);
-		}
-		temp++;
-		free(trimmed);
-	}
-	ft_printf("Texture path not found.\n");
-	return (false);
 }

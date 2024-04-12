@@ -6,7 +6,7 @@
 /*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 18:15:38 by Juliany Ber       #+#    #+#             */
-/*   Updated: 2024/04/12 16:45:05 by julberna         ###   ########.fr       */
+/*   Updated: 2024/04/12 17:58:05 by julberna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,10 +127,25 @@ typedef struct s_texture
 }					t_texture;
 
 /* main calls */
-void				check(t_game *cub, int argc, char **argv);
+void				parse(t_game *cub, int argc, char **argv);
 void				init(t_game *cub);
 void				game(t_game *cub);
 void				over(t_game *cub, char *flag);
+
+/* map parsing */
+void				check_input(t_game *cub, int argc, char **argv);
+int					set_texture_path(t_game *cub, char *trimmed);
+bool				rgb_to_hex(t_game *cub, char *rgb, char flag);
+int					get_rgba(int r, int g, int b, int a);
+bool				find_matrix(t_game *cub, t_get_map_helper *helper);
+void				set_map(t_game *cub, t_get_map_helper *helper);
+bool				crop_map(t_game *cub, t_get_map_helper *helper, int *i);
+int					count_rows(int fd);
+void				get_map(t_game *cub);
+void				get_colors(t_game *cub);
+void				get_texture_path(t_game *cub);
+char				**get_raw_data(char *map_path);
+void				get_player_direction(t_game *cub);
 
 /* raycast */
 void				raycast(t_game *cub);
@@ -143,7 +158,6 @@ void				calculate_wall_distance(t_game *cub);
 void				initial_ray_setup(t_game *cub, int i);
 void				calculate_delta_distance(t_game *cub);
 void				calculate_frames_per_second(t_game *cub);
-void				put_square(t_game *cub, int y, int x, int color);
 void				pick_a_side(t_game *cub, int side, t_texture *tex);
 void				calculate_step_and_initial_side_distance(t_game *cub);
 void				put_texture(t_game *cub, t_coord start, t_coord end,
@@ -171,14 +185,5 @@ void				load_textures(t_game *cub);
 t_coord				coordinate(double x, double y);
 t_vector			vector(double x, double y);
 // void				ft_print_matrix(char **matrix);
-
-/* map parsing */
-int					get_texture_path(t_game *cub);
-int					count_rows(int fd);
-bool				get_map(t_game *cub);
-bool				get_colors(t_game *cub);
-bool				parsing_suite(t_game *cub);
-char				**get_raw_data(char *map_path);
-bool				get_player_direction(t_game *cub);
 
 #endif

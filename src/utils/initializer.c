@@ -6,7 +6,7 @@
 /*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 19:29:16 by Juliany Ber       #+#    #+#             */
-/*   Updated: 2024/04/12 16:49:59 by julberna         ###   ########.fr       */
+/*   Updated: 2024/04/12 17:22:55 by julberna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 
 void	init(t_game *cub)
 {
-	if (!parsing_suite(cub))
-		over(cub, "M");
 	load_textures(cub);
 	cub->direction = vector(-1, 0);
 	cub->camera_plane = vector(0, 0.66);
