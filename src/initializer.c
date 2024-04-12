@@ -6,7 +6,7 @@
 /*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 19:29:16 by Juliany Ber       #+#    #+#             */
-/*   Updated: 2024/04/12 16:39:44 by julberna         ###   ########.fr       */
+/*   Updated: 2024/04/12 16:49:59 by julberna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 void	init(t_game *cub)
 {
-	cub->map_data.raw_data = get_raw_data(cub->map_path);
 	if (!parsing_suite(cub))
 		over(cub, "M");
 	load_textures(cub);
@@ -30,8 +29,8 @@ void	init(t_game *cub)
 
 void	load_textures(t_game *cub)
 {
-	cub->texture[NO] = mlx_load_png(cub->map_data.north_tex_path);
-	cub->texture[SO] = mlx_load_png(cub->map_data.south_tex_path);
 	cub->texture[EA] = mlx_load_png(cub->map_data.east_tex_path);
 	cub->texture[WE] = mlx_load_png(cub->map_data.west_tex_path);
+	cub->texture[NO] = mlx_load_png(cub->map_data.north_tex_path);
+	cub->texture[SO] = mlx_load_png(cub->map_data.south_tex_path);
 }
