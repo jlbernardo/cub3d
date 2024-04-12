@@ -6,7 +6,7 @@
 /*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/31 20:27:07 by julberna          #+#    #+#             */
-/*   Updated: 2024/04/12 20:21:56 by julberna         ###   ########.fr       */
+/*   Updated: 2024/04/12 20:43:58 by julberna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ void	raycast(t_game *cub)
 	if (cub->screen)
 		mlx_delete_image(cub->mlx, cub->screen);
 	cub->screen = mlx_new_image(cub->mlx, WIDTH, HEIGHT);
+	if (!cub->screen)
+		cuberror("Oops, the game just broke. ˙◠˙", cub);
 	while (++i < WIDTH)
 	{
 		initial_ray_setup(cub, i);
