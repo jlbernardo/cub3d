@@ -3,31 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aperis-p <aperis-p@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 19:28:36 by aperis-p          #+#    #+#             */
-/*   Updated: 2024/04/10 19:28:55 by aperis-p         ###   ########.fr       */
+/*   Updated: 2024/04/12 16:37:24 by julberna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-int	ft_isspace(char c)
-{
-	if (c == ' ' || c == '\t' || c == '\v' || c == '\r' || c == '\n'
-		|| c == '\f')
-		return (1);
-	return (0);
-}
-
-int	ft_blank_line(char *line)
-{
-	while (*line && ft_isspace(*line))
-		line++;
-	if (*line)
-		return (0);
-	return (1);
-}
 
 int	count_rows(int fd)
 {
@@ -43,14 +26,6 @@ int	count_rows(int fd)
 		temp_line = get_next_line(fd);
 	}
 	return (rows);
-}
-
-_Bool	parsing_suite(t_game *cub)
-{
-	if (!get_texture_path(cub) || !get_colors(cub) || !get_map(cub)
-		|| !get_player_direction(cub))
-		return (false);
-	return (true);
 }
 
 char	**get_raw_data(char *map_path)

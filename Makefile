@@ -14,11 +14,12 @@ INCLUDE	= -I./libft -I. -I./.MLX42/include/MLX42
 SDIR	= src/
 ODIR	= obj/
 
-SRC		= $(addprefix $(SDIR), cub3d.c check.c initializer.c raycast.c \
-								raycast_utils.c game.c bresenham.c over.c \
-								texture.c actions.c minimap.c utils.c data_parsing/map_parsing.c \
-								data_parsing/texture_parsing.c data_parsing/color_parsing.c \
-								data_parsing/parsing_utils.c )
+SRC		+= $(addprefix $(SDIR), cub3d.c)
+SRC		+= $(addprefix $(SDIR)parse/, parse.c get_color.c get_map.c parsing_utils.c get_texture.c get_player.c)
+SRC		+= $(addprefix $(SDIR)draw/, bresenham.c minimap.c raycast_utils.c raycast.c texture.c)
+SRC		+= $(addprefix $(SDIR)game/, actions.c game.c)
+SRC		+= $(addprefix $(SDIR)utils/, conditionals.c initializer.c over.c utils.c)
+
 OBJ		= $(SRC:$(SDIR)%.c=$(ODIR)%.o)
 
 BLU 	=	\033[1;36m
