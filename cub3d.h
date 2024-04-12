@@ -6,7 +6,7 @@
 /*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 18:15:38 by Juliany Ber       #+#    #+#             */
-/*   Updated: 2024/04/12 16:31:29 by julberna         ###   ########.fr       */
+/*   Updated: 2024/04/12 16:41:52 by julberna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -165,7 +165,6 @@ void				walk_sideways(t_game *cub, int key);
 /* utils */
 int					get_color(t_texture tex);
 void				load_textures(t_game *cub);
-bool				not_on_minimap(t_game *cub, t_coord start);
 t_coord				coordinate(double x, double y);
 t_vector			vector(double x, double y);
 void				free_matrix(char **split);
@@ -173,8 +172,8 @@ void				free_data(t_game *cub);
 // void				ft_print_matrix(char **matrix);
 
 /* map parsing */
-int					ft_isspace(char c);
-int					ft_blank_line(char *line);
+bool				is_space(char c);
+bool				is_blank_line(char *line);
 int					count_rows(int fd);
 char				**get_raw_data(char *map_path);
 bool				parsing_suite(t_game *cub);

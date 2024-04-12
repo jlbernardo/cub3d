@@ -6,7 +6,7 @@
 /*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 19:29:16 by Juliany Ber       #+#    #+#             */
-/*   Updated: 2024/04/12 16:33:08 by julberna         ###   ########.fr       */
+/*   Updated: 2024/04/12 16:39:44 by julberna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ void	init(t_game *cub)
 	cub->mlx = mlx_init(WIDTH, HEIGHT, "cub3d?", false);
 	draw_ceiling_floor(cub);
 	raycast(cub);
-	draw_minimap(cub);
 }
+	// draw_minimap(cub);
 
 void	load_textures(t_game *cub)
 {

@@ -1,52 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   conditionals.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/27 21:29:32 by Juliany Ber       #+#    #+#             */
-/*   Updated: 2024/04/12 16:37:49 by julberna         ###   ########.fr       */
+/*   Created: 2024/04/12 16:35:52 by julberna          #+#    #+#             */
+/*   Updated: 2024/04/12 16:38:07 by julberna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-t_coord	coordinate(double x, double y)
+bool	parsing_suite(t_game *cub)
 {
-	t_coord	coordinate;
-
-	coordinate.x = x;
-	coordinate.y = y;
-	return (coordinate);
+	if (!get_texture_path(cub) || !get_colors(cub) || !get_map(cub)
+		|| !get_player_direction(cub))
+		return (false);
+	return (true);
 }
 
-t_vector	vector(double x, double y)
+bool	is_space(char c)
 {
-	t_vector	vector;
-
-	vector.x = x;
-	vector.y = y;
-	return (vector);
+	if (c == ' ' || c == '\t' || c == '\v' || c == '\r' || c == '\n'
+		|| c == '\f')
+		return (true);
+	return (false);
 }
 
-void	free_matrix(char **matrix)
+bool	is_blank_line(char *line)
 {
-	int	i;
-
-	i = 0;
-	while (matrix[i])
-	{
-		if (matrix[i][0])
-		{
-			free(matrix[i]);
-			matrix[i] = NULL;
-		}
-		i++;
-	}
-	if (matrix)
-	{
-		free(matrix);
-		matrix = NULL;
-	}
+	while (*line && is_space(*line))
+		line++;
+	if (*line)
+		return (false);
+	return (true);
 }
