@@ -6,7 +6,7 @@
 /*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 18:15:38 by Juliany Ber       #+#    #+#             */
-/*   Updated: 2024/04/12 20:09:38 by julberna         ###   ########.fr       */
+/*   Updated: 2024/04/12 20:35:24 by julberna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,8 +109,8 @@ typedef struct s_draw
 
 typedef struct s_get_map_helper
 {
-	char			**line_bkp;
 	int				rows;
+	char			**line_bkp;
 	bool			broken_map;
 }					t_get_map_helper;
 
@@ -130,7 +130,7 @@ typedef struct s_texture
 void				parse(t_game *cub, int argc, char **argv);
 void				init(t_game *cub);
 void				game(t_game *cub);
-void				over(t_game *cub, char *flag);
+void				over(t_game *cub, int exit_code);
 
 /* map parsing */
 void				check_input(t_game *cub, int argc, char **argv);
@@ -182,6 +182,7 @@ bool				is_blank_line(char *line);
 bool				is_space(char c);
 void				free_matrix(char **split);
 void				load_textures(t_game *cub);
+void				delete_images(t_game *cub);
 void				cuberror(char *message, t_game *cub);
 t_coord				coordinate(double x, double y);
 t_vector			vector(double x, double y);
