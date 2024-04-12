@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aperis-p <aperis-p@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 19:28:36 by aperis-p          #+#    #+#             */
-/*   Updated: 2024/04/10 19:28:55 by aperis-p         ###   ########.fr       */
+/*   Updated: 2024/04/12 16:30:58 by julberna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	count_rows(int fd)
 	return (rows);
 }
 
-_Bool	parsing_suite(t_game *cub)
+bool	parsing_suite(t_game *cub)
 {
 	if (!get_texture_path(cub) || !get_colors(cub) || !get_map(cub)
 		|| !get_player_direction(cub))

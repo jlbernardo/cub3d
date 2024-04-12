@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   map_parsing.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aperis-p <aperis-p@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 19:28:16 by aperis-p          #+#    #+#             */
-/*   Updated: 2024/04/10 19:28:20 by aperis-p         ###   ########.fr       */
+/*   Updated: 2024/04/12 16:31:29 by julberna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-_Bool	get_player_direction(t_game *cub)
+bool	get_player_direction(t_game *cub)
 {
 	int	i;
 	int	j;
@@ -58,7 +58,7 @@ void	set_map(t_game *cub, t_get_map_helper *helper)
 	cub->map_matrix[i] = NULL;
 }
 
-_Bool	crop_map(t_game *cub, t_get_map_helper *helper, int *i)
+bool	crop_map(t_game *cub, t_get_map_helper *helper, int *i)
 {
 	while (cub->map_data.raw_data[*i])
 	{
@@ -75,7 +75,7 @@ _Bool	crop_map(t_game *cub, t_get_map_helper *helper, int *i)
 	return (true);
 }
 
-_Bool	find_matrix(t_game *cub, t_get_map_helper *helper)
+bool	find_matrix(t_game *cub, t_get_map_helper *helper)
 {
 	int	i;
 	int	j;
@@ -102,7 +102,7 @@ _Bool	find_matrix(t_game *cub, t_get_map_helper *helper)
 	return (true);
 }
 
-_Bool	get_map(t_game *cub)
+bool	get_map(t_game *cub)
 {
 	t_get_map_helper	helper;
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   color_parsing.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aperis-p <aperis-p@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 19:29:07 by aperis-p          #+#    #+#             */
-/*   Updated: 2024/04/10 19:29:16 by aperis-p         ###   ########.fr       */
+/*   Updated: 2024/04/12 16:31:29 by julberna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	get_rgba(int r, int g, int b, int a)
 	return (r << 24 | g << 16 | b << 8 | a);
 }
 
-_Bool	rgb_to_hex(t_game *cub, char *rgb, char flag)
+bool	rgb_to_hex(t_game *cub, char *rgb, char flag)
 {
 	char	*trimmed;
 	char	**colors;
@@ -45,7 +45,7 @@ _Bool	rgb_to_hex(t_game *cub, char *rgb, char flag)
 	return (false);
 }
 
-_Bool	get_colors(t_game *cub)
+bool	get_colors(t_game *cub)
 {
 	char	**temp;
 	char	*trimmed;

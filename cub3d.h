@@ -6,7 +6,7 @@
 /*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 18:15:38 by Juliany Ber       #+#    #+#             */
-/*   Updated: 2024/04/12 16:22:23 by julberna         ###   ########.fr       */
+/*   Updated: 2024/04/12 16:31:29 by julberna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ typedef struct s_get_map_helper
 {
 	char			**line_bkp;
 	int				rows;
-	_Bool			broken_map;
+	bool			broken_map;
 }					t_get_map_helper;
 
 typedef struct s_texture
@@ -130,7 +130,7 @@ typedef struct s_texture
 void				check(t_game *cub, int argc, char **argv);
 void				init(t_game *cub);
 void				game(t_game *cub);
-void				over(t_game *cub);
+void				over(t_game *cub, char *flag);
 
 /* raycast */
 void				raycast(t_game *cub);
@@ -177,10 +177,10 @@ int					ft_isspace(char c);
 int					ft_blank_line(char *line);
 int					count_rows(int fd);
 char				**get_raw_data(char *map_path);
-_Bool				parsing_suite(t_game *cub);
+bool				parsing_suite(t_game *cub);
 int					get_texture_path(t_game *cub);
-_Bool				get_colors(t_game *cub);
-_Bool				get_map(t_game *cub);
-_Bool				get_player_direction(t_game *cub);
+bool				get_colors(t_game *cub);
+bool				get_map(t_game *cub);
+bool				get_player_direction(t_game *cub);
 
 #endif
