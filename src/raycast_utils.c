@@ -6,7 +6,7 @@
 /*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 21:28:39 by julberna          #+#    #+#             */
-/*   Updated: 2024/04/10 22:02:35 by julberna         ###   ########.fr       */
+/*   Updated: 2024/04/12 13:50:45 by julberna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,11 +57,11 @@ void	draw_ceiling_floor(t_game *cub)
 	x = 0;
 	y = 0;
 	cub->ceiling_floor = mlx_new_image(cub->mlx, WIDTH, HEIGHT);
-	while (x <= HEIGHT)
+	while (x < HEIGHT)
 	{
-		while (y <= WIDTH)
+		while (y < WIDTH)
 		{
-			if (x < (int)(HEIGHT / HORIZON))
+			if (x < floor(HEIGHT / HORIZON))
 				mlx_put_pixel(cub->ceiling_floor, y, x, 0xe7fbffff);
 			else
 				mlx_put_pixel(cub->ceiling_floor, y, x, 0x344e41ff);

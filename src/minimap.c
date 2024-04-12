@@ -6,7 +6,7 @@
 /*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 18:00:41 by julberna          #+#    #+#             */
-/*   Updated: 2024/04/12 13:43:05 by julberna         ###   ########.fr       */
+/*   Updated: 2024/04/12 15:27:37 by julberna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,17 +16,21 @@ void	draw_minimap(t_game *cub)
 {
 	int	x;
 	int	y;
+	int	rx;
+	int	ry;
 
 	y = -1;
-	cub->minimap = mlx_new_image(cub->mlx, cub->map.x * 3, cub->map.y * 3);
-	while (++y < cub->map.x * 3)
+	rx = ceil(WIDTH / RATIO);
+	ry = ceil(HEIGHT / RATIO);
+	cub->minimap = mlx_new_image(cub->mlx, cub->map.x * rx, cub->map.y * ry);
+	while (++y < cub->map.x * rx)
 	{
 		x = -1;
-		while (++x < cub->map.y * 3)
+		while (++x < cub->map.y * ry)
 		{
-			if (cub->map_matrix[x / 3][y / 3] == '0')
+			if (cub->map_matrix[(int)(x / ry)][(int)(y / rx)] == '0')
 				mlx_put_pixel(cub->minimap, y, x, 0xffffff95);
-			else if (cub->map_matrix[x / 3][y / 3] != '\n')
+			else if (cub->map_matrix[(int)(x / ry)][(int)(y / rx)] != '\n')
 				mlx_put_pixel(cub->minimap, y, x, 0x00000095);
 		}
 	}
@@ -38,19 +42,23 @@ void	draw_player_on_minimap(t_game *cub)
 {
 	int	x;
 	int	y;
+	int	rx;
+	int	ry;
 
+	rx = ceil(WIDTH / RATIO);
+	ry = ceil(HEIGHT / RATIO);
 	if (cub->miniplayer)
 		mlx_delete_image(cub->mlx, cub->miniplayer);
-	cub->miniplayer = mlx_new_image(cub->mlx, 3, 3);
+	cub->miniplayer = mlx_new_image(cub->mlx, rx, ry);
 	x = -1;
-	while (++x < 3)
+	while (++x < ry)
 	{
 		y = -1;
-		while (++y < 3)
+		while (++y < rx)
 			mlx_put_pixel(cub->miniplayer, y, x, 0xc1121f95);
 	}
 	mlx_image_to_window(cub->mlx, cub->miniplayer,
-		(cub->p1.x * 3) + MAP_OFFSET, (cub->p1.y * 3) + MAP_OFFSET);
+		cub->p1.x * rx + MAP_OFFSET - (int)(rx / 3), cub->p1.y * ry + MAP_OFFSET - (int)(rx / 3));
 	cub->screen->instances->z = 1;
 	cub->miniplayer->instances->z = 3;
 }
