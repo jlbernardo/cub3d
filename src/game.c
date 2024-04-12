@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aperis-p <aperis-p@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 20:01:10 by Juliany Ber       #+#    #+#             */
-/*   Updated: 2024/04/10 19:58:25 by aperis-p         ###   ########.fr       */
+/*   Updated: 2024/04/12 15:34:26 by julberna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,4 +44,5 @@ void	actions(void *param)
 	if (mlx_is_key_down(cub->mlx, MLX_KEY_LEFT))
 		rotate_left(cub);
 	raycast(cub);
+	draw_player_on_minimap(cub);
 }

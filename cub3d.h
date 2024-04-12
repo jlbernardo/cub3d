@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aperis-p <aperis-p@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 18:15:38 by Juliany Ber       #+#    #+#             */
-/*   Updated: 2024/04/10 20:05:40 by aperis-p         ###   ########.fr       */
+/*   Updated: 2024/04/12 15:35:43 by julberna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,10 @@
 # include <unistd.h>
 
 # define HORIZON 2
-# define HEIGHT 980
-# define WIDTH 1020
+# define MAP_OFFSET	10
+# define HEIGHT 600
+# define WIDTH 800
+# define RATIO		200
 # define X 0
 # define Y 1
 # define NO 0
@@ -84,16 +86,20 @@ typedef struct s_game
 	double			rotation_speed;
 	t_vector		camera_plane;
 	t_vector		direction;
+	t_coord			mini_size;
 	t_coord			map;
 	t_coord			p1;
 	t_map_data		map_data;
 	mlx_image_t		*screen;
+	mlx_image_t		*minimap;
+	mlx_image_t		*miniplayer;
 	mlx_image_t		*ceiling_floor;
 	mlx_texture_t	*texture[4];
 }					t_game;
 
 typedef struct s_draw
 {
+	int				i;
 	int				error;
 	int				step_x;
 	int				step_y;
@@ -128,9 +134,11 @@ int					over(t_game *cub);
 
 /* raycast */
 void				raycast(t_game *cub);
+void				draw_minimap(t_game *cub);
 void				draw_line(t_game *cub, int i);
 void				draw_ceiling_floor(t_game *cub);
 void				wall_side(t_game *cub, int axis);
+void				draw_player_on_minimap(t_game *cub);
 void				calculate_wall_distance(t_game *cub);
 void				initial_ray_setup(t_game *cub, int i);
 void				calculate_delta_distance(t_game *cub);
@@ -141,9 +149,9 @@ void				put_texture(t_game *cub, t_coord start, t_coord end,
 						int side);
 
 /* bresenham */
+void				algo_setup(t_draw *line, t_coord start, t_coord end);
 void				line(t_game *cub, t_coord start, t_coord end,
 						int buffer[HEIGHT]);
-void				algo_setup(t_draw *line, t_coord start, t_coord end);
 
 /* game mechanics */
 void				actions(void *param);
@@ -158,6 +166,7 @@ int					get_color(t_texture tex);
 void				get_size(t_game *cub);
 void				load_textures(t_game *cub);
 void				create_matrix(t_game *cub);
+bool				not_on_minimap(t_game *cub, t_coord start);
 t_coord				coordinate(double x, double y);
 t_vector			vector(double x, double y);
 void				free_matrix(char **split);

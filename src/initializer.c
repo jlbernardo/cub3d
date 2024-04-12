@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   initializer.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aperis-p <aperis-p@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 19:29:16 by Juliany Ber       #+#    #+#             */
-/*   Updated: 2024/04/10 20:01:41 by aperis-p         ###   ########.fr       */
+/*   Updated: 2024/04/12 15:36:37 by julberna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ _Bool	init(t_game *cub)
 	cub->mlx = mlx_init(WIDTH, HEIGHT, "cub3d?", false);
 	draw_ceiling_floor(cub);
 	raycast(cub);
+	draw_minimap(cub);
 	return (true);
 }
 

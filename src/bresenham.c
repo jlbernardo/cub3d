@@ -6,7 +6,7 @@
 /*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/01 15:44:30 by julberna          #+#    #+#             */
-/*   Updated: 2024/04/09 21:21:23 by julberna         ###   ########.fr       */
+/*   Updated: 2024/04/11 15:48:16 by julberna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,13 @@
 
 void	line(t_game *cub, t_coord start, t_coord end, int buffer[HEIGHT])
 {
-	int		i;
 	t_draw	line;
 
-	i = (int)start.x;
 	algo_setup(&line, start, end);
 	while (true)
 	{
-		mlx_put_pixel(cub->screen, start.y, start.x, buffer[i++]);
+		mlx_put_pixel(cub->screen, start.y, start.x, buffer[line.i]);
+		line.i++;
 		if (start.x == end.x && start.y == end.y)
 			break ;
 		if (line.error * 2 >= -line.delta_y)
@@ -43,6 +42,7 @@ void	line(t_game *cub, t_coord start, t_coord end, int buffer[HEIGHT])
 
 void	algo_setup(t_draw *line, t_coord start, t_coord end)
 {
+	line->i = (int)start.x;
 	line->step_x = 1;
 	line->step_y = 1;
 	line->delta_x = fabs(end.x - start.x);
