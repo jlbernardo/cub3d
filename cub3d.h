@@ -6,7 +6,7 @@
 /*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 18:15:38 by Juliany Ber       #+#    #+#             */
-/*   Updated: 2024/04/12 16:11:26 by julberna         ###   ########.fr       */
+/*   Updated: 2024/04/12 16:22:23 by julberna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,9 +128,9 @@ typedef struct s_texture
 
 /* main calls */
 void				check(t_game *cub, int argc, char **argv);
-_Bool				init(t_game *cub);
+void				init(t_game *cub);
 void				game(t_game *cub);
-int					over(t_game *cub);
+void				over(t_game *cub);
 
 /* raycast */
 void				raycast(t_game *cub);
@@ -164,15 +164,13 @@ void				walk_sideways(t_game *cub, int key);
 
 /* utils */
 int					get_color(t_texture tex);
-void				get_size(t_game *cub);
 void				load_textures(t_game *cub);
-void				create_matrix(t_game *cub);
 bool				not_on_minimap(t_game *cub, t_coord start);
 t_coord				coordinate(double x, double y);
 t_vector			vector(double x, double y);
 void				free_matrix(char **split);
-int					free_data(t_game *cub);
-void				ft_print_matrix(char **matrix);
+void				free_data(t_game *cub);
+// void				ft_print_matrix(char **matrix);
 
 /* map parsing */
 int					ft_isspace(char c);

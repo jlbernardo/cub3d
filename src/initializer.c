@@ -6,17 +6,17 @@
 /*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 19:29:16 by Juliany Ber       #+#    #+#             */
-/*   Updated: 2024/04/12 16:15:18 by julberna         ###   ########.fr       */
+/*   Updated: 2024/04/12 16:23:24 by julberna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-_Bool	init(t_game *cub)
+void	init(t_game *cub)
 {
 	cub->map_data.raw_data = get_raw_data(cub->map_path);
 	if (!parsing_suite(cub))
-		return (false);
+		free_data(cub);
 	load_textures(cub);
 	cub->direction = vector(-1, 0);
 	cub->camera_plane = vector(0, 0.66);
@@ -26,7 +26,6 @@ _Bool	init(t_game *cub)
 	draw_ceiling_floor(cub);
 	raycast(cub);
 	draw_minimap(cub);
-	return (true);
 }
 
 void	load_textures(t_game *cub)

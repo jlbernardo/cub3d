@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   over.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aperis-p <aperis-p@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 19:53:32 by Juliany Ber       #+#    #+#             */
-/*   Updated: 2024/04/10 19:33:55 by aperis-p         ###   ########.fr       */
+/*   Updated: 2024/04/12 16:21:56 by julberna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	free_data(t_game *cub)
+void	free_data(t_game *cub)
 {
 	if (cub->map_matrix)
 		free_matrix(cub->map_matrix);
@@ -24,7 +24,7 @@ int	free_data(t_game *cub)
 	exit(EXIT_SUCCESS);
 }
 
-int	over(t_game *cub)
+void	over(t_game *cub)
 {
 	if (cub->map_matrix)
 		free_matrix(cub->map_matrix);
