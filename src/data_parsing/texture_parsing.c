@@ -6,7 +6,7 @@
 /*   By: aperis-p <aperis-p@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 20:06:07 by aperis-p          #+#    #+#             */
-/*   Updated: 2024/04/10 20:06:10 by aperis-p         ###   ########.fr       */
+/*   Updated: 2024/04/11 20:09:58 by aperis-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	get_texture_path(t_game *cub)
 	keys = 0;
 	while (*temp)
 	{
-		trimmed = ft_strtrim(*temp, " ");
+		trimmed = ft_strtrim(*temp, "\n ");
 		keys += set_texture_path(cub, trimmed);
 		if (keys == 15)
 		{

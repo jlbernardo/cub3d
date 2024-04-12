@@ -3,12 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   raycast_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aperis-p <aperis-p@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 21:28:39 by julberna          #+#    #+#             */
-/*   Updated: 2024/04/12 15:36:12 by julberna         ###   ########.fr       */
+/*   Updated: 2024/04/12 15:46:17 by aperis-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "cub3d.h"
 
