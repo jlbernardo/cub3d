@@ -6,7 +6,7 @@
 /*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 18:15:38 by Juliany Ber       #+#    #+#             */
-/*   Updated: 2024/04/12 21:08:20 by julberna         ###   ########.fr       */
+/*   Updated: 2024/04/12 21:46:31 by julberna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,9 +139,9 @@ int					count_rows(int fd);
 void				get_map(t_game *cub);
 void				get_colors(t_game *cub);
 void				get_texture_path(t_game *cub);
-char				**get_raw_data(char *map_path);
 void				get_player_direction(t_game *cub);
 void				set_direction(t_game *cub, int i, int j);
+char				**get_raw_data(char *map_path, t_game *cub);
 bool				rgb_to_hex(t_game *cub, char *rgb, char flag);
 void				set_map(t_game *cub, t_get_map_helper *helper);
 void				check_input(t_game *cub, int argc, char **argv);

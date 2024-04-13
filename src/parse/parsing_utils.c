@@ -6,7 +6,7 @@
 /*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 19:28:36 by aperis-p          #+#    #+#             */
-/*   Updated: 2024/04/12 16:37:24 by julberna         ###   ########.fr       */
+/*   Updated: 2024/04/12 21:46:09 by julberna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	count_rows(int fd)
 	return (rows);
 }
 
-char	**get_raw_data(char *map_path)
+char	**get_raw_data(char *map_path, t_game *cub)
 {
 	int		i;
 	int		fd;
@@ -38,6 +38,8 @@ char	**get_raw_data(char *map_path)
 
 	i = 0;
 	fd = open(map_path, O_RDONLY);
+	if (fd == -1)
+		cuberror("Could not open map file.", cub);
 	rows = count_rows(fd);
 	close(fd);
 	fd = open(map_path, O_RDONLY);

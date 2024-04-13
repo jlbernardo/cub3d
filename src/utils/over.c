@@ -6,7 +6,7 @@
 /*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 19:53:32 by Juliany Ber       #+#    #+#             */
-/*   Updated: 2024/04/12 20:35:07 by julberna         ###   ########.fr       */
+/*   Updated: 2024/04/12 21:39:37 by julberna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,15 @@ void	over(t_game *cub, int exit_code)
 {
 	if (cub->map_matrix)
 		free_matrix(cub->map_matrix);
-	free(cub->map_data.east_tex_path);
-	free(cub->map_data.west_tex_path);
-	free(cub->map_data.north_tex_path);
-	free(cub->map_data.south_tex_path);
-	free_matrix(cub->map_data.raw_data);
+	if (cub->map_data.raw_data)
+		free_matrix(cub->map_data.raw_data);
+	if (cub->map_data.east_tex_path)
+	{
+		free(cub->map_data.east_tex_path);
+		free(cub->map_data.west_tex_path);
+		free(cub->map_data.north_tex_path);
+		free(cub->map_data.south_tex_path);
+	}
 	if (cub->mlx)
 		delete_images(cub);
 	exit(exit_code);
@@ -49,7 +53,7 @@ void	delete_images(t_game *cub)
 
 void	cuberror(char *message, t_game *cub)
 {
-	write(STDERR_FILENO, "\033[1;31mError!\033[0m\n", 19);
+	write(STDERR_FILENO, "\033[1;31mError!\033[0m\n", 18);
 	write(STDERR_FILENO, message, ft_strlen(message));
 	write(STDERR_FILENO, "\n", 1);
 	over(cub, EXIT_FAILURE);

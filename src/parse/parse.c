@@ -6,7 +6,7 @@
 /*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 17:15:02 by julberna          #+#    #+#             */
-/*   Updated: 2024/04/12 19:56:00 by julberna         ###   ########.fr       */
+/*   Updated: 2024/04/12 21:51:01 by julberna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ void	parse(t_game *cub, int argc, char **argv)
 
 void	check_input(t_game *cub, int argc, char **argv)
 {
+	ft_bzero(cub, sizeof(t_game));
 	if (argc != 2)
 		cuberror("Wrong number of arguments.", cub);
-	ft_bzero(cub, sizeof(t_game));
 	cub->map_path = argv[1];
-	cub->map_data.raw_data = get_raw_data(cub->map_path);
+	cub->map_data.raw_data = get_raw_data(cub->map_path, cub);
 }
