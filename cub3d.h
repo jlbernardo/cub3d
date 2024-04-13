@@ -6,7 +6,7 @@
 /*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 18:15:38 by Juliany Ber       #+#    #+#             */
-/*   Updated: 2024/04/12 20:35:24 by julberna         ###   ########.fr       */
+/*   Updated: 2024/04/12 21:08:20 by julberna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,19 +133,20 @@ void				game(t_game *cub);
 void				over(t_game *cub, int exit_code);
 
 /* map parsing */
-void				check_input(t_game *cub, int argc, char **argv);
 int					set_texture_path(t_game *cub, char *trimmed);
-bool				rgb_to_hex(t_game *cub, char *rgb, char flag);
 int					get_rgba(int r, int g, int b, int a);
-void				find_matrix(t_game *cub, t_get_map_helper *helper);
-void				set_map(t_game *cub, t_get_map_helper *helper);
-bool				crop_map(t_game *cub, t_get_map_helper *helper, int *i);
 int					count_rows(int fd);
 void				get_map(t_game *cub);
 void				get_colors(t_game *cub);
 void				get_texture_path(t_game *cub);
 char				**get_raw_data(char *map_path);
 void				get_player_direction(t_game *cub);
+void				set_direction(t_game *cub, int i, int j);
+bool				rgb_to_hex(t_game *cub, char *rgb, char flag);
+void				set_map(t_game *cub, t_get_map_helper *helper);
+void				check_input(t_game *cub, int argc, char **argv);
+void				find_matrix(t_game *cub, t_get_map_helper *helper);
+bool				crop_map(t_game *cub, t_get_map_helper *helper, int *i);
 
 /* raycast */
 void				raycast(t_game *cub);
@@ -178,8 +179,8 @@ void				walk_sideways(t_game *cub, int key);
 
 /* utils */
 int					get_color(t_texture tex);
-bool				is_blank_line(char *line);
 bool				is_space(char c);
+bool				is_blank_line(char *line);
 void				free_matrix(char **split);
 void				load_textures(t_game *cub);
 void				delete_images(t_game *cub);

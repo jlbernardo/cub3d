@@ -6,7 +6,7 @@
 /*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 19:29:16 by Juliany Ber       #+#    #+#             */
-/*   Updated: 2024/04/12 20:07:54 by julberna         ###   ########.fr       */
+/*   Updated: 2024/04/12 21:15:16 by julberna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,6 @@
 void	init(t_game *cub)
 {
 	load_textures(cub);
-	cub->direction = vector(-1, 0);
-	cub->camera_plane = vector(0, 0.66);
 	cub->rotation_speed = 0.02;
 	cub->move_speed = 0.06;
 	cub->mlx = mlx_init(WIDTH, HEIGHT, "cub3d?", false);
