@@ -19,12 +19,13 @@ void	over(t_game *cub, int exit_code)
 	if (cub->map_data.raw_data)
 		free_matrix(cub->map_data.raw_data);
 	if (cub->map_data.east_tex_path)
-	{
 		free(cub->map_data.east_tex_path);
+	if (cub->map_data.west_tex_path)
 		free(cub->map_data.west_tex_path);
+	if (cub->map_data.north_tex_path)
 		free(cub->map_data.north_tex_path);
+	if (cub->map_data.south_tex_path)
 		free(cub->map_data.south_tex_path);
-	}
 	if (cub->mlx)
 		delete_images(cub);
 	exit(exit_code);
