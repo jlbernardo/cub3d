@@ -91,8 +91,8 @@ typedef struct s_game
 	t_coord			p1;
 	t_map_data		map_data;
 	mlx_image_t		*screen;
-	mlx_image_t		*miniplayer;
 	mlx_image_t		*minimap;
+	mlx_image_t		*miniplayer;
 	mlx_image_t		*ceiling_floor;
 	mlx_texture_t	*texture[4];
 	mlx_texture_t	*logo;
