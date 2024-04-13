@@ -1,0 +1,13 @@
+NO ./assets/brick-1l.png
+SO ./assets/brick-2l.png
+WE ./assets/brick-2d.png
+EA ./assets/brick-1d.png
+
+C 238,245,255
+F 210,227,200
+
+111111111111
+110000000001
+10000N000001
+110000000001
+111111111111

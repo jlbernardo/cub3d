@@ -6,7 +6,7 @@
 /*   By: aperis-p <aperis-p@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 19:28:16 by aperis-p          #+#    #+#             */
-/*   Updated: 2024/04/10 19:28:20 by aperis-p         ###   ########.fr       */
+/*   Updated: 2024/04/12 19:17:16 by aperis-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ _Bool	crop_map(t_game *cub, t_get_map_helper *helper, int *i)
 	return (true);
 }
 
-_Bool	find_matrix(t_game *cub, t_get_map_helper *helper)
+bool	find_matrix(t_game *cub, t_get_map_helper *helper)
 {
 	int	i;
 	int	j;
@@ -102,7 +102,7 @@ _Bool	find_matrix(t_game *cub, t_get_map_helper *helper)
 	return (true);
 }
 
-_Bool	get_map(t_game *cub)
+bool	get_map(t_game *cub)
 {
 	t_get_map_helper	helper;
 

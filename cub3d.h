@@ -6,7 +6,7 @@
 /*   By: aperis-p <aperis-p@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 18:15:38 by Juliany Ber       #+#    #+#             */
-/*   Updated: 2024/04/12 15:51:03 by aperis-p         ###   ########.fr       */
+/*   Updated: 2024/04/12 21:29:21 by aperis-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,7 +143,7 @@ void				calculate_wall_distance(t_game *cub);
 void				initial_ray_setup(t_game *cub, int i);
 void				calculate_delta_distance(t_game *cub);
 void				calculate_frames_per_second(t_game *cub);
-void		put_square(t_game *cub, int y, int x, int color);
+void				put_square(t_game *cub, int y, int x, int color);
 void				pick_a_side(t_game *cub, int side, t_texture *tex);
 void				calculate_step_and_initial_side_distance(t_game *cub);
 void				put_texture(t_game *cub, t_coord start, t_coord end,
@@ -184,5 +184,8 @@ int					get_texture_path(t_game *cub);
 _Bool				get_colors(t_game *cub);
 _Bool				get_map(t_game *cub);
 _Bool				get_player_direction(t_game *cub);
+
+/* validation */
+bool				validation_suite(t_game * cub);
 
 #endif

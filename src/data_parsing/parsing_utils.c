@@ -6,7 +6,7 @@
 /*   By: aperis-p <aperis-p@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 19:28:36 by aperis-p          #+#    #+#             */
-/*   Updated: 2024/04/10 19:28:55 by aperis-p         ###   ########.fr       */
+/*   Updated: 2024/04/12 21:41:18 by aperis-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,11 +79,11 @@ char	**get_raw_data(char *map_path)
 	return (raw_data);
 }
 
-// void	ft_print_matrix(char **matrix) // DELETE ME BEFORE SEND TO VOGSPHERE!
-// {
-// 	while (*matrix)
-// 	{
-// 		ft_printf("%s", *matrix);
-// 		matrix++;
-// 	}
-// }
+void	ft_print_matrix(char **matrix) // DELETE ME BEFORE SEND TO VOGSPHERE!
+{
+	while (*matrix)
+	{
+		ft_printf("%s", *matrix);
+		matrix++;
+	}
+}
