@@ -6,7 +6,7 @@
 /*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 19:29:16 by Juliany Ber       #+#    #+#             */
-/*   Updated: 2024/04/13 17:42:41 by julberna         ###   ########.fr       */
+/*   Updated: 2024/04/13 23:46:30 by julberna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,9 @@ void	load_textures(t_game *cub)
 	cub->texture[NO] = mlx_load_png(cub->map_data.north_tex_path);
 	cub->texture[SO] = mlx_load_png(cub->map_data.south_tex_path);
 	cub->logo = mlx_load_png("./assets/logo.png");
+	cub->door = mlx_load_png("./assets/door.png");
 	if (!cub->texture[EA] || !cub->texture[WE]
 		|| !cub->texture[NO] || !cub->texture[SO]
-		|| !cub->logo)
+		|| !cub->logo || !cub->door)
 		cuberror("There was a problem loading the textures.", cub);
 }
