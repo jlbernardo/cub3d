@@ -6,7 +6,7 @@
 /*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 17:15:02 by julberna          #+#    #+#             */
-/*   Updated: 2024/04/13 16:18:52 by julberna         ###   ########.fr       */
+/*   Updated: 2024/04/14 19:19:46 by julberna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,43 +27,46 @@ void	check_input(t_game *cub, int argc, char **argv)
 	if (argc != 2)
 		cuberror("Wrong number of arguments.", cub);
 	cub->map_path = argv[1];
-	cub->map_data.raw_data = get_raw_data(cub->map_path, cub);
+	get_raw_data(cub->map_path, cub);
 }
 
-char	**get_raw_data(char *map_path, t_game *cub)
+void	get_raw_data(char *map_path, t_game *cub)
 {
 	int		i;
 	int		fd;
-	int		rows;
+	int		size;
 	char	*temp_line;
-	char	**raw_data;
 
 	i = 0;
+	cub->map = coordinate(0, count_rows(cub, map_path));
 	fd = open(map_path, O_RDONLY);
 	if (fd == -1)
-		cuberror("Could not open map file.", cub);
-	rows = count_rows(fd);
-	close(fd);
-	fd = open(map_path, O_RDONLY);
-	raw_data = (char **)ft_calloc(rows + 1, sizeof(char *));
-	while (i < rows)
+		cuberror("Could not open map file. ☹", cub);
+	cub->map_data.raw_data = (char **)ft_calloc(cub->map.y + 1, sizeof(char *));
+	temp_line = get_next_line(fd);
+	while (temp_line)
 	{
-		temp_line = get_next_line(fd);
-		raw_data[i] = (char *)ft_calloc(ft_strlen(temp_line) + 1, sizeof(char));
-		if (raw_data[i] && temp_line)
-			ft_strlcpy(raw_data[i], temp_line, ft_strlen(temp_line) + 1);
-		i++;
+		size = ft_strlen(temp_line);
+		if (size > cub->map.x)
+			cub->map.x = size;
+		cub->map_data.raw_data[i] = ft_strdup(temp_line);
 		free(temp_line);
+		temp_line = get_next_line(fd);
+		i++;
 	}
-	return (raw_data);
+	close(fd);
 }
 
-int	count_rows(int fd)
+int	count_rows(t_game *cub, char *map_path)
 {
+	int		fd;
 	int		rows;
 	char	*temp_line;
 
 	rows = 0;
+	fd = open(map_path, O_RDONLY);
+	if (fd == -1)
+		cuberror("Could not open map file. ( ｡ • ᴖ •｡)", cub);
 	temp_line = get_next_line(fd);
 	while (temp_line)
 	{
@@ -71,5 +74,6 @@ int	count_rows(int fd)
 		free(temp_line);
 		temp_line = get_next_line(fd);
 	}
+	close(fd);
 	return (rows);
 }
