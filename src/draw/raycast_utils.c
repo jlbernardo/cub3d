@@ -6,7 +6,7 @@
 /*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 21:28:39 by julberna          #+#    #+#             */
-/*   Updated: 2024/04/12 20:44:08 by julberna         ###   ########.fr       */
+/*   Updated: 2024/04/13 22:17:01 by julberna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,13 @@ void	calculate_wall_distance(t_game *cub)
 void	wall_side(t_game *cub, int axis)
 {
 	if (axis == X && cub->ray.dir.x > 0)
-		cub->ray.side = WE;
-	if (axis == X && cub->ray.dir.x <= 0)
 		cub->ray.side = EA;
+	if (axis == X && cub->ray.dir.x <= 0)
+		cub->ray.side = WE;
 	if (axis == Y && cub->ray.dir.y > 0)
-		cub->ray.side = SO;
-	if (axis == Y && cub->ray.dir.y <= 0)
 		cub->ray.side = NO;
+	if (axis == Y && cub->ray.dir.y <= 0)
+		cub->ray.side = SO;
 }
 
 void	draw_ceiling_floor(t_game *cub)
@@ -80,7 +80,7 @@ void	draw_line(t_game *cub, int i)
 	t_coord		end;
 	t_coord		start;
 
-	cub->ray.line_height = (int)(HEIGHT / cub->ray.perp_wall_dist);
+	cub->ray.line_height = (int)(HEIGHT / cub->ray.perp_wall_dist) + 1;
 	start.y = i;
 	start.x = (int)(-cub->ray.line_height / HORIZON + HEIGHT / HORIZON);
 	if (start.x < 0)

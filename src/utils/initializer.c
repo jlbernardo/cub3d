@@ -6,7 +6,7 @@
 /*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 19:29:16 by Juliany Ber       #+#    #+#             */
-/*   Updated: 2024/04/12 21:15:16 by julberna         ###   ########.fr       */
+/*   Updated: 2024/04/13 17:42:41 by julberna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void	init(t_game *cub)
 	cub->mlx = mlx_init(WIDTH, HEIGHT, "cub3d?", false);
 	if (!cub->mlx)
 		cuberror("There was a problem opening the window.", cub);
+	mlx_set_icon(cub->mlx, cub->logo);
 	draw_ceiling_floor(cub);
 	raycast(cub);
 }
@@ -31,7 +32,9 @@ void	load_textures(t_game *cub)
 	cub->texture[WE] = mlx_load_png(cub->map_data.west_tex_path);
 	cub->texture[NO] = mlx_load_png(cub->map_data.north_tex_path);
 	cub->texture[SO] = mlx_load_png(cub->map_data.south_tex_path);
+	cub->logo = mlx_load_png("./assets/logo.png");
 	if (!cub->texture[EA] || !cub->texture[WE]
-		|| !cub->texture[NO] || !cub->texture[SO])
+		|| !cub->texture[NO] || !cub->texture[SO]
+		|| !cub->logo)
 		cuberror("There was a problem loading the textures.", cub);
 }

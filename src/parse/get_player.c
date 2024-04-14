@@ -6,7 +6,7 @@
 /*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 17:29:04 by julberna          #+#    #+#             */
-/*   Updated: 2024/04/12 21:13:50 by julberna         ###   ########.fr       */
+/*   Updated: 2024/04/13 22:14:39 by julberna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,5 +58,5 @@ void	set_direction(t_game *cub, int i, int j)
 	}
 	else
 		cuberror("Player direction not recognized.", cub);
-	cub->p1 = coordinate(j, i);
+	cub->p1 = coordinate(j + 0.5, i + 0.5);
 }
