@@ -6,7 +6,7 @@
 /*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 18:15:38 by Juliany Ber       #+#    #+#             */
-/*   Updated: 2024/04/14 18:45:32 by julberna         ###   ########.fr       */
+/*   Updated: 2024/04/14 23:09:44 by julberna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,13 +109,6 @@ typedef struct s_draw
 	int				delta_y;
 }					t_draw;
 
-typedef struct s_get_map_helper
-{
-	int				rows;
-	char			**line_bkp;
-	bool			broken_map;
-}					t_get_map_helper;
-
 typedef struct s_texture
 {
 	int				buffer[HEIGHT];
@@ -145,10 +138,10 @@ void				get_player_direction(t_game *cub);
 void				set_direction(t_game *cub, int i, int j);
 void				get_raw_data(char *map_path, t_game *cub);
 bool				rgb_to_hex(t_game *cub, char *rgb, char flag);
-void				set_map(t_game *cub, t_get_map_helper *helper);
+void				set_map(t_game *cub, int i);
 void				check_input(t_game *cub, int argc, char **argv);
-void				find_matrix(t_game *cub, t_get_map_helper *helper);
-bool				crop_map(t_game *cub, t_get_map_helper *helper, int *i);
+void				find_matrix(t_game *cub, int *i);
+bool				crop_map(t_game *cub, int i);
 
 /* raycast */
 void				raycast(t_game *cub);

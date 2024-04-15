@@ -6,7 +6,7 @@
 /*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 17:15:02 by julberna          #+#    #+#             */
-/*   Updated: 2024/04/14 19:19:46 by julberna         ###   ########.fr       */
+/*   Updated: 2024/04/14 20:13:52 by julberna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,21 +34,18 @@ void	get_raw_data(char *map_path, t_game *cub)
 {
 	int		i;
 	int		fd;
-	int		size;
+	int		rows;
 	char	*temp_line;
 
 	i = 0;
-	cub->map = coordinate(0, count_rows(cub, map_path));
+	rows = count_rows(cub, map_path);
 	fd = open(map_path, O_RDONLY);
 	if (fd == -1)
 		cuberror("Could not open map file. ☹", cub);
-	cub->map_data.raw_data = (char **)ft_calloc(cub->map.y + 1, sizeof(char *));
+	cub->map_data.raw_data = (char **)ft_calloc(rows + 1, sizeof(char *));
 	temp_line = get_next_line(fd);
 	while (temp_line)
 	{
-		size = ft_strlen(temp_line);
-		if (size > cub->map.x)
-			cub->map.x = size;
 		cub->map_data.raw_data[i] = ft_strdup(temp_line);
 		free(temp_line);
 		temp_line = get_next_line(fd);

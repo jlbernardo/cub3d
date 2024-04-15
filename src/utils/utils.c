@@ -6,7 +6,7 @@
 /*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 21:29:32 by Juliany Ber       #+#    #+#             */
-/*   Updated: 2024/04/12 16:37:49 by julberna         ###   ########.fr       */
+/*   Updated: 2024/04/14 23:31:16 by julberna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,8 @@ void	free_matrix(char **matrix)
 	i = 0;
 	while (matrix[i])
 	{
-		if (matrix[i][0])
-		{
-			free(matrix[i]);
-			matrix[i] = NULL;
-		}
+		free(matrix[i]);
+		matrix[i] = NULL;
 		i++;
 	}
 	if (matrix)

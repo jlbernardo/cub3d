@@ -6,7 +6,7 @@
 /*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 19:28:16 by aperis-p          #+#    #+#             */
-/*   Updated: 2024/04/12 20:04:17 by julberna         ###   ########.fr       */
+/*   Updated: 2024/04/15 00:04:49 by julberna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,68 +14,68 @@
 
 void	get_map(t_game *cub)
 {
-	t_get_map_helper	helper;
+	int	map_start;
 
-	helper.line_bkp = NULL;
-	helper.rows = 0;
-	helper.broken_map = false;
-	find_matrix(cub, &helper);
-	set_map(cub, &helper);
+	cub->map = coordinate(0, 0);
+	find_matrix(cub, &map_start);
+	set_map(cub, map_start);
 }
 
-void	find_matrix(t_game *cub, t_get_map_helper *helper)
+void	find_matrix(t_game *cub, int *i)
 {
-	int	i;
 	int	j;
 
-	i = 0;
-	j = 0;
-	while (cub->map_data.raw_data[i])
-	{
-		if (is_space(cub->map_data.raw_data[i][j]))
-		{
-			helper->line_bkp = &cub->map_data.raw_data[i];
-			while (is_space(cub->map_data.raw_data[i][j]))
-				j++;
-		}
-		if (!ft_isdigit(cub->map_data.raw_data[i][j]))
-			i++;
-		else if (!crop_map(cub, helper, &i))
-			cuberror("Broken map.", cub);
-		j = 0;
-	}
-}
-
-void	set_map(t_game *cub, t_get_map_helper *helper)
-{
-	int	i;
-
-	i = 0;
-	cub->map_matrix = (char **)ft_calloc(helper->rows + 1, sizeof(char *));
-	while (helper->line_bkp[i] && helper->line_bkp[i][0] != '\n')
-	{
-		cub->map_matrix[i] = (char *)ft_calloc(ft_strlen(helper->line_bkp[i])
-				+ 1, sizeof(char));
-		ft_strlcpy(cub->map_matrix[i], helper->line_bkp[i],
-			ft_strlen(helper->line_bkp[i]) + 1);
-		i++;
-	}
-	cub->map_matrix[i] = NULL;
-}
-
-bool	crop_map(t_game *cub, t_get_map_helper *helper, int *i)
-{
+	*i = 0;
 	while (cub->map_data.raw_data[*i])
 	{
-		if (!helper->line_bkp || **helper->line_bkp == '\n')
-			helper->line_bkp = &cub->map_data.raw_data[*i];
-		if (is_blank_line(cub->map_data.raw_data[*i]))
-			helper->broken_map = true;
-		else if (cub->map_data.raw_data[*i] && !helper->broken_map)
-			helper->rows++;
-		else
+		j = 0;
+		while (is_space(cub->map_data.raw_data[*i][j]))
+			j++;
+		if (ft_isdigit(cub->map_data.raw_data[*i][j]))
+			break ;
+		(*i)++;
+	}
+	if (!crop_map(cub, *i))
+		cuberror("Broken map.", cub);
+}
+
+bool	crop_map(t_game *cub, int i)
+{
+	while (cub->map_data.raw_data[i])
+	{
+		if (is_blank_line(cub->map_data.raw_data[i]))
 			return (false);
-		*i = *i + 1;
+		else if (cub->map_data.raw_data[i])
+			cub->map.y++;
+		i++;
 	}
 	return (true);
 }
+
+void	set_map(t_game *cub, int i)
+{
+	int	j;
+	int	size;
+
+	j = 0;
+	cub->map_matrix = (char **)ft_calloc(cub->map.y + 1, sizeof(char *));
+	while (j < cub->map.y)
+	{
+		cub->map_matrix[j] = ft_strtrim(cub->map_data.raw_data[i], "\n");
+		size = ft_strlen(cub->map_matrix[j]);
+		if (size > cub->map.x)
+			cub->map.x = size;
+		i++;
+		j++;
+	}
+	cub->map_matrix[j] = ft_calloc(1, sizeof(char));
+}
+
+// void	ft_print_matrix(char **matrix)
+// {
+// 	while (*matrix)
+// 	{
+// 		ft_printf("%s", *matrix);
+// 		matrix++;
+// 	}
+// }
