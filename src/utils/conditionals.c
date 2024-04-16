@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   conditionals.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aperis-p <aperis-p@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 16:35:52 by julberna          #+#    #+#             */
-/*   Updated: 2024/04/12 17:25:17 by julberna         ###   ########.fr       */
+/*   Updated: 2024/04/15 21:50:44 by aperis-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,15 @@ bool	is_space(char c)
 bool	is_blank_line(char *line)
 {
 	while (*line && is_space(*line))
+		line++;
+	if (*line)
+		return (false);
+	return (true);
+}
+
+bool	is_alpha_numeric_line(char *line)
+{
+	while (*line && (is_space(*line) || ft_isalnum(*line)))
 		line++;
 	if (*line)
 		return (false);

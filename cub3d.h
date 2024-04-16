@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aperis-p <aperis-p@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 18:15:38 by Juliany Ber       #+#    #+#             */
-/*   Updated: 2024/04/13 17:40:24 by julberna         ###   ########.fr       */
+/*   Updated: 2024/04/15 22:13:42 by aperis-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -182,12 +182,18 @@ void				walk_sideways(t_game *cub, int key);
 int					get_color(t_texture tex);
 bool				is_space(char c);
 bool				is_blank_line(char *line);
+bool				is_alpha_numeric_line(char *line);
 void				free_matrix(char **split);
 void				load_textures(t_game *cub);
 void				delete_images(t_game *cub);
 void				cuberror(char *message, t_game *cub);
 t_coord				coordinate(double x, double y);
 t_vector			vector(double x, double y);
-// void				ft_print_matrix(char **matrix);
+void				ft_print_matrix(char **matrix);
+
+/* validation */
+void				validation(t_game *cub);
+int					count_rows_from_map(char **map);
+void				flood_fill(char **map, int rows, t_coord cur, char to_fill);
 
 #endif
