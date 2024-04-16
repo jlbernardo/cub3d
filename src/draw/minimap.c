@@ -6,7 +6,7 @@
 /*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 18:00:41 by julberna          #+#    #+#             */
-/*   Updated: 2024/04/15 00:14:35 by julberna         ###   ########.fr       */
+/*   Updated: 2024/04/16 15:12:20 by julberna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,10 @@ void	draw_minimap(t_game *cub)
 		x = 0;
 		while (x < (int)(ft_strlen(cub->map_matrix[(int)(y / rx)]) * ry))
 		{
-			if (cub->map_matrix[(int)(y / rx)][(int)(x / ry)] == '0')
-				mlx_put_pixel(cub->minimap, x, y, 0xffffff95);
-			else if (cub->map_matrix[(int)(y / rx)][(int)(x / ry)] == '1')
+			if (cub->map_matrix[(int)(y / rx)][(int)(x / ry)] == '1')
 				mlx_put_pixel(cub->minimap, x, y, 0x00000095);
+			else if (cub->map_matrix[(int)(y / rx)][(int)(x / ry)] != ' ')
+				mlx_put_pixel(cub->minimap, x, y, 0xffffff95);
 			x++;
 		}
 	}
