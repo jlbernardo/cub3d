@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validation.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aperis-p <aperis-p@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 17:02:12 by aperis-p          #+#    #+#             */
-/*   Updated: 2024/04/15 22:11:22 by aperis-p         ###   ########.fr       */
+/*   Updated: 2024/04/16 14:43:28 by julberna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	check_keys(t_game *cub)
 			if (player_found)
 				cuberror("More than one player found.", cub);
 			player_found = true;
-		}			
+		}
 	}
 }
 
