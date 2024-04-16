@@ -1,24 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check.c                                           :+:      :+:    :+:   */
+/*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Juliany Bernardo <julberna@student.42sp    +#+  +:+       +#+        */
+/*   By: aperis-p <aperis-p@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/27 20:33:55 by Juliany Ber       #+#    #+#             */
-/*   Updated: 2024/03/27 20:36:15 by Juliany Ber      ###   ########.fr       */
+/*   Created: 2023/05/03 14:09:55 by julberna          #+#    #+#             */
+/*   Updated: 2024/04/15 20:38:55 by aperis-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "libft.h"
 
-void	check(t_game *cub, int argc, char **argv)
+int	ft_strcmp(const char *s1, const char *s2)
 {
-	if (argc != 2)
+	while ((*s1 != '\0' || *s2 != '\0'))
 	{
-		write(STDERR_FILENO, "Wrong number of arguments.\n", 27);
-		exit(EXIT_FAILURE);
+		while (*s1 == *s2 && *s1 && *s2)
+		{
+			s1++;
+			s2++;
+		}
+		return (*(unsigned char *)s1 - *(unsigned char *)s2);
 	}
-	ft_bzero(cub, sizeof(t_game));
-	cub->map_path = argv[1];
+	return (0);
 }

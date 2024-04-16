@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minimap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aperis-p <aperis-p@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 18:00:41 by julberna          #+#    #+#             */
-/*   Updated: 2024/04/12 15:46:58 by aperis-p         ###   ########.fr       */
+/*   Updated: 2024/04/12 20:44:29 by julberna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ void	draw_minimap(t_game *cub)
 	rx = ceil(WIDTH / RATIO);
 	ry = ceil(HEIGHT / RATIO);
 	cub->minimap = mlx_new_image(cub->mlx, cub->map.x * rx, cub->map.y * ry);
+	if (!cub->minimap)
+		cuberror("Oops, we had a problem with the minimap. ˙◠˙", cub);
 	while (++y < cub->map.x * rx)
 	{
 		x = -1;
@@ -50,6 +52,8 @@ void	draw_player_on_minimap(t_game *cub)
 	if (cub->miniplayer)
 		mlx_delete_image(cub->mlx, cub->miniplayer);
 	cub->miniplayer = mlx_new_image(cub->mlx, rx, ry);
+	if (!cub->miniplayer)
+		cuberror("Oops, found an issue on the minimap. ˙◠˙", cub);
 	x = -1;
 	while (++x < ry)
 	{

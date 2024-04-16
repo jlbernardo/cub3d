@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycast.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aperis-p <aperis-p@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/31 20:27:07 by julberna          #+#    #+#             */
-/*   Updated: 2024/04/12 15:46:11 by aperis-p         ###   ########.fr       */
+/*   Updated: 2024/04/13 22:06:41 by julberna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ void	raycast(t_game *cub)
 	if (cub->screen)
 		mlx_delete_image(cub->mlx, cub->screen);
 	cub->screen = mlx_new_image(cub->mlx, WIDTH, HEIGHT);
+	if (!cub->screen)
+		cuberror("Oops, the game just broke. ˙◠˙", cub);
 	while (++i < WIDTH)
 	{
 		initial_ray_setup(cub, i);
@@ -28,7 +30,6 @@ void	raycast(t_game *cub)
 		calculate_wall_distance(cub);
 		draw_line(cub, i);
 	}
-	calculate_frames_per_second(cub);
 	mlx_image_to_window(cub->mlx, cub->screen, 0, 0);
 }
 

@@ -1,59 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing_utils.c                                    :+:      :+:    :+:   */
+/*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aperis-p <aperis-p@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 19:28:36 by aperis-p          #+#    #+#             */
-/*   Updated: 2024/04/12 21:41:18 by aperis-p         ###   ########.fr       */
+/*   Updated: 2024/04/14 20:17:05 by aperis-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	ft_isspace(char c)
+void	parse(t_game *cub, int argc, char **argv)
 {
-	if (c == ' ' || c == '\t' || c == '\v' || c == '\r' || c == '\n'
-		|| c == '\f')
-		return (1);
-	return (0);
+	check_input(cub, argc, argv);
+	get_texture_path(cub);
+	get_colors(cub);
+	get_map(cub);
+	get_player_direction(cub);
 }
 
-int	ft_blank_line(char *line)
+void	check_input(t_game *cub, int argc, char **argv)
 {
-	while (*line && ft_isspace(*line))
-		line++;
-	if (*line)
-		return (0);
-	return (1);
+	ft_bzero(cub, sizeof(t_game));
+	if (argc != 2)
+		cuberror("Wrong number of arguments.", cub);
+	cub->map_path = argv[1];
+	cub->map_data.raw_data = get_raw_data(cub->map_path, cub);
 }
 
-int	count_rows(int fd)
-{
-	int		rows;
-	char	*temp_line;
-
-	rows = 0;
-	temp_line = get_next_line(fd);
-	while (temp_line)
-	{
-		rows++;
-		free(temp_line);
-		temp_line = get_next_line(fd);
-	}
-	return (rows);
-}
-
-_Bool	parsing_suite(t_game *cub)
-{
-	if (!get_texture_path(cub) || !get_colors(cub) || !get_map(cub)
-		|| !get_player_direction(cub))
-		return (false);
-	return (true);
-}
-
-char	**get_raw_data(char *map_path)
+char	**get_raw_data(char *map_path, t_game *cub)
 {
 	int		i;
 	int		fd;
@@ -63,6 +40,8 @@ char	**get_raw_data(char *map_path)
 
 	i = 0;
 	fd = open(map_path, O_RDONLY);
+	if (fd == -1)
+		cuberror("Could not open map file.", cub);
 	rows = count_rows(fd);
 	close(fd);
 	fd = open(map_path, O_RDONLY);
@@ -79,11 +58,18 @@ char	**get_raw_data(char *map_path)
 	return (raw_data);
 }
 
-void	ft_print_matrix(char **matrix) // DELETE ME BEFORE SEND TO VOGSPHERE!
+int	count_rows(int fd)
 {
-	while (*matrix)
+	int		rows;
+	char	*temp_line;
+
+	rows = 0;
+	temp_line = get_next_line(fd);
+	while (temp_line)
 	{
-		ft_printf("%s", *matrix);
-		matrix++;
+		rows++;
+		free(temp_line);
+		temp_line = get_next_line(fd);
 	}
+	return (rows);
 }

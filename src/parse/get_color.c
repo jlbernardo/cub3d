@@ -1,23 +1,47 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   color_parsing.c                                    :+:      :+:    :+:   */
+/*   get_color.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aperis-p <aperis-p@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 19:29:07 by aperis-p          #+#    #+#             */
-/*   Updated: 2024/04/10 19:29:16 by aperis-p         ###   ########.fr       */
+/*   Updated: 2024/04/12 19:55:35 by julberna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	get_rgba(int r, int g, int b, int a)
+void	get_colors(t_game *cub)
 {
-	return (r << 24 | g << 16 | b << 8 | a);
+	char	**temp;
+	char	*trimmed;
+	int		keys;
+
+	temp = cub->map_data.raw_data;
+	keys = 0;
+	while (*temp)
+	{
+		trimmed = ft_strtrim(*temp, " ");
+		if (!ft_strncmp("C", trimmed, 1) && (keys & (1 << 1)) < 1)
+		{
+			if (rgb_to_hex(cub, trimmed, 'C'))
+				keys |= (1 << 1);
+		}
+		if (!ft_strncmp("F", trimmed, 1) && (keys & (1 << 0)) < 1)
+		{
+			if (rgb_to_hex(cub, trimmed, 'F'))
+				keys |= 1;
+		}
+		temp++;
+		free(trimmed);
+	}
+	if (keys == 3)
+		return ;
+	cuberror("Ceiling/floor color information missing.", cub);
 }
 
-_Bool	rgb_to_hex(t_game *cub, char *rgb, char flag)
+bool	rgb_to_hex(t_game *cub, char *rgb, char flag)
 {
 	char	*trimmed;
 	char	**colors;
@@ -45,31 +69,7 @@ _Bool	rgb_to_hex(t_game *cub, char *rgb, char flag)
 	return (false);
 }
 
-_Bool	get_colors(t_game *cub)
+int	get_rgba(int r, int g, int b, int a)
 {
-	char	**temp;
-	char	*trimmed;
-	int		keys;
-
-	temp = cub->map_data.raw_data;
-	keys = 0;
-	while (*temp)
-	{
-		trimmed = ft_strtrim(*temp, " ");
-		if (!ft_strncmp("C", trimmed, 1) && (keys & (1 << 1)) < 1)
-		{
-			if (rgb_to_hex(cub, trimmed, 'C'))
-				keys |= (1 << 1);
-		}
-		if (!ft_strncmp("F", trimmed, 1) && (keys & (1 << 0)) < 1)
-		{
-			if (rgb_to_hex(cub, trimmed, 'F'))
-				keys |= 1;
-		}
-		temp++;
-		free(trimmed);
-	}
-	if (keys == 3)
-		return (true);
-	return (false);
+	return (r << 24 | g << 16 | b << 8 | a);
 }
