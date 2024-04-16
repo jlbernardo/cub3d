@@ -6,7 +6,7 @@
 /*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 18:15:38 by Juliany Ber       #+#    #+#             */
-/*   Updated: 2024/04/14 23:09:44 by julberna         ###   ########.fr       */
+/*   Updated: 2024/04/16 16:31:48 by julberna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,6 @@ typedef struct s_game
 	mlx_image_t		*miniplayer;
 	mlx_image_t		*ceiling_floor;
 	mlx_texture_t	*texture[4];
-	mlx_texture_t	*door;
 	mlx_texture_t	*logo;
 }					t_game;
 
@@ -108,6 +107,13 @@ typedef struct s_draw
 	int				delta_x;
 	int				delta_y;
 }					t_draw;
+
+typedef struct s_get_map_helper
+{
+	int				rows;
+	char			**line_bkp;
+	bool			broken_map;
+}					t_get_map_helper;
 
 typedef struct s_texture
 {
@@ -129,19 +135,19 @@ void				over(t_game *cub, int exit_code);
 
 /* map parsing */
 int					set_texture_path(t_game *cub, char *trimmed);
-int					count_rows(t_game *cub, char *map_path);
 int					get_rgba(int r, int g, int b, int a);
+int					count_rows(int fd);
 void				get_map(t_game *cub);
 void				get_colors(t_game *cub);
 void				get_texture_path(t_game *cub);
 void				get_player_direction(t_game *cub);
 void				set_direction(t_game *cub, int i, int j);
-void				get_raw_data(char *map_path, t_game *cub);
+char				**get_raw_data(char *map_path, t_game *cub);
 bool				rgb_to_hex(t_game *cub, char *rgb, char flag);
-void				set_map(t_game *cub, int i);
+void				set_map(t_game *cub, t_get_map_helper *helper);
 void				check_input(t_game *cub, int argc, char **argv);
-void				find_matrix(t_game *cub, int *i);
-bool				crop_map(t_game *cub, int i);
+void				find_matrix(t_game *cub, t_get_map_helper *helper);
+bool				crop_map(t_game *cub, t_get_map_helper *helper, int *i);
 
 /* raycast */
 void				raycast(t_game *cub);
@@ -176,12 +182,18 @@ void				walk_sideways(t_game *cub, int key);
 int					get_color(t_texture tex);
 bool				is_space(char c);
 bool				is_blank_line(char *line);
+bool				is_alpha_numeric_line(char *line);
 void				free_matrix(char **split);
 void				load_textures(t_game *cub);
 void				delete_images(t_game *cub);
 void				cuberror(char *message, t_game *cub);
 t_coord				coordinate(double x, double y);
 t_vector			vector(double x, double y);
-// void				ft_print_matrix(char **matrix);
+void				ft_print_matrix(char **matrix);
+
+/* validation */
+void				validation(t_game *cub);
+int					count_rows_from_map(char **map);
+void				flood_fill(char **map, int rows, t_coord cur, char to_fill);
 
 #endif

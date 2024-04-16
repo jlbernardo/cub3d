@@ -1,24 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.c                                            :+:      :+:    :+:   */
+/*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aperis-p <aperis-p@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/27 16:26:50 by Juliany Ber       #+#    #+#             */
-/*   Updated: 2024/04/14 20:36:12 by aperis-p         ###   ########.fr       */
+/*   Created: 2023/05/03 14:09:55 by julberna          #+#    #+#             */
+/*   Updated: 2024/04/15 20:38:55 by aperis-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "libft.h"
 
-int	main(int argc, char **argv)
+int	ft_strcmp(const char *s1, const char *s2)
 {
-	t_game	cub;
-
-	parse(&cub, argc, argv);
-	validation(&cub);
-	init(&cub);
-	game(&cub);
-	over(&cub, EXIT_SUCCESS);
+	while ((*s1 != '\0' || *s2 != '\0'))
+	{
+		while (*s1 == *s2 && *s1 && *s2)
+		{
+			s1++;
+			s2++;
+		}
+		return (*(unsigned char *)s1 - *(unsigned char *)s2);
+	}
+	return (0);
 }
