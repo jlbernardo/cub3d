@@ -6,7 +6,7 @@
 /*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 18:00:41 by julberna          #+#    #+#             */
-/*   Updated: 2024/04/17 15:54:17 by julberna         ###   ########.fr       */
+/*   Updated: 2024/04/17 16:33:29 by julberna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ void	draw_minimap(t_game *cub)
 	const int	ry = ceil(HEIGHT / RATIO);
 
 	y = -1;
+	if (cub->minimap)
+		mlx_delete_image(cub->mlx, cub->minimap);
 	cub->minimap = mlx_new_image(cub->mlx, cub->map.x * ry, cub->map.y * rx);
 	if (!cub->minimap)
 		cuberror("Oops, we had a problem with the minimap. ˙◠˙", cub);
@@ -36,19 +38,16 @@ void	draw_minimap(t_game *cub)
 			x++;
 		}
 	}
-	mlx_image_to_window(cub->mlx, cub->minimap, MAP_OFFSET, MAP_OFFSET);
 	draw_player_on_minimap(cub);
 }
 
 void	draw_player_on_minimap(t_game *cub)
 {
-	int	x;
-	int	y;
-	int	rx;
-	int	ry;
+	int			x;
+	int			y;
+	const int	rx = ceil(WIDTH / RATIO);
+	const int	ry = ceil(HEIGHT / RATIO);
 
-	rx = ceil(WIDTH / RATIO);
-	ry = ceil(HEIGHT / RATIO);
 	if (cub->miniplayer)
 		mlx_delete_image(cub->mlx, cub->miniplayer);
 	cub->miniplayer = mlx_new_image(cub->mlx, rx, ry);
@@ -61,9 +60,11 @@ void	draw_player_on_minimap(t_game *cub)
 		while (++y < ry)
 			mlx_put_pixel(cub->miniplayer, x, y, 0xc1121f95);
 	}
+	mlx_image_to_window(cub->mlx, cub->minimap, MAP_OFFSET, MAP_OFFSET);
 	mlx_image_to_window(cub->mlx, cub->miniplayer,
 		cub->p1.x * ry + MAP_OFFSET - (int)(ry / 3),
 		cub->p1.y * rx + MAP_OFFSET - (int)(rx / 3));
 	cub->screen->instances->z = 1;
+	cub->minimap->instances->z = 2;
 	cub->miniplayer->instances->z = 3;
 }
