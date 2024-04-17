@@ -6,7 +6,7 @@
 /*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 12:11:45 by aperis-p          #+#    #+#             */
-/*   Updated: 2024/04/17 16:29:13 by julberna         ###   ########.fr       */
+/*   Updated: 2024/04/17 17:24:28 by julberna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,33 @@ void	open_door(t_game *cub)
 				if ((px == j || px == j + 1 || px == j - 1)
 					&& (py == i || py == i + 1 || py == i - 1))
 					cub->map_matrix[i][j] = '3';
+			}
+		}
+	}
+}
+
+void	close_open_doors(t_game *cub)
+{
+	int	i;
+	int	j;
+	int	px;
+	int	py;
+
+	i = -1;
+	px = (int)cub->p1.x;
+	py = (int)cub->p1.y;
+	while (++i < cub->map.y)
+	{
+		j = -1;
+		while (++j < (int)ft_strlen(cub->map_matrix[i]))
+		{
+			if (cub->map_matrix[i][j] == '3')
+			{
+				if ((px != j && px != j + 1 && px != j + 2
+						&& px != j - 1 && px != j - 2)
+					|| (py != i && py != i + 1 && py != i + 2
+						&& py != i - 1 && py != i - 2))
+					cub->map_matrix[i][j] = '2';
 			}
 		}
 	}

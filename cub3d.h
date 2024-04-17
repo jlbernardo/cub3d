@@ -6,7 +6,7 @@
 /*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 18:15:38 by Juliany Ber       #+#    #+#             */
-/*   Updated: 2024/04/17 15:51:23 by julberna         ###   ########.fr       */
+/*   Updated: 2024/04/17 16:37:59 by julberna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -180,6 +180,7 @@ void				walk_back(t_game *cub);
 void				rotate_left(t_game *cub);
 void				walk_forward(t_game *cub);
 void				rotate_right(t_game *cub);
+void				close_open_doors(t_game *cub);
 void				walk_sideways(t_game *cub, int key);
 void				mouse_control(void *param);
 

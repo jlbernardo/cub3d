@@ -6,7 +6,7 @@
 /*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 22:29:12 by julberna          #+#    #+#             */
-/*   Updated: 2024/04/17 15:50:09 by julberna         ###   ########.fr       */
+/*   Updated: 2024/04/17 17:26:28 by julberna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,13 +80,13 @@ void	walk_sideways(t_game *cub, int key)
 	const int	y2 = (int)(cub->p1.y + cub->direction.x * cub->move_speed);
 
 	if (key == MLX_KEY_A
-		&& (cub->map_matrix[y1][x1] != '1' || cub->map_matrix[y1][x1] != '2'))
+		&& (cub->map_matrix[y1][x1] != '1' && cub->map_matrix[y1][x1] != '2'))
 	{
 		cub->p1.x += cub->direction.y * cub->move_speed;
 		cub->p1.y -= cub->direction.x * cub->move_speed;
 	}
 	if (key == MLX_KEY_D
-		&& (cub->map_matrix[y2][x2] != '1' || cub->map_matrix[y2][x2] != '2'))
+		&& (cub->map_matrix[y2][x2] != '1' && cub->map_matrix[y2][x2] != '2'))
 	{
 		cub->p1.x -= cub->direction.y * cub->move_speed;
 		cub->p1.y += cub->direction.x * cub->move_speed;
