@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aperis-p <aperis-p@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 20:01:10 by Juliany Ber       #+#    #+#             */
-/*   Updated: 2024/04/12 20:35:39 by julberna         ###   ########.fr       */
+/*   Updated: 2024/04/16 18:00:51 by aperis-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 void	game(t_game *cub)
 {
 	mlx_loop_hook(cub->mlx, actions, cub);
+	mlx_loop_hook(cub->mlx, mouse_control, cub);
 	mlx_loop(cub->mlx);
 }
 

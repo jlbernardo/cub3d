@@ -6,7 +6,7 @@
 /*   By: aperis-p <aperis-p@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 18:15:38 by Juliany Ber       #+#    #+#             */
-/*   Updated: 2024/04/15 22:13:42 by aperis-p         ###   ########.fr       */
+/*   Updated: 2024/04/16 19:23:42 by aperis-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -177,6 +177,7 @@ void				rotate_left(t_game *cub);
 void				walk_forward(t_game *cub);
 void				rotate_right(t_game *cub);
 void				walk_sideways(t_game *cub, int key);
+void				mouse_control(void *param);
 
 /* utils */
 int					get_color(t_texture tex);
