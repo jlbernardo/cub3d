@@ -6,7 +6,7 @@
 /*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 18:15:38 by Juliany Ber       #+#    #+#             */
-/*   Updated: 2024/04/16 22:34:36 by julberna         ###   ########.fr       */
+/*   Updated: 2024/04/17 15:24:28 by julberna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@
 # define SO			1
 # define EA			2
 # define WE			3
+# define IN			4
 
 typedef struct s_coord
 {
@@ -53,6 +54,7 @@ typedef struct s_ray
 	int				line_height;
 	int				side;
 	bool			hit;
+	bool			door;
 	double			camera_x;
 	double			perp_wall_dist;
 	t_coord			delta_dist;
@@ -95,7 +97,7 @@ typedef struct s_game
 	mlx_image_t		*minimap;
 	mlx_image_t		*miniplayer;
 	mlx_image_t		*ceiling_floor;
-	mlx_texture_t	*texture[4];
+	mlx_texture_t	*texture[5];
 	mlx_texture_t	*logo;
 }					t_game;
 

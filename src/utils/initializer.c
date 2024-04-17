@@ -6,7 +6,7 @@
 /*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 19:29:16 by Juliany Ber       #+#    #+#             */
-/*   Updated: 2024/04/16 21:28:44 by julberna         ###   ########.fr       */
+/*   Updated: 2024/04/17 15:20:14 by julberna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,36 @@ void	load_textures(t_game *cub)
 	cub->texture[WE] = mlx_load_png(cub->map_data.west_tex_path);
 	cub->texture[NO] = mlx_load_png(cub->map_data.north_tex_path);
 	cub->texture[SO] = mlx_load_png(cub->map_data.south_tex_path);
+	cub->texture[IN] = mlx_load_png("./assets/door.png");
 	cub->logo = mlx_load_png("./assets/logo.png");
 	if (!cub->texture[EA] || !cub->texture[WE]
 		|| !cub->texture[NO] || !cub->texture[SO]
 		|| !cub->logo)
 		cuberror("There was a problem loading the textures.", cub);
+}
+
+void	draw_ceiling_floor(t_game *cub)
+{
+	int	x;
+	int	y;
+
+	x = 0;
+	y = 0;
+	cub->ceiling_floor = mlx_new_image(cub->mlx, WIDTH, HEIGHT);
+	if (!cub->ceiling_floor)
+		cuberror("Oops, had a problem with the background. ˙◠˙", cub);
+	while (x < HEIGHT)
+	{
+		while (y < WIDTH)
+		{
+			if (x < (int)(HEIGHT / HORIZON))
+				mlx_put_pixel(cub->ceiling_floor, y, x, cub->map_data.c_color);
+			else
+				mlx_put_pixel(cub->ceiling_floor, y, x, cub->map_data.f_color);
+			y++;
+		}
+		y = 0;
+		x++;
+	}
+	mlx_image_to_window(cub->mlx, cub->ceiling_floor, 0, 0);
 }
