@@ -6,7 +6,7 @@
 /*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 18:15:38 by Juliany Ber       #+#    #+#             */
-/*   Updated: 2024/04/17 16:37:59 by julberna         ###   ########.fr       */
+/*   Updated: 2024/04/17 18:26:14 by julberna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,17 @@
 # define RATIO		200
 # define X			0
 # define Y			1
-# define NO			0
-# define SO			1
-# define EA			2
-# define WE			3
-# define IN			4
+
+enum e_texture
+{
+	NO = 0,
+	SO,
+	EA,
+	WE,
+	DL,
+	DD,
+	TOTAL_TEXTURES,
+};
 
 typedef struct s_coord
 {
@@ -97,7 +103,7 @@ typedef struct s_game
 	mlx_image_t		*minimap;
 	mlx_image_t		*miniplayer;
 	mlx_image_t		*ceiling_floor;
-	mlx_texture_t	*texture[5];
+	mlx_texture_t	*texture[TOTAL_TEXTURES];
 	mlx_texture_t	*logo;
 }					t_game;
 
