@@ -6,7 +6,7 @@
 /*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 18:00:41 by julberna          #+#    #+#             */
-/*   Updated: 2024/04/16 21:28:07 by julberna         ###   ########.fr       */
+/*   Updated: 2024/04/17 15:54:17 by julberna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,12 @@
 
 void	draw_minimap(t_game *cub)
 {
-	int	x;
-	int	y;
-	int	rx;
-	int	ry;
+	int			x;
+	int			y;
+	const int	rx = ceil(WIDTH / RATIO);
+	const int	ry = ceil(HEIGHT / RATIO);
 
 	y = -1;
-	rx = ceil(WIDTH / RATIO);
-	ry = ceil(HEIGHT / RATIO);
 	cub->minimap = mlx_new_image(cub->mlx, cub->map.x * ry, cub->map.y * rx);
 	if (!cub->minimap)
 		cuberror("Oops, we had a problem with the minimap. ˙◠˙", cub);
@@ -30,7 +28,8 @@ void	draw_minimap(t_game *cub)
 		x = 0;
 		while (x < (int)(ft_strlen(cub->map_matrix[(int)(y / rx)]) * ry))
 		{
-			if (cub->map_matrix[(int)(y / rx)][(int)(x / ry)] == '1')
+			if (cub->map_matrix[(int)(y / rx)][(int)(x / ry)] == '1'
+				|| cub->map_matrix[(int)(y / rx)][(int)(x / ry)] == '2')
 				mlx_put_pixel(cub->minimap, x, y, 0x00000095);
 			else if (cub->map_matrix[(int)(y / rx)][(int)(x / ry)] != ' ')
 				mlx_put_pixel(cub->minimap, x, y, 0xffffff95);
