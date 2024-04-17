@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mouse_hook.c                                       :+:      :+:    :+:   */
+/*   actions_ii.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aperis-p <aperis-p@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 12:11:45 by aperis-p          #+#    #+#             */
-/*   Updated: 2024/04/16 19:23:55 by aperis-p         ###   ########.fr       */
+/*   Updated: 2024/04/17 16:27:03 by julberna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,32 @@ void	mouse_control(void *param)
 	{
 		rotate_left(cub);
 		old_x = x;
+	}
+}
+
+void	open_door(t_game *cub)
+{
+	int	i;
+	int	j;
+	int	px;
+	int	py;
+
+	i = 0;
+	px = (int)cub->p1.x;
+	py = (int)cub->p1.y;
+	while (i < cub->map.y)
+	{
+		j = 0;
+		while (j < (int)ft_strlen(cub->map_matrix[i]))
+		{
+			if (cub->map_matrix[i][j] == '2')
+			{
+				if ((px == j || px == j + 1 || px == j - 1)
+					&& (py == i || py == i + 1 || py == i - 1))
+					cub->map_matrix[i][j] = '3';
+			}
+			j++;
+		}
+		i++;
 	}
 }

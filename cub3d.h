@@ -6,7 +6,7 @@
 /*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 18:15:38 by Juliany Ber       #+#    #+#             */
-/*   Updated: 2024/04/17 15:24:28 by julberna         ###   ########.fr       */
+/*   Updated: 2024/04/17 15:51:23 by julberna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -175,6 +175,7 @@ void				line(t_game *cub, t_coord start, t_coord end,
 
 /* game mechanics */
 void				actions(void *param);
+void				open_door(t_game *cub);
 void				walk_back(t_game *cub);
 void				rotate_left(t_game *cub);
 void				walk_forward(t_game *cub);
