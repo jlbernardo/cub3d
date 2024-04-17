@@ -6,7 +6,7 @@
 /*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 18:15:38 by Juliany Ber       #+#    #+#             */
-/*   Updated: 2024/04/16 21:29:11 by julberna         ###   ########.fr       */
+/*   Updated: 2024/04/16 22:34:36 by julberna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -178,6 +178,7 @@ void				rotate_left(t_game *cub);
 void				walk_forward(t_game *cub);
 void				rotate_right(t_game *cub);
 void				walk_sideways(t_game *cub, int key);
+void				mouse_control(void *param);
 
 /* utils */
 int					get_color(t_texture tex);
