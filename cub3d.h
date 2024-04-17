@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aperis-p <aperis-p@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 18:15:38 by Juliany Ber       #+#    #+#             */
-/*   Updated: 2024/04/16 19:23:42 by aperis-p         ###   ########.fr       */
+/*   Updated: 2024/04/16 22:34:36 by julberna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ typedef struct s_ray
 
 typedef struct s_map_data
 {
+	int				size;
 	char			*north_tex_path;
 	char			*east_tex_path;
 	char			*south_tex_path;
@@ -135,19 +136,19 @@ void				over(t_game *cub, int exit_code);
 
 /* map parsing */
 int					set_texture_path(t_game *cub, char *trimmed);
+int					count_rows(t_game *cub, char *map_path);
 int					get_rgba(int r, int g, int b, int a);
-int					count_rows(int fd);
 void				get_map(t_game *cub);
 void				get_colors(t_game *cub);
 void				get_texture_path(t_game *cub);
 void				get_player_direction(t_game *cub);
 void				set_direction(t_game *cub, int i, int j);
-char				**get_raw_data(char *map_path, t_game *cub);
+void				get_raw_data(char *map_path, t_game *cub);
 bool				rgb_to_hex(t_game *cub, char *rgb, char flag);
-void				set_map(t_game *cub, t_get_map_helper *helper);
+void				set_map(t_game *cub, int i);
 void				check_input(t_game *cub, int argc, char **argv);
-void				find_matrix(t_game *cub, t_get_map_helper *helper);
-bool				crop_map(t_game *cub, t_get_map_helper *helper, int *i);
+void				find_matrix(t_game *cub, int *i);
+bool				crop_map(t_game *cub, int i);
 
 /* raycast */
 void				raycast(t_game *cub);
@@ -190,7 +191,7 @@ void				delete_images(t_game *cub);
 void				cuberror(char *message, t_game *cub);
 t_coord				coordinate(double x, double y);
 t_vector			vector(double x, double y);
-void				ft_print_matrix(char **matrix);
+// void				ft_print_matrix(char **matrix);
 
 /* validation */
 void				validation(t_game *cub);
