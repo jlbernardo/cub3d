@@ -6,7 +6,7 @@
 /*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 17:29:04 by julberna          #+#    #+#             */
-/*   Updated: 2024/04/13 22:14:39 by julberna         ###   ########.fr       */
+/*   Updated: 2024/04/16 18:44:59 by julberna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,25 +38,25 @@ void	set_direction(t_game *cub, int i, int j)
 {
 	if (cub->map_matrix[i][j] == 'N')
 	{
-		cub->direction = vector(0, 1);
+		cub->direction = vector(0, -1);
 		cub->camera_plane = vector(0.66, 0);
 	}
 	else if (cub->map_matrix[i][j] == 'E')
 	{
 		cub->direction = vector(1, 0);
-		cub->camera_plane = vector(0, -0.66);
+		cub->camera_plane = vector(0, 0.66);
 	}
 	else if (cub->map_matrix[i][j] == 'S')
 	{
-		cub->direction = vector(0, -1);
+		cub->direction = vector(0, 1);
 		cub->camera_plane = vector(-0.66, 0);
 	}
 	else if (cub->map_matrix[i][j] == 'W')
 	{
 		cub->direction = vector(-1, 0);
-		cub->camera_plane = vector(0, 0.66);
+		cub->camera_plane = vector(0, -0.66);
 	}
 	else
 		cuberror("Player direction not recognized.", cub);
-	cub->p1 = coordinate(j + 0.5, i + 0.5);
+	cub->p1 = coordinate(j + 0.01, i + 0.01);
 }
