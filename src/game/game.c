@@ -6,7 +6,7 @@
 /*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 20:01:10 by Juliany Ber       #+#    #+#             */
-/*   Updated: 2024/04/16 22:34:28 by julberna         ###   ########.fr       */
+/*   Updated: 2024/04/17 16:37:16 by julberna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,7 @@ void	actions(void *param)
 
 	cub = param;
 	if (mlx_is_key_down(cub->mlx, MLX_KEY_ESCAPE))
-	{
 		over(cub, EXIT_SUCCESS);
-		mlx_close_window(cub->mlx);
-	}
 	if (mlx_is_key_down(cub->mlx, MLX_KEY_DOWN)
 		|| mlx_is_key_down(cub->mlx, MLX_KEY_S))
 		walk_back(cub);
@@ -44,6 +41,9 @@ void	actions(void *param)
 		rotate_right(cub);
 	if (mlx_is_key_down(cub->mlx, MLX_KEY_LEFT))
 		rotate_left(cub);
+	if (mlx_is_key_down(cub->mlx, MLX_KEY_SPACE))
+		open_door(cub);
+	close_open_doors(cub);
 	raycast(cub);
-	draw_player_on_minimap(cub);
+	draw_minimap(cub);
 }

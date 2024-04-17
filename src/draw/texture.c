@@ -6,7 +6,7 @@
 /*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 18:57:39 by julberna          #+#    #+#             */
-/*   Updated: 2024/04/13 22:23:34 by julberna         ###   ########.fr       */
+/*   Updated: 2024/04/17 15:27:08 by julberna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,10 @@ void	pick_a_side(t_game *cub, int side, t_texture *tex)
 		tex->surface_x = cub->p1.x + cub->ray.perp_wall_dist * cub->ray.dir.x;
 	if (side == EA || side == WE)
 		tex->surface_x = cub->p1.y + cub->ray.perp_wall_dist * cub->ray.dir.y;
-	tex->img = cub->texture[side];
+	if (!cub->ray.door)
+		tex->img = cub->texture[side];
+	else
+		tex->img = cub->texture[IN];
 	tex->surface_x -= floor(tex->surface_x);
 	tex->x = (int)(tex->surface_x * (double)tex->img->width);
 	tex->step = (double)tex->img->height / cub->ray.line_height;
