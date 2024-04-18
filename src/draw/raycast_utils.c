@@ -6,7 +6,7 @@
 /*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 21:28:39 by julberna          #+#    #+#             */
-/*   Updated: 2024/04/17 20:54:24 by julberna         ###   ########.fr       */
+/*   Updated: 2024/04/17 23:59:29 by julberna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ void	wall_side(t_game *cub, int axis)
 
 void	draw_line(t_game *cub, int i)
 {
+	int			rev;
 	t_coord		end;
 	t_coord		start;
 
@@ -68,8 +69,13 @@ void	draw_line(t_game *cub, int i)
 	if (end.x >= HEIGHT)
 		end.x = HEIGHT - 1;
 	put_texture(cub, start, end, cub->ray.side);
+	rev = 0;
+	if (cub->ray.dir.y > 0)
+		rev = cub->ray.side % 2;
+	if (cub->ray.dir.x > 0 && cub->ray.side % 2 == 0)
+		rev = 3;
 	if (cub->ray.open_door)
-		put_texture(cub, start, end, OPEN_DOOR + (cub->ray.side % 2));
+		put_texture(cub, start, end, OPEN_DOOR + rev + (cub->ray.side % 2));
 }
 
 void	check_open_door(t_game *cub)

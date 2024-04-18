@@ -6,7 +6,7 @@
 /*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 19:29:16 by Juliany Ber       #+#    #+#             */
-/*   Updated: 2024/04/17 20:26:26 by julberna         ###   ########.fr       */
+/*   Updated: 2024/04/17 23:28:01 by julberna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ void	init(t_game *cub)
 	if (!cub->mlx)
 		cuberror("There was a problem opening the window.", cub);
 	mlx_set_icon(cub->mlx, cub->texture[LOGO]);
+	mlx_set_mouse_pos(cub->mlx, WIDTH / HORIZON, HEIGHT / HORIZON);
+	mlx_set_cursor_mode(cub->mlx, MLX_MOUSE_HIDDEN);
 	draw_ceiling_floor(cub);
 	raycast(cub);
 	draw_minimap(cub);
@@ -36,8 +38,10 @@ void	load_textures(t_game *cub)
 	cub->texture[WE] = mlx_load_png(cub->map_data.west_tex_path);
 	cub->texture[CDL] = mlx_load_png("./assets/cdoorl.png");
 	cub->texture[CDD] = mlx_load_png("./assets/cdoord.png");
-	cub->texture[ODL] = mlx_load_png("./assets/odoorl.png");
-	cub->texture[ODD] = mlx_load_png("./assets/odoord.png");
+	cub->texture[LDL] = mlx_load_png("./assets/ldoorl.png");
+	cub->texture[LDD] = mlx_load_png("./assets/ldoord.png");
+	cub->texture[RDL] = mlx_load_png("./assets/rdoorl.png");
+	cub->texture[RDD] = mlx_load_png("./assets/rdoord.png");
 	cub->texture[LOGO] = mlx_load_png("./assets/logo.png");
 	i = -1;
 	while (++i < TOTAL_TEXTURES)

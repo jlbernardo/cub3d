@@ -6,7 +6,7 @@
 /*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 18:15:38 by Juliany Ber       #+#    #+#             */
-/*   Updated: 2024/04/17 20:24:00 by julberna         ###   ########.fr       */
+/*   Updated: 2024/04/17 23:45:10 by julberna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,10 @@ enum e_texture
 	WE,
 	CDL,
 	CDD,
-	ODL,
-	ODD,
+	RDL,
+	RDD,
+	LDD,
+	LDL,
 	LOGO,
 	TOTAL_TEXTURES,
 };
