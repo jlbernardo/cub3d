@@ -6,7 +6,7 @@
 /*   By: aperis-p <aperis-p@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 20:01:10 by Juliany Ber       #+#    #+#             */
-/*   Updated: 2024/04/16 18:00:51 by aperis-p         ###   ########.fr       */
+/*   Updated: 2024/04/17 21:40:25 by aperis-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,9 @@
 void	game(t_game *cub)
 {
 	mlx_loop_hook(cub->mlx, actions, cub);
-	mlx_loop_hook(cub->mlx, mouse_control, cub);
+	mlx_cursor_hook(cub->mlx, mouse_control, cub);
+	// mlx_mouse_hook(cub->mlx, mouse_click_handler, cub);
+	mlx_loop_hook(cub->mlx, mouse_click_handler, cub);
 	mlx_loop(cub->mlx);
 }
 
@@ -46,4 +48,5 @@ void	actions(void *param)
 		rotate_left(cub);
 	raycast(cub);
 	draw_player_on_minimap(cub);
+	calculate_frames_per_second(cub);
 }

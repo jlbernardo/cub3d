@@ -6,7 +6,7 @@
 /*   By: aperis-p <aperis-p@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 18:15:38 by Juliany Ber       #+#    #+#             */
-/*   Updated: 2024/04/16 19:23:42 by aperis-p         ###   ########.fr       */
+/*   Updated: 2024/04/17 21:47:45 by aperis-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,9 @@ typedef struct s_game
 	mlx_image_t		*minimap;
 	mlx_image_t		*miniplayer;
 	mlx_image_t		*ceiling_floor;
+	mlx_image_t		*weapon_layer[15];
 	mlx_texture_t	*texture[4];
+	mlx_texture_t	*weapon[15];
 	mlx_texture_t	*logo;
 }					t_game;
 
@@ -164,6 +166,7 @@ void				pick_a_side(t_game *cub, int side, t_texture *tex);
 void				calculate_step_and_initial_side_distance(t_game *cub);
 void				put_texture(t_game *cub, t_coord start, t_coord end,
 						int side);
+void 				draw_weapon(t_game *cub, bool reload);
 
 /* bresenham */
 void				algo_setup(t_draw *line, t_coord start, t_coord end);
@@ -177,7 +180,9 @@ void				rotate_left(t_game *cub);
 void				walk_forward(t_game *cub);
 void				rotate_right(t_game *cub);
 void				walk_sideways(t_game *cub, int key);
-void				mouse_control(void *param);
+void 				mouse_control(double xpos, double ypos, void* param);
+// void				mouse_click_handler(mouse_key_t button, action_t action, modifier_key_t mods, void* param);
+void				mouse_click_handler(void* param);
 
 /* utils */
 int					get_color(t_texture tex);
@@ -186,6 +191,7 @@ bool				is_blank_line(char *line);
 bool				is_alpha_numeric_line(char *line);
 void				free_matrix(char **split);
 void				load_textures(t_game *cub);
+void				load_weapon(t_game *cub);
 void				delete_images(t_game *cub);
 void				cuberror(char *message, t_game *cub);
 t_coord				coordinate(double x, double y);

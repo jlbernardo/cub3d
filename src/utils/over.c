@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   over.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aperis-p <aperis-p@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 19:53:32 by Juliany Ber       #+#    #+#             */
-/*   Updated: 2024/04/13 17:52:40 by julberna         ###   ########.fr       */
+/*   Updated: 2024/04/17 21:05:53 by aperis-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,11 @@ void	delete_images(t_game *cub)
 		mlx_delete_image(cub->mlx, cub->miniplayer);
 	if (cub->logo)
 		mlx_delete_texture(cub->logo);
+	// if (cub->weapon_layer)
+	// {
+	// 	mlx_delete_image(cub->mlx, cub->weapon_layer);
+	// 	mlx_delete_texture(cub->weapon);
+	// }
 	if (*cub->texture)
 	{
 		while (++i < 4)
