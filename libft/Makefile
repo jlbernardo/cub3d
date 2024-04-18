@@ -18,7 +18,8 @@ SRC = ft_isalnum.c	ft_isalpha.c	ft_isascii.c	ft_isdigit.c \
 				ft_lstnew_bonus.c				ft_lstmap_bonus.c \
 				ft_lstdelone_bonus.c			ft_lstclear_bonus.c \
 				ft_lstiter_bonus.c				ft_lstadd_back_bonus.c \
-				ft_lstadd_front_bonus.c			ft_printf.c	get_next_line.c
+				ft_lstadd_front_bonus.c			ft_printf.c	get_next_line.c \
+				ft_strschr.c
 
 SRC += $(addprefix printf_utils/, ft_handle_char.c ft_handle_int.c ft_handle_lower_hex.c \
 					ft_handle_octothorpe.c ft_handle_percent.c ft_handle_plus.c \
