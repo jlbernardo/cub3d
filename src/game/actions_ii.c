@@ -6,7 +6,7 @@
 /*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 12:11:45 by aperis-p          #+#    #+#             */
-/*   Updated: 2024/04/17 17:24:28 by julberna         ###   ########.fr       */
+/*   Updated: 2024/04/17 22:08:40 by julberna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,10 +75,8 @@ void	close_open_doors(t_game *cub)
 		{
 			if (cub->map_matrix[i][j] == '3')
 			{
-				if ((px != j && px != j + 1 && px != j + 2
-						&& px != j - 1 && px != j - 2)
-					|| (py != i && py != i + 1 && py != i + 2
-						&& py != i - 1 && py != i - 2))
+				if ((px != j && px != j + 1 && px != j - 1)
+					|| (py != i && py != i + 1 && py != i - 1))
 					cub->map_matrix[i][j] = '2';
 			}
 		}

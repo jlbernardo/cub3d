@@ -6,7 +6,7 @@
 /*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/01 15:44:30 by julberna          #+#    #+#             */
-/*   Updated: 2024/04/11 15:48:16 by julberna         ###   ########.fr       */
+/*   Updated: 2024/04/17 20:13:28 by julberna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ void	line(t_game *cub, t_coord start, t_coord end, int buffer[HEIGHT])
 	algo_setup(&line, start, end);
 	while (true)
 	{
-		mlx_put_pixel(cub->screen, start.y, start.x, buffer[line.i]);
+		if (buffer[line.i] != 0)
+			mlx_put_pixel(cub->screen, start.y, start.x, buffer[line.i]);
 		line.i++;
 		if (start.x == end.x && start.y == end.y)
 			break ;
