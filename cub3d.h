@@ -6,7 +6,7 @@
 /*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 18:15:38 by Juliany Ber       #+#    #+#             */
-/*   Updated: 2024/04/17 18:26:14 by julberna         ###   ########.fr       */
+/*   Updated: 2024/04/17 20:24:00 by julberna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,22 +24,27 @@
 # include <sys/stat.h>
 # include <unistd.h>
 
-# define HORIZON	2
-# define MAP_OFFSET	10
-# define HEIGHT		600
-# define WIDTH		800
-# define RATIO		200
-# define X			0
-# define Y			1
+# define HORIZON		2
+# define MAP_OFFSET		10
+# define HEIGHT			600
+# define WIDTH			800
+# define RATIO			200
+# define X				0
+# define Y				1
+# define CLOSED_DOOR	4
+# define OPEN_DOOR		6
 
 enum e_texture
 {
 	NO = 0,
-	SO,
 	EA,
+	SO,
 	WE,
-	DL,
-	DD,
+	CDL,
+	CDD,
+	ODL,
+	ODD,
+	LOGO,
 	TOTAL_TEXTURES,
 };
 
@@ -60,7 +65,8 @@ typedef struct s_ray
 	int				line_height;
 	int				side;
 	bool			hit;
-	bool			door;
+	bool			open_door;
+	bool			closed_door;
 	double			camera_x;
 	double			perp_wall_dist;
 	t_coord			delta_dist;
@@ -104,7 +110,6 @@ typedef struct s_game
 	mlx_image_t		*miniplayer;
 	mlx_image_t		*ceiling_floor;
 	mlx_texture_t	*texture[TOTAL_TEXTURES];
-	mlx_texture_t	*logo;
 }					t_game;
 
 typedef struct s_draw
@@ -161,6 +166,7 @@ bool				crop_map(t_game *cub, int i);
 /* raycast */
 void				raycast(t_game *cub);
 void				draw_minimap(t_game *cub);
+void				check_open_door(t_game *cub);
 void				draw_line(t_game *cub, int i);
 void				draw_ceiling_floor(t_game *cub);
 void				wall_side(t_game *cub, int axis);

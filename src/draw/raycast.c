@@ -6,7 +6,7 @@
 /*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/31 20:27:07 by julberna          #+#    #+#             */
-/*   Updated: 2024/04/17 16:36:51 by julberna         ###   ########.fr       */
+/*   Updated: 2024/04/17 18:49:21 by julberna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,8 @@ void	initial_ray_setup(t_game *cub, int i)
 	cub->time = 0;
 	cub->old_time = 0;
 	cub->ray.hit = false;
-	cub->ray.door = false;
+	cub->ray.open_door = false;
+	cub->ray.closed_door = false;
 	cub->ray.camera_x = 2 * i / (double)WIDTH - 1;
 	cub->ray.map = coordinate((int)cub->p1.x, (int)cub->p1.y);
 	cub->ray.dir.x = cub->direction.x + cub->camera_plane.x * cub->ray.camera_x;

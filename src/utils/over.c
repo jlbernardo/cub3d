@@ -6,7 +6,7 @@
 /*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 19:53:32 by Juliany Ber       #+#    #+#             */
-/*   Updated: 2024/04/17 18:25:54 by julberna         ###   ########.fr       */
+/*   Updated: 2024/04/17 19:43:09 by julberna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,6 @@ void	delete_images(t_game *cub)
 		mlx_delete_image(cub->mlx, cub->minimap);
 	if (cub->miniplayer)
 		mlx_delete_image(cub->mlx, cub->miniplayer);
-	if (cub->logo)
-		mlx_delete_texture(cub->logo);
 	if (*cub->texture)
 	{
 		while (++i < TOTAL_TEXTURES)

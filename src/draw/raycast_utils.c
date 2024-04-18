@@ -6,7 +6,7 @@
 /*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 21:28:39 by julberna          #+#    #+#             */
-/*   Updated: 2024/04/17 15:29:32 by julberna         ###   ########.fr       */
+/*   Updated: 2024/04/17 20:54:24 by julberna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,9 @@ void	wall_side(t_game *cub, int axis)
 	if (axis == X && cub->ray.dir.x <= 0)
 		cub->ray.side = WE;
 	if (axis == Y && cub->ray.dir.y > 0)
-		cub->ray.side = NO;
-	if (axis == Y && cub->ray.dir.y <= 0)
 		cub->ray.side = SO;
+	if (axis == Y && cub->ray.dir.y <= 0)
+		cub->ray.side = NO;
 }
 
 void	draw_line(t_game *cub, int i)
@@ -56,7 +56,8 @@ void	draw_line(t_game *cub, int i)
 	t_coord		start;
 
 	if (cub->map_matrix[(int)cub->ray.map.y][(int)cub->ray.map.x] == '2')
-		cub->ray.door = true;
+		cub->ray.closed_door = true;
+	check_open_door(cub);
 	cub->ray.line_height = (int)(HEIGHT / cub->ray.perp_wall_dist) + 1;
 	start.y = i;
 	start.x = (int)(-cub->ray.line_height / HORIZON + HEIGHT / HORIZON);
@@ -67,6 +68,24 @@ void	draw_line(t_game *cub, int i)
 	if (end.x >= HEIGHT)
 		end.x = HEIGHT - 1;
 	put_texture(cub, start, end, cub->ray.side);
+	if (cub->ray.open_door)
+		put_texture(cub, start, end, OPEN_DOOR + (cub->ray.side % 2));
+}
+
+void	check_open_door(t_game *cub)
+{
+	if (cub->ray.side == EA && (int)cub->ray.map.x - 1 > 0
+		&& cub->map_matrix[(int)cub->ray.map.y][(int)cub->ray.map.x - 1] == '3')
+		cub->ray.open_door = true;
+	else if (cub->ray.side == WE && (int)cub->ray.map.x + 1 <= cub->map.x
+		&& cub->map_matrix[(int)cub->ray.map.y][(int)cub->ray.map.x + 1] == '3')
+		cub->ray.open_door = true;
+	else if (cub->ray.side == NO && (int)cub->ray.map.y + 1 > 0
+		&& cub->map_matrix[(int)cub->ray.map.y + 1][(int)cub->ray.map.x] == '3')
+		cub->ray.open_door = true;
+	else if (cub->ray.side == SO && (int)cub->ray.map.y - 1 <= cub->map.y
+		&& cub->map_matrix[(int)cub->ray.map.y - 1][(int)cub->ray.map.x] == '3')
+		cub->ray.open_door = true;
 }
 
 void	calculate_frames_per_second(t_game *cub)

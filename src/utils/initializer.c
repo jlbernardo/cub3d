@@ -6,7 +6,7 @@
 /*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 19:29:16 by Juliany Ber       #+#    #+#             */
-/*   Updated: 2024/04/17 18:25:41 by julberna         ###   ########.fr       */
+/*   Updated: 2024/04/17 20:26:26 by julberna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	init(t_game *cub)
 	cub->mlx = mlx_init(WIDTH, HEIGHT, "cub3d?", false);
 	if (!cub->mlx)
 		cuberror("There was a problem opening the window.", cub);
-	mlx_set_icon(cub->mlx, cub->logo);
+	mlx_set_icon(cub->mlx, cub->texture[LOGO]);
 	draw_ceiling_floor(cub);
 	raycast(cub);
 	draw_minimap(cub);
@@ -28,18 +28,23 @@ void	init(t_game *cub)
 
 void	load_textures(t_game *cub)
 {
+	int	i;
+
 	cub->texture[NO] = mlx_load_png(cub->map_data.north_tex_path);
-	cub->texture[SO] = mlx_load_png(cub->map_data.south_tex_path);
 	cub->texture[EA] = mlx_load_png(cub->map_data.east_tex_path);
+	cub->texture[SO] = mlx_load_png(cub->map_data.south_tex_path);
 	cub->texture[WE] = mlx_load_png(cub->map_data.west_tex_path);
-	cub->texture[DL] = mlx_load_png("./assets/doorl.png");
-	cub->texture[DD] = mlx_load_png("./assets/doord.png");
-	cub->logo = mlx_load_png("./assets/logo.png");
-	if (!cub->texture[EA] || !cub->texture[WE]
-		|| !cub->texture[NO] || !cub->texture[SO]
-		|| !cub->texture[DL] || !cub->texture[DD]
-		|| !cub->logo)
-		cuberror("There was a problem loading the textures.", cub);
+	cub->texture[CDL] = mlx_load_png("./assets/cdoorl.png");
+	cub->texture[CDD] = mlx_load_png("./assets/cdoord.png");
+	cub->texture[ODL] = mlx_load_png("./assets/odoorl.png");
+	cub->texture[ODD] = mlx_load_png("./assets/odoord.png");
+	cub->texture[LOGO] = mlx_load_png("./assets/logo.png");
+	i = -1;
+	while (++i < TOTAL_TEXTURES)
+	{
+		if (!cub->texture[i])
+			cuberror("There was a problem loading the textures.", cub);
+	}
 }
 
 void	draw_ceiling_floor(t_game *cub)
