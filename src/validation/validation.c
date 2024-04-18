@@ -6,11 +6,18 @@
 /*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 17:02:12 by aperis-p          #+#    #+#             */
-/*   Updated: 2024/04/16 14:43:28 by julberna         ###   ########.fr       */
+/*   Updated: 2024/04/18 18:10:21 by julberna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+void	validation(t_game *cub)
+{
+	check_extension(cub);
+	check_keys(cub);
+	check_walls(cub, cub->p1);
+}
 
 void	check_extension(t_game *cub)
 {
@@ -42,45 +49,38 @@ void	check_keys(t_game *cub)
 	}
 }
 
-void	has_walls(t_game *cub, int row)
+void	check_walls(t_game *cub, t_coord start)
+{
+	copy_matrix(cub);
+	flood_fill(cub->map_data.copy, cub->map.y, start, '0');
+	has_walls(cub, cub->map_data.copy);
+}
+
+void	has_walls(t_game *cub, char **map)
 {
 	int	i;
 
 	i = 0;
-	while (cub->map_matrix[0][i])
+	while (map[0][i])
 	{
-		if (cub->map_matrix[0][i] == '#')
+		if (map[0][i] == '#')
 			cuberror("Map has a broken wall.", cub);
 		i++;
 	}
 	i = 0;
-	while (cub->map_matrix[row - 1][i])
+	while (map[(int)(cub->map.y - 1)][i])
 	{
-		if (cub->map_matrix[row - 1][i] == '#')
+		if (map[(int)(cub->map.y - 1)][i] == '#')
 			cuberror("Map has a broken wall.", cub);
 		i++;
 	}
 	i = 1;
-	while (i < row)
+	while (i < cub->map.y)
 	{
-		if (cub->map_matrix[i][0] != '#'
-		&& cub->map_matrix[i][ft_strlen(cub->map_matrix[i]) - 1] != '#')
+		if (map[i][0] != '#'
+		&& map[i][ft_strlen(map[i]) - 1] != '#')
 			i++;
 		else
 			cuberror("Map has a broken wall.", cub);
 	}
-}
-
-void	check_walls(t_game *cub, t_coord start)
-{
-	flood_fill(cub->map_matrix,
-		count_rows_from_map(cub->map_matrix), start, '0');
-	has_walls(cub, count_rows_from_map(cub->map_matrix));
-}
-
-void	validation(t_game *cub)
-{
-	check_extension(cub);
-	check_keys(cub);
-	check_walls(cub, cub->p1);
 }

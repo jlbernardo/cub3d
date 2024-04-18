@@ -6,7 +6,7 @@
 /*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 18:15:38 by Juliany Ber       #+#    #+#             */
-/*   Updated: 2024/04/17 23:45:10 by julberna         ###   ########.fr       */
+/*   Updated: 2024/04/18 18:10:47 by julberna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ typedef struct s_map_data
 	char			*south_tex_path;
 	char			*west_tex_path;
 	char			**raw_data;
+	char			**copy;
 	uint32_t		c_color;
 	uint32_t		f_color;
 }					t_map_data;
@@ -123,13 +124,6 @@ typedef struct s_draw
 	int				delta_x;
 	int				delta_y;
 }					t_draw;
-
-typedef struct s_get_map_helper
-{
-	int				rows;
-	char			**line_bkp;
-	bool			broken_map;
-}					t_get_map_helper;
 
 typedef struct s_texture
 {
@@ -212,8 +206,13 @@ t_vector			vector(double x, double y);
 // void				ft_print_matrix(char **matrix);
 
 /* validation */
-void				validation(t_game *cub);
 int					count_rows_from_map(char **map);
+void				validation(t_game *cub);
+void				check_keys(t_game *cub);
+void				copy_matrix(t_game *cub);
+void				check_extension(t_game *cub);
+void				has_walls(t_game *cub, char **map);
+void				check_walls(t_game *cub, t_coord start);
 void				flood_fill(char **map, int rows, t_coord cur, char to_fill);
 
 #endif

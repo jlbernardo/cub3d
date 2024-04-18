@@ -6,7 +6,7 @@
 /*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 19:53:32 by Juliany Ber       #+#    #+#             */
-/*   Updated: 2024/04/17 19:43:09 by julberna         ###   ########.fr       */
+/*   Updated: 2024/04/18 18:12:50 by julberna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ void	over(t_game *cub, int exit_code)
 		free_matrix(cub->map_matrix);
 	if (cub->map_data.raw_data)
 		free_matrix(cub->map_data.raw_data);
+	if (cub->map_data.copy)
+		free_matrix(cub->map_data.copy);
 	if (cub->map_data.east_tex_path)
 		free(cub->map_data.east_tex_path);
 	if (cub->map_data.west_tex_path)
