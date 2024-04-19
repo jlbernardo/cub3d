@@ -6,7 +6,7 @@
 /*   By: aperis-p <aperis-p@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 19:53:32 by Juliany Ber       #+#    #+#             */
-/*   Updated: 2024/04/17 21:05:53 by aperis-p         ###   ########.fr       */
+/*   Updated: 2024/04/19 18:23:09 by aperis-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,17 +46,27 @@ void	delete_images(t_game *cub)
 		mlx_delete_image(cub->mlx, cub->miniplayer);
 	if (cub->logo)
 		mlx_delete_texture(cub->logo);
-	// if (cub->weapon_layer)
-	// {
-	// 	mlx_delete_image(cub->mlx, cub->weapon_layer);
-	// 	mlx_delete_texture(cub->weapon);
-	// }
+	if (cub->weapon_img_layer[0])
+		delete_weapon_files(cub);
 	if (*cub->texture)
 	{
 		while (++i < 4)
 			mlx_delete_texture(cub->texture[i]);
 	}
 	mlx_terminate(cub->mlx);
+}
+
+void	delete_weapon_files(t_game *cub)
+{
+	int	i;
+
+	i = 0;
+	while (i < 15)
+	{
+		mlx_delete_image(cub->mlx, cub->weapon_img_layer[i]);
+		mlx_delete_texture(cub->weapon_texture[i]);
+		i++;
+	}
 }
 
 void	cuberror(char *message, t_game *cub)

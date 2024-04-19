@@ -6,7 +6,7 @@
 /*   By: aperis-p <aperis-p@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 21:28:39 by julberna          #+#    #+#             */
-/*   Updated: 2024/04/17 21:26:50 by aperis-p         ###   ########.fr       */
+/*   Updated: 2024/04/18 16:31:07 by aperis-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,6 @@ void	calculate_frames_per_second(t_game *cub)
 
 	cub->old_time = cub->time;
 	cub->time = mlx_get_time();
-	frame_time = (cub->time - cub->old_time) / 1000.0;
+	frame_time = (cub->time - cub->old_time) * 10000;
 	printf("fps: %f\n", frame_time);
 }
