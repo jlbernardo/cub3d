@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aperis-p <aperis-p@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 14:52:12 by julberna          #+#    #+#             */
-/*   Updated: 2024/04/15 20:37:55 by aperis-p         ###   ########.fr       */
+/*   Updated: 2024/04/18 20:47:12 by julberna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,5 +101,6 @@ size_t			ft_strlcat(char *dest, const char *src, size_t size);
 
 /*extra*/
 int				ft_wordcount(char *s, char c);
+char			*ft_strschr(const char *s, const char *set);
 
 #endif

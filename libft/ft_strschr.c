@@ -1,24 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.c                                            :+:      :+:    :+:   */
+/*   ft_strschr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/27 16:26:50 by Juliany Ber       #+#    #+#             */
-/*   Updated: 2024/04/18 17:54:56 by julberna         ###   ########.fr       */
+/*   Created: 2024/04/18 20:42:58 by julberna          #+#    #+#             */
+/*   Updated: 2024/04/18 21:02:25 by julberna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "libft.h"
 
-int	main(int argc, char **argv)
+char	*ft_strschr(const char *s, const char *set)
 {
-	t_game	cub;
+	int	i;
+	int	j;
 
-	parse(&cub, argc, argv);
-	validation(&cub);
-	init(&cub);
-	game(&cub);
-	over(&cub, EXIT_SUCCESS);
+	if (s == NULL || set == NULL)
+		return (NULL);
+	i = -1;
+	while (s[++i])
+	{
+		j = -1;
+		while (set[++j])
+		{
+			if (s[i] == set[j])
+				return ((char *)s + i);
+		}
+	}
+	return (NULL);
 }

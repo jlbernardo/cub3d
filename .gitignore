@@ -2,6 +2,5 @@
 cub3d
 ./MLX
 .vscode
-/libft/*.o
-/libft/*/*.o
+/libft/obj/
 /libft/libft.a
