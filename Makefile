@@ -63,6 +63,8 @@ mlxre:
 
 re: fclean all
 
+relib: libclean fclean all
+
 reall: fclean libclean mlxre all
 
 .PHONY: all libft clean fclean libclean mlxre re reall
