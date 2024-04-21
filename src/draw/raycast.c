@@ -6,7 +6,7 @@
 /*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/31 20:27:07 by julberna          #+#    #+#             */
-/*   Updated: 2024/04/18 00:01:10 by julberna         ###   ########.fr       */
+/*   Updated: 2024/04/21 18:16:42 by julberna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,6 @@ void	raycast(t_game *cub)
 
 void	initial_ray_setup(t_game *cub, int i)
 {
-	cub->time = 0;
-	cub->old_time = 0;
 	cub->ray.hit = false;
 	cub->ray.open_door = false;
 	cub->ray.closed_door = false;

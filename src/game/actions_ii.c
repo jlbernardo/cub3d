@@ -6,30 +6,50 @@
 /*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 12:11:45 by aperis-p          #+#    #+#             */
-/*   Updated: 2024/04/17 22:08:40 by julberna         ###   ########.fr       */
+/*   Updated: 2024/04/21 18:52:07 by julberna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	mouse_control(void *param)
+void	mouse_control(double xpos, double ypos, void *param)
 {
-	int32_t			x;
-	int32_t			y;
 	t_game			*cub;
-	static int32_t	old_x;
+	static double	old_x;
+	int				sensitivity;
+
+	(void)ypos;
+	cub = (t_game *)param;
+	sensitivity = 2;
+	if (old_x < xpos)
+	{
+		while (sensitivity--)
+			rotate_right(cub);
+		old_x = xpos;
+	}
+	else if (old_x > xpos)
+	{
+		while (sensitivity--)
+			rotate_left(cub);
+		old_x = xpos;
+	}
+}
+
+void	mouse_click_handler(void *param)
+{
+	t_game	*cub;
+	double	temp;
 
 	cub = (t_game *)param;
-	mlx_get_mouse_pos(cub->mlx, &x, &y);
-	if (old_x < x || x > WIDTH)
+	temp = mlx_get_time();
+	if (mlx_is_mouse_down(cub->mlx, MLX_MOUSE_BUTTON_LEFT)
+		|| cub->weapon_reloading == true)
 	{
-		rotate_right(cub);
-		old_x = x;
-	}
-	else if (old_x > x || x < 0)
-	{
-		rotate_left(cub);
-		old_x = x;
+		if (temp - cub->last_fps > 0.05)
+		{
+			draw_weapon(cub, true, 1);
+			cub->last_fps = temp;
+		}
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 20:01:10 by Juliany Ber       #+#    #+#             */
-/*   Updated: 2024/04/17 16:37:16 by julberna         ###   ########.fr       */
+/*   Updated: 2024/04/21 18:16:58 by julberna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@
 void	game(t_game *cub)
 {
 	mlx_loop_hook(cub->mlx, actions, cub);
-	mlx_loop_hook(cub->mlx, mouse_control, cub);
+	mlx_loop_hook(cub->mlx, mouse_click_handler, cub);
+	mlx_cursor_hook(cub->mlx, mouse_control, cub);
 	mlx_loop(cub->mlx);
 }
 
@@ -46,4 +47,5 @@ void	actions(void *param)
 	close_open_doors(cub);
 	raycast(cub);
 	draw_minimap(cub);
+	calculate_frames_per_second(cub);
 }

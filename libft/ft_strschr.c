@@ -5,29 +5,30 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/18 20:42:58 by julberna          #+#    #+#             */
-/*   Updated: 2024/04/18 21:02:25 by julberna         ###   ########.fr       */
+/*   Created: 2024/04/16 12:11:45 by aperis-p          #+#    #+#             */
+/*   Updated: 2024/04/21 18:15:03 by julberna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "cub3d.h"
 
-char	*ft_strschr(const char *s, const char *set)
+void	mouse_control(void *param)
 {
-	int	i;
-	int	j;
+	int32_t			x;
+	int32_t			y;
+	t_game			*cub;
+	static int32_t	old_x;
 
-	if (s == NULL || set == NULL)
-		return (NULL);
-	i = -1;
-	while (s[++i])
+	cub = (t_game *)param;
+	mlx_get_mouse_pos(cub->mlx, &x, &y);
+	if (old_x < x || x > WIDTH)
 	{
-		j = -1;
-		while (set[++j])
-		{
-			if (s[i] == set[j])
-				return ((char *)s + i);
-		}
+		rotate_right(cub);
+		old_x = x;
 	}
-	return (NULL);
+	else if (old_x > x || x < 0)
+	{
+		rotate_left(cub);
+		old_x = x;
+	}
 }

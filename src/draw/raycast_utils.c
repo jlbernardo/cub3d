@@ -6,7 +6,7 @@
 /*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 21:28:39 by julberna          #+#    #+#             */
-/*   Updated: 2024/04/17 23:59:29 by julberna         ###   ########.fr       */
+/*   Updated: 2024/04/21 18:16:32 by julberna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,9 +96,22 @@ void	check_open_door(t_game *cub)
 
 void	calculate_frames_per_second(t_game *cub)
 {
-	double	frame_time;
+	char				*fps_string;
+	static mlx_image_t	*fps_img;
+	static int			fps_count;
+	int					current_second;
 
-	cub->old_time = cub->time;
-	cub->time = mlx_get_time();
-	frame_time = (cub->time - cub->old_time) / 1000.0;
+	fps_count += 1;
+	current_second = (int)mlx_get_time();
+	if ((int)cub->time < current_second)
+	{
+		fps_string = ft_strjoin("FPS: ", ft_itoa(fps_count));
+		fps_count = 0;
+		cub->time = mlx_get_time();
+		if (fps_img)
+			mlx_delete_image(cub->mlx, fps_img);
+		fps_img = mlx_put_string(cub->mlx, fps_string, 20, HEIGHT - 35);
+		mlx_resize_image(fps_img, 100, 25);
+		free(fps_string);
+	}
 }

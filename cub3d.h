@@ -6,7 +6,7 @@
 /*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 18:15:38 by Juliany Ber       #+#    #+#             */
-/*   Updated: 2024/04/18 18:10:47 by julberna         ###   ########.fr       */
+/*   Updated: 2024/04/21 19:00:58 by julberna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,7 @@ typedef struct s_game
 	t_ray			ray;
 	double			time;
 	double			old_time;
+	double			last_fps;
 	double			move_speed;
 	double			rotation_speed;
 	t_vector		camera_plane;
@@ -112,7 +113,10 @@ typedef struct s_game
 	mlx_image_t		*minimap;
 	mlx_image_t		*miniplayer;
 	mlx_image_t		*ceiling_floor;
+	mlx_image_t		*weapon[15];
+	mlx_texture_t	*weapon_t[15];
 	mlx_texture_t	*texture[TOTAL_TEXTURES];
+	bool			weapon_reloading;
 }					t_game;
 
 typedef struct s_draw
@@ -175,6 +179,7 @@ void				pick_a_side(t_game *cub, int side, t_texture *tex);
 void				calculate_step_and_initial_side_distance(t_game *cub);
 void				put_texture(t_game *cub, t_coord start, t_coord end,
 						int side);
+void				draw_weapon(t_game *cub, bool reload, int i);
 
 /* bresenham */
 void				algo_setup(t_draw *line, t_coord start, t_coord end);
@@ -190,7 +195,8 @@ void				walk_forward(t_game *cub);
 void				rotate_right(t_game *cub);
 void				close_open_doors(t_game *cub);
 void				walk_sideways(t_game *cub, int key);
-void				mouse_control(void *param);
+void				mouse_control(double xpos, double ypos, void *param);
+void				mouse_click_handler(void *param);
 
 /* utils */
 int					get_color(t_texture tex);
@@ -199,7 +205,10 @@ bool				is_blank_line(char *line);
 bool				is_alpha_numeric_line(char *line);
 void				free_matrix(char **split);
 void				load_textures(t_game *cub);
+void				load_weapon_textures(t_game *cub);
+void				create_weapon_imgs(t_game *cub);
 void				delete_images(t_game *cub);
+void				delete_weapon_files(t_game *cub);
 void				cuberror(char *message, t_game *cub);
 t_coord				coordinate(double x, double y);
 t_vector			vector(double x, double y);
