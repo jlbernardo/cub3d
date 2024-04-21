@@ -6,7 +6,7 @@
 /*   By: aperis-p <aperis-p@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/31 20:27:07 by julberna          #+#    #+#             */
-/*   Updated: 2024/04/18 16:27:37 by aperis-p         ###   ########.fr       */
+/*   Updated: 2024/04/20 10:47:12 by aperis-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,6 @@ void	raycast(t_game *cub)
 
 void	initial_ray_setup(t_game *cub, int i)
 {
-	cub->time = mlx_get_time();
-	cub->old_time = 0;
 	cub->ray.hit = false;
 	cub->ray.camera_x = 2 * i / (double)WIDTH - 1;
 	cub->ray.map = coordinate((int)cub->p1.x, (int)cub->p1.y);

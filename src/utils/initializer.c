@@ -6,7 +6,7 @@
 /*   By: aperis-p <aperis-p@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 19:29:16 by Juliany Ber       #+#    #+#             */
-/*   Updated: 2024/04/19 18:33:15 by aperis-p         ###   ########.fr       */
+/*   Updated: 2024/04/21 00:05:36 by aperis-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void	init(t_game *cub)
 	cub->mlx = mlx_init(WIDTH, HEIGHT, "cub3d?", false);
 	if (!cub->mlx)
 		cuberror("There was a problem opening the window.", cub);
+	cub->time = mlx_get_time();
 	mlx_set_icon(cub->mlx, cub->logo);
 	mlx_set_cursor_mode(cub->mlx, MLX_MOUSE_HIDDEN);
 	draw_ceiling_floor(cub);
@@ -53,9 +54,7 @@ void	create_weapon_imgs(t_game *cub)
 		cub->weapon_img_layer[i] = mlx_texture_to_image(
 				cub->mlx, cub->weapon_texture[i]);
 		cub->weapon_img_layer[i]->enabled = false;
-		mlx_image_to_window(cub->mlx,
-			cub->weapon_img_layer[i], WIDTH / 2
-			- cub->weapon_texture[i]->width / 2,
+		mlx_image_to_window(cub->mlx, cub->weapon_img_layer[i], WIDTH / 2,
 			HEIGHT - cub->weapon_texture[i]->height);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: aperis-p <aperis-p@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 18:15:38 by Juliany Ber       #+#    #+#             */
-/*   Updated: 2024/04/19 18:31:39 by aperis-p         ###   ########.fr       */
+/*   Updated: 2024/04/20 23:50:18 by aperis-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,9 +82,9 @@ typedef struct s_game
 	t_ray			ray;
 	double			time;
 	double			old_time;
+	double			last_fps;
 	double			move_speed;
 	double			rotation_speed;
-	double			last_fps;
 	t_vector		camera_plane;
 	t_vector		direction;
 	t_coord			mini_size;
