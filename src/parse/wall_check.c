@@ -6,7 +6,7 @@
 /*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 17:02:12 by aperis-p          #+#    #+#             */
-/*   Updated: 2024/04/21 23:21:08 by julberna         ###   ########.fr       */
+/*   Updated: 2024/04/21 23:34:56 by julberna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,13 @@ void	has_walls(t_game *cub, char **map)
 	i = -1;
 	while (map[0][++i])
 	{
-		if (map[0][i] == '#' || map[(int)(cub->map.y - 1)][i] == '#')
+		if (map[0][i] == '#')
+			cuberror("Map has a broken wall.", cub);
+	}
+	i = -1;
+	while (map[(int)(cub->map.y - 1)][++i])
+	{
+		if (map[(int)(cub->map.y - 1)][i] == '#')
 			cuberror("Map has a broken wall.", cub);
 	}
 	i = 0;
