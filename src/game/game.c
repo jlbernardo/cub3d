@@ -6,17 +6,17 @@
 /*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 20:01:10 by Juliany Ber       #+#    #+#             */
-/*   Updated: 2024/04/17 16:37:16 by julberna         ###   ########.fr       */
+/*   Updated: 2024/04/21 22:15:03 by julberna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-#include <stdio.h>
 
 void	game(t_game *cub)
 {
 	mlx_loop_hook(cub->mlx, actions, cub);
-	mlx_loop_hook(cub->mlx, mouse_control, cub);
+	mlx_loop_hook(cub->mlx, mouse_click, cub);
+	mlx_cursor_hook(cub->mlx, mouse_control, cub);
 	mlx_loop(cub->mlx);
 }
 
@@ -29,7 +29,7 @@ void	actions(void *param)
 		over(cub, EXIT_SUCCESS);
 	if (mlx_is_key_down(cub->mlx, MLX_KEY_DOWN)
 		|| mlx_is_key_down(cub->mlx, MLX_KEY_S))
-		walk_back(cub);
+		walk_backward(cub);
 	if (mlx_is_key_down(cub->mlx, MLX_KEY_UP)
 		|| mlx_is_key_down(cub->mlx, MLX_KEY_W))
 		walk_forward(cub);
@@ -43,7 +43,13 @@ void	actions(void *param)
 		rotate_left(cub);
 	if (mlx_is_key_down(cub->mlx, MLX_KEY_SPACE))
 		open_door(cub);
+	update(cub);
+}
+
+void	update(t_game *cub)
+{
 	close_open_doors(cub);
+	calculate_frames_per_second(cub);
 	raycast(cub);
 	draw_minimap(cub);
 }

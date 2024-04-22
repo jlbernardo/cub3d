@@ -6,7 +6,7 @@
 /*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 19:28:36 by aperis-p          #+#    #+#             */
-/*   Updated: 2024/04/16 21:28:39 by julberna         ###   ########.fr       */
+/*   Updated: 2024/04/21 19:23:36 by julberna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void	parse(t_game *cub, int argc, char **argv)
 	get_colors(cub);
 	get_map(cub);
 	get_player_direction(cub);
+	validation(cub);
 }
 
 void	check_input(t_game *cub, int argc, char **argv)

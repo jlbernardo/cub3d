@@ -6,7 +6,7 @@
 /*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 17:02:12 by aperis-p          #+#    #+#             */
-/*   Updated: 2024/04/18 21:57:27 by julberna         ###   ########.fr       */
+/*   Updated: 2024/04/21 19:56:52 by julberna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,11 +51,4 @@ void	check_keys(t_game *cub)
 			}
 		}
 	}
-}
-
-void	check_walls(t_game *cub, t_coord start)
-{
-	copy_matrix(cub);
-	flood_fill(cub->map_data.copy, cub->map.y, start, '0');
-	has_walls(cub, cub->map_data.copy);
 }
