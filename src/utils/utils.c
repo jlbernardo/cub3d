@@ -6,7 +6,7 @@
 /*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 21:29:32 by Juliany Ber       #+#    #+#             */
-/*   Updated: 2024/04/16 21:28:12 by julberna         ###   ########.fr       */
+/*   Updated: 2024/04/21 22:16:11 by julberna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,17 @@ t_vector	vector(double x, double y)
 	return (vector);
 }
 
+void	copy_matrix(t_game *cub)
+{
+	int		i;
+
+	i = -1;
+	cub->map_data.copy = ft_calloc(cub->map.y + 1, sizeof(char *));
+	while (++i < cub->map.y)
+		cub->map_data.copy[i] = ft_strdup(cub->map_matrix[i]);
+	cub->map_data.copy[i] = NULL;
+}
+
 void	free_matrix(char **matrix)
 {
 	int	i;
@@ -46,4 +57,12 @@ void	free_matrix(char **matrix)
 		free(matrix);
 		matrix = NULL;
 	}
+}
+
+void	cuberror(char *message, t_game *cub)
+{
+	write(STDERR_FILENO, "\033[1;31mError!\033[0m\n", 18);
+	write(STDERR_FILENO, message, ft_strlen(message));
+	write(STDERR_FILENO, "\n", 1);
+	over(cub, EXIT_FAILURE);
 }

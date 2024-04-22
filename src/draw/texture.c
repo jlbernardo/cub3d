@@ -6,13 +6,13 @@
 /*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 18:57:39 by julberna          #+#    #+#             */
-/*   Updated: 2024/04/17 22:43:22 by julberna         ###   ########.fr       */
+/*   Updated: 2024/04/21 22:23:22 by julberna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	put_texture(t_game *cub, t_coord start, t_coord end, int side)
+void	texture(t_game *cub, t_coord start, t_coord end, int side)
 {
 	int				i;
 	t_texture		tex;

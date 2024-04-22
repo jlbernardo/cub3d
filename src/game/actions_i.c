@@ -6,7 +6,7 @@
 /*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 22:29:12 by julberna          #+#    #+#             */
-/*   Updated: 2024/04/17 17:26:28 by julberna         ###   ########.fr       */
+/*   Updated: 2024/04/21 22:15:03 by julberna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	walk_forward(t_game *cub)
 		cub->p1.y += cub->direction.y * cub->move_speed;
 }
 
-void	walk_back(t_game *cub)
+void	walk_backward(t_game *cub)
 {
 	const int	x1 = (int)(cub->p1.x - cub->direction.x * cub->move_speed);
 	const int	y1 = (int)cub->p1.y;

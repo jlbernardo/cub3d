@@ -1,7 +1,7 @@
-NO ./assets/brick-1l.png
-SO ./assets/brick-2l.png
-WE ./assets/brick-2d.png
-EA ./assets/brick-1d.png
+NO ./assets/wall/brick-1l.png
+SO ./assets/wall/brick-2l.png
+WE ./assets/wall/brick-2d.png
+EA ./assets/wall/brick-1d.png
 
 C 238,245,255
 F 210,227,200

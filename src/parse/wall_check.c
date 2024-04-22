@@ -1,25 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   validation_utils.c                                 :+:      :+:    :+:   */
+/*   wall_check.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 17:02:12 by aperis-p          #+#    #+#             */
-/*   Updated: 2024/04/18 20:55:34 by julberna         ###   ########.fr       */
+/*   Updated: 2024/04/21 20:01:03 by julberna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	count_rows_from_map(char **map)
+void	check_walls(t_game *cub, t_coord start)
 {
-	int	i;
-
-	i = 0;
-	while (map[i])
-		i++;
-	return (i);
+	copy_matrix(cub);
+	flood_fill(cub->map_data.copy, cub->map.y, start, '0');
+	has_walls(cub, cub->map_data.copy);
 }
 
 void	flood_fill(char **map, int rows, t_coord cur, char to_fill)
@@ -40,53 +37,27 @@ void	flood_fill(char **map, int rows, t_coord cur, char to_fill)
 	flood_fill(map, rows, (t_coord){cur.x, cur.y + 1}, '0');
 }
 
-void	copy_matrix(t_game *cub)
-{
-	int		i;
-
-	i = -1;
-	cub->map_data.copy = ft_calloc(cub->map.y + 1, sizeof(char *));
-	while (++i < cub->map.y)
-		cub->map_data.copy[i] = ft_strdup(cub->map_matrix[i]);
-	cub->map_data.copy[i] = NULL;
-}
-
 void	has_walls(t_game *cub, char **map)
 {
 	int	i;
 
-	i = 0;
-	while (map[0][i])
+	i = -1;
+	while (map[0][++i])
 	{
 		if (map[0][i] == '#')
 			cuberror("Map has a broken wall.", cub);
-		i++;
 	}
-	i = 0;
-	while (map[(int)(cub->map.y - 1)][i])
+	i = -1;
+	while (map[(int)(cub->map.y - 1)][++i])
 	{
 		if (map[(int)(cub->map.y - 1)][i] == '#')
 			cuberror("Map has a broken wall.", cub);
-		i++;
 	}
-	i = 1;
-	while (i < cub->map.y)
+	i = 0;
+	while (++i < cub->map.y)
 	{
-		if (map[i][0] != '#'
-		&& map[i][ft_strlen(map[i]) - 1] != '#')
-			i++;
-		else
+		if (map[i][0] == '#'
+		|| map[i][ft_strlen(map[i]) - 1] == '#')
 			cuberror("Map has a broken wall.", cub);
 	}
 }
-
-// void	ft_print_matrix(char **matrix)
-// {
-// 	while (*matrix)
-// 	{
-// 		ft_printf("%s", *matrix);
-// 		matrix++;
-// 	}
-// 	ft_printf("\n");
-// 	ft_printf("\n");
-// }

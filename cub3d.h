@@ -6,7 +6,7 @@
 /*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 18:15:38 by Juliany Ber       #+#    #+#             */
-/*   Updated: 2024/04/21 19:00:58 by julberna         ###   ########.fr       */
+/*   Updated: 2024/04/21 22:27:52 by julberna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@
 # define RATIO			200
 # define X				0
 # define Y				1
+# define WEAPON_FRAMES	15
 # define CLOSED_DOOR	4
 # define OPEN_DOOR		6
 
@@ -113,8 +114,8 @@ typedef struct s_game
 	mlx_image_t		*minimap;
 	mlx_image_t		*miniplayer;
 	mlx_image_t		*ceiling_floor;
-	mlx_image_t		*weapon[15];
-	mlx_texture_t	*weapon_t[15];
+	mlx_image_t		*weapon[WEAPON_FRAMES];
+	mlx_texture_t	*weapon_t[WEAPON_FRAMES];
 	mlx_texture_t	*texture[TOTAL_TEXTURES];
 	bool			weapon_reloading;
 }					t_game;
@@ -148,74 +149,22 @@ void				game(t_game *cub);
 void				over(t_game *cub, int exit_code);
 
 /* map parsing */
-int					set_texture_path(t_game *cub, char *trimmed);
-int					count_rows(t_game *cub, char *map_path);
 int					get_rgba(int r, int g, int b, int a);
-void				get_map(t_game *cub);
-void				get_colors(t_game *cub);
-void				get_texture_path(t_game *cub);
-void				get_player_direction(t_game *cub);
-void				set_direction(t_game *cub, int i, int j);
-void				get_raw_data(char *map_path, t_game *cub);
-bool				rgb_to_hex(t_game *cub, char *rgb, char flag);
-void				set_map(t_game *cub, int i);
+int					count_rows(t_game *cub, char *map_path);
+int					set_texture_path(t_game *cub, char *trimmed);
 void				check_input(t_game *cub, int argc, char **argv);
+bool				rgb_to_hex(t_game *cub, char *rgb, char flag);
+void				get_raw_data(char *map_path, t_game *cub);
+void				set_direction(t_game *cub, int i, int j);
+void				get_player_direction(t_game *cub);
 void				find_matrix(t_game *cub, int *i);
+void				get_texture_path(t_game *cub);
 bool				crop_map(t_game *cub, int i);
+void				set_map(t_game *cub, int i);
+void				get_colors(t_game *cub);
+void				get_map(t_game *cub);
 
-/* raycast */
-void				raycast(t_game *cub);
-void				draw_minimap(t_game *cub);
-void				check_open_door(t_game *cub);
-void				draw_line(t_game *cub, int i);
-void				draw_ceiling_floor(t_game *cub);
-void				wall_side(t_game *cub, int axis);
-void				draw_player_on_minimap(t_game *cub);
-void				calculate_wall_distance(t_game *cub);
-void				initial_ray_setup(t_game *cub, int i);
-void				calculate_delta_distance(t_game *cub);
-void				calculate_frames_per_second(t_game *cub);
-void				pick_a_side(t_game *cub, int side, t_texture *tex);
-void				calculate_step_and_initial_side_distance(t_game *cub);
-void				put_texture(t_game *cub, t_coord start, t_coord end,
-						int side);
-void				draw_weapon(t_game *cub, bool reload, int i);
-
-/* bresenham */
-void				algo_setup(t_draw *line, t_coord start, t_coord end);
-void				line(t_game *cub, t_coord start, t_coord end,
-						int buffer[HEIGHT]);
-
-/* game mechanics */
-void				actions(void *param);
-void				open_door(t_game *cub);
-void				walk_back(t_game *cub);
-void				rotate_left(t_game *cub);
-void				walk_forward(t_game *cub);
-void				rotate_right(t_game *cub);
-void				close_open_doors(t_game *cub);
-void				walk_sideways(t_game *cub, int key);
-void				mouse_control(double xpos, double ypos, void *param);
-void				mouse_click_handler(void *param);
-
-/* utils */
-int					get_color(t_texture tex);
-bool				is_space(char c);
-bool				is_blank_line(char *line);
-bool				is_alpha_numeric_line(char *line);
-void				free_matrix(char **split);
-void				load_textures(t_game *cub);
-void				load_weapon_textures(t_game *cub);
-void				create_weapon_imgs(t_game *cub);
-void				delete_images(t_game *cub);
-void				delete_weapon_files(t_game *cub);
-void				cuberror(char *message, t_game *cub);
-t_coord				coordinate(double x, double y);
-t_vector			vector(double x, double y);
-// void				ft_print_matrix(char **matrix);
-
-/* validation */
-int					count_rows_from_map(char **map);
+/* map validation */
 void				validation(t_game *cub);
 void				check_keys(t_game *cub);
 void				copy_matrix(t_game *cub);
@@ -223,5 +172,57 @@ void				check_extension(t_game *cub);
 void				has_walls(t_game *cub, char **map);
 void				check_walls(t_game *cub, t_coord start);
 void				flood_fill(char **map, int rows, t_coord cur, char to_fill);
+
+/* raycast */
+int					get_color(t_texture tex);
+void				raycast(t_game *cub);
+void				draw_screen(t_game *cub);
+void				check_open_door(t_game *cub);
+void				draw_line(t_game *cub, int i);
+void				wall_side(t_game *cub, int axis);
+void				calculate_wall_distance(t_game *cub);
+void				calculate_delta_distance(t_game *cub);
+void				initial_ray_setup(t_game *cub, int i);
+void				pick_a_side(t_game *cub, int side, t_texture *tex);
+void				calculate_step_and_initial_side_distance(t_game *cub);
+void				texture(t_game *cub, t_coord start, t_coord end, int side);
+
+/* bresenham */
+void				algo_setup(t_draw *line, t_coord start, t_coord end);
+void				line(t_game *cub, t_coord start, t_coord end,
+						int buffer[HEIGHT]);
+
+/* draw other elements */
+void				draw_minimap(t_game *cub);
+void				load_textures(t_game *cub);
+void				draw_background(t_game *cub);
+void				load_weapon_images(t_game *cub);
+void				load_weapon_textures(t_game *cub);
+void				draw_player_on_minimap(t_game *cub);
+void				draw_weapon(t_game *cub, bool reload, int i);
+
+/* game mechanics */
+void				update(t_game *cub);
+void				actions(void *param);
+void				open_door(t_game *cub);
+void				mouse_click(void *param);
+void				rotate_left(t_game *cub);
+void				walk_forward(t_game *cub);
+void				rotate_right(t_game *cub);
+void				walk_backward(t_game *cub);
+void				close_open_doors(t_game *cub);
+void				walk_sideways(t_game *cub, int key);
+void				calculate_frames_per_second(t_game *cub);
+void				mouse_control(double xpos, double ypos, void *param);
+
+/* utils */
+bool				is_space(char c);
+bool				is_blank_line(char *line);
+void				free_matrix(char **split);
+void				delete_images(t_game *cub);
+bool				is_alpha_numeric_line(char *line);
+void				cuberror(char *message, t_game *cub);
+t_coord				coordinate(double x, double y);
+t_vector			vector(double x, double y);
 
 #endif
