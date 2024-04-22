@@ -6,7 +6,7 @@
 /*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 19:29:07 by aperis-p          #+#    #+#             */
-/*   Updated: 2024/04/16 20:44:14 by julberna         ###   ########.fr       */
+/*   Updated: 2024/04/21 23:19:27 by julberna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ bool	rgb_to_hex(t_game *cub, char *rgb, char flag)
 	}
 	free(trimmed);
 	free_matrix(colors);
+	cuberror("Color out of range.", cub);
 	return (false);
 }
 

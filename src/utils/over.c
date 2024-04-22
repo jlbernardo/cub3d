@@ -6,7 +6,7 @@
 /*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 19:53:32 by Juliany Ber       #+#    #+#             */
-/*   Updated: 2024/04/21 22:16:06 by julberna         ###   ########.fr       */
+/*   Updated: 2024/04/21 23:06:21 by julberna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,11 @@ void	over(t_game *cub, int exit_code)
 	if (cub->map_data.south_tex_path)
 		free(cub->map_data.south_tex_path);
 	if (cub->mlx)
+	{
 		delete_images(cub);
-	mlx_close_window(cub->mlx);
-	mlx_terminate(cub->mlx);
+		mlx_close_window(cub->mlx);
+		mlx_terminate(cub->mlx);
+	}
 	exit(exit_code);
 }
 
