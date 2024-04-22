@@ -6,7 +6,7 @@
 /*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 19:53:32 by Juliany Ber       #+#    #+#             */
-/*   Updated: 2024/04/21 23:06:21 by julberna         ###   ########.fr       */
+/*   Updated: 2024/04/21 23:43:13 by julberna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,9 +58,9 @@ void	delete_images(t_game *cub)
 			mlx_delete_texture(cub->weapon_t[i]);
 	}
 	i = -1;
-	if (*cub->texture)
+	while (++i < TOTAL_TEXTURES)
 	{
-		while (++i < TOTAL_TEXTURES)
+		if (cub->texture[i])
 			mlx_delete_texture(cub->texture[i]);
 	}
 }
