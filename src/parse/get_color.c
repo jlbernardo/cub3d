@@ -6,7 +6,7 @@
 /*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 19:29:07 by aperis-p          #+#    #+#             */
-/*   Updated: 2024/04/16 20:44:14 by julberna         ###   ########.fr       */
+/*   Updated: 2024/04/21 23:50:26 by julberna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,11 @@ bool	rgb_to_hex(t_game *cub, char *rgb, char flag)
 
 	trimmed = ft_strtrim(rgb, "CF ");
 	colors = ft_split(trimmed, ',');
+	free(trimmed);
 	i = -1;
 	while (++i < 3)
 		rgba[i] = ft_atoi(colors[i]);
+	free_matrix(colors);
 	if ((rgba[0] >= 0 && rgba[0] <= 255) && (rgba[1] >= 0 && rgba[1] <= 255)
 		&& (rgba[2] >= 0 && rgba[2] <= 255))
 	{
@@ -60,12 +62,10 @@ bool	rgb_to_hex(t_game *cub, char *rgb, char flag)
 			cub->map_data.c_color = get_rgba(rgba[0], rgba[1], rgba[2], 0xFF);
 		else if (flag == 'F')
 			cub->map_data.f_color = get_rgba(rgba[0], rgba[1], rgba[2], 0xFF);
-		free(trimmed);
-		free_matrix(colors);
 		return (true);
 	}
-	free(trimmed);
-	free_matrix(colors);
+	free(rgb);
+	cuberror("Color out of range.", cub);
 	return (false);
 }
 
