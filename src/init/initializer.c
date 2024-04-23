@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   initializer.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aperis-p <aperis-p@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 19:29:16 by Juliany Ber       #+#    #+#             */
-/*   Updated: 2024/04/21 23:13:34 by julberna         ###   ########.fr       */
+/*   Updated: 2024/04/22 20:35:41 by aperis-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	init(t_game *cub)
 {
-	cub->mlx = mlx_init(WIDTH, HEIGHT, "cub3d?", false);
+	cub->mlx = mlx_init(WIDTH, HEIGHT, "/ᐠ - ˕ -マ game on!", false);
 	if (!cub->mlx)
 		cuberror("There was a problem opening the window.", cub);
 	cub->time = mlx_get_time();

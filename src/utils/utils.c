@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aperis-p <aperis-p@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 21:29:32 by Juliany Ber       #+#    #+#             */
-/*   Updated: 2024/04/21 22:16:11 by julberna         ###   ########.fr       */
+/*   Updated: 2024/04/22 21:02:48 by aperis-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,16 @@ t_vector	vector(double x, double y)
 void	copy_matrix(t_game *cub)
 {
 	int		i;
+	char	*temp;
 
 	i = -1;
 	cub->map_data.copy = ft_calloc(cub->map.y + 1, sizeof(char *));
 	while (++i < cub->map.y)
-		cub->map_data.copy[i] = ft_strdup(cub->map_matrix[i]);
+	{
+		temp = ft_strdup(cub->map_matrix[i]);
+		cub->map_data.copy[i] = ft_strjoin(temp, "\n");
+		free(temp);
+	}
 	cub->map_data.copy[i] = NULL;
 }
 
