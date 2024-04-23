@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aperis-p <aperis-p@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 18:15:38 by Juliany Ber       #+#    #+#             */
-/*   Updated: 2024/04/22 20:58:54 by aperis-p         ###   ########.fr       */
+/*   Updated: 2024/04/23 16:00:46 by julberna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -216,12 +216,14 @@ void				calculate_frames_per_second(t_game *cub);
 void				mouse_control(double xpos, double ypos, void *param);
 
 /* utils */
+int					count_tabs(char *str);
+char				*transform_tabs(char *str);
+void				cuberror(char *message, t_game *cub);
+void				delete_images(t_game *cub);
+void				free_matrix(char **split);
 bool				is_space(char c);
 bool				is_blank_line(char *line);
-void				free_matrix(char **split);
-void				delete_images(t_game *cub);
 bool				is_alpha_numeric_line(char *line);
-void				cuberror(char *message, t_game *cub);
 t_coord				coordinate(double x, double y);
 t_vector			vector(double x, double y);
 

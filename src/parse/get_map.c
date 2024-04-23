@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_map.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aperis-p <aperis-p@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 19:28:16 by aperis-p          #+#    #+#             */
-/*   Updated: 2024/04/22 20:59:08 by aperis-p         ###   ########.fr       */
+/*   Updated: 2024/04/23 15:59:20 by julberna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,8 @@ void	set_map(t_game *cub, int i)
 	while (j < cub->map.y)
 	{
 		cub->map_matrix[j] = ft_strtrim(cub->map_data.raw_data[i], "\n");
+		if (count_tabs(cub->map_matrix[j]) > 0)
+			cub->map_matrix[j] = transform_tabs(cub->map_matrix[j]);
 		size = ft_strlen(cub->map_matrix[j]);
 		if (size > cub->map.x)
 			cub->map.x = size;
@@ -69,4 +71,32 @@ void	set_map(t_game *cub, int i)
 		j++;
 	}
 	cub->map_matrix[j] = NULL;
+}
+
+char	*transform_tabs(char *str)
+{
+	char		*transformed;
+	int			i;
+	int			j;
+
+	transformed = (char *)ft_calloc((count_tabs(str) * 4)
+			+ ft_strlen(str) + 1, sizeof(char));
+	i = 0;
+	j = 0;
+	while (str[i])
+	{
+		if (str[i] == '\t')
+		{
+			transformed[j] = ' ';
+			transformed[j + 1] = ' ';
+			transformed[j + 2] = ' ';
+			transformed[j + 3] = ' ';
+			j += 4;
+			i++;
+		}
+		else
+			transformed[j++] = str[i++];
+	}
+	free(str);
+	return (transformed);
 }
