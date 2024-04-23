@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_map.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aperis-p <aperis-p@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 19:28:16 by aperis-p          #+#    #+#             */
-/*   Updated: 2024/04/16 21:28:35 by julberna         ###   ########.fr       */
+/*   Updated: 2024/04/22 20:59:08 by aperis-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,12 +70,3 @@ void	set_map(t_game *cub, int i)
 	}
 	cub->map_matrix[j] = NULL;
 }
-
-// void	ft_print_matrix(char **matrix)
-// {
-// 	while (*matrix)
-// 	{
-// 		ft_printf("%s", *matrix);
-// 		matrix++;
-// 	}
-// }
