@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aperis-p <aperis-p@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 21:29:32 by Juliany Ber       #+#    #+#             */
-/*   Updated: 2024/04/22 21:02:48 by aperis-p         ###   ########.fr       */
+/*   Updated: 2024/04/23 16:00:21 by julberna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ void	copy_matrix(t_game *cub)
 	{
 		temp = ft_strdup(cub->map_matrix[i]);
 		cub->map_data.copy[i] = ft_strjoin(temp, "\n");
+		if (count_tabs(cub->map_data.copy[i]) > 0)
+			cub->map_data.copy[i] = transform_tabs(cub->map_data.copy[i]);
 		free(temp);
 	}
 	cub->map_data.copy[i] = NULL;

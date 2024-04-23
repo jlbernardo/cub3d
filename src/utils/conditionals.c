@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   conditionals.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aperis-p <aperis-p@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 16:35:52 by julberna          #+#    #+#             */
-/*   Updated: 2024/04/15 21:50:44 by aperis-p         ###   ########.fr       */
+/*   Updated: 2024/04/23 15:59:51 by julberna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,4 +36,20 @@ bool	is_alpha_numeric_line(char *line)
 	if (*line)
 		return (false);
 	return (true);
+}
+
+int	count_tabs(char *str)
+{
+	int	i;
+	int	total_tabs;
+
+	i = 0;
+	total_tabs = 0;
+	while (str[i])
+	{
+		if (str[i] == '\t')
+			total_tabs++;
+		i++;
+	}
+	return (total_tabs);
 }
