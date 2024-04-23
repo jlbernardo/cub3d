@@ -6,7 +6,7 @@
 /*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 19:28:36 by aperis-p          #+#    #+#             */
-/*   Updated: 2024/04/23 15:47:44 by julberna         ###   ########.fr       */
+/*   Updated: 2024/04/23 16:27:43 by julberna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ void	check_input(t_game *cub, int argc, char **argv)
 	ft_bzero(cub, sizeof(t_game));
 	if (argc < 2)
 		cuberror("Run the program with one of the map files provided.\n"
-			"They are located on the 'phases' folder. (^ -^)", cub);
+			"They are located on the 'phases' folder. i.e.:\n"
+			"./cub3d phases/00-valid_map.cub", cub);
 	if (argc > 2)
 		cuberror("Too many arguments. Use one of the map files provided."
 			" i.e.:\n./cub3d phases/00-valid_map.cub", cub);
