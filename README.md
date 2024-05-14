@@ -17,6 +17,13 @@ Raycasters often use an algorithm called DDA (Digital Differential Analysis) to 
 <br><br>
 
 ## How to play
+
+<p align="center">
+  <br>
+  <img src="https://github.com/jlbernardo/cub3d/assets/56981667/cefc29f3-4071-43f9-a03c-7e23dda51c8c" />
+  <br><br>
+</p>
+
 Download the repository using one of the formats below and type `make run` at the root of the project.
 
 If you want to explore different maps, use `./cub3d phases/[name of the map].cub` and choose one of the valid maps (or use one you built yourself following that same structure or modifying one of the existing valid maps).
