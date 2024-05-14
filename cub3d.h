@@ -6,7 +6,7 @@
 /*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/27 18:15:38 by Juliany Ber       #+#    #+#             */
-/*   Updated: 2024/04/23 16:00:46 by julberna         ###   ########.fr       */
+/*   Updated: 2024/04/23 22:53:36 by julberna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,19 +15,16 @@
 
 # include "MLX42.h"
 # include "libft.h"
-# include <errno.h>
 # include <fcntl.h>
 # include <math.h>
-# include <stdio.h>
 # include <stdlib.h>
 # include <string.h>
-# include <sys/stat.h>
 # include <unistd.h>
 
 # define HORIZON		2
 # define MAP_OFFSET		10
 # define HEIGHT			600
-# define WIDTH			800
+# define WIDTH			700
 # define RATIO			200
 # define X				0
 # define Y				1

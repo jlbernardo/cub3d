@@ -50,6 +50,10 @@ $(LIBFT):
 
 bonus: all
 
+run: all
+	@clear
+	@./$(NAME) phases/02-valid_map.cub
+
 clean:
 	@rm -rf $(ODIR)
 	@echo "$(BLU) All objects were deleted.$(DFL)"

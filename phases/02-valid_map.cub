@@ -3,8 +3,8 @@ SO ./assets/wall/brick-2l.png
 WE ./assets/wall/brick-2d.png
 EA ./assets/wall/brick-1d.png
 
-C 24, 28, 56
-F 0, 18, 25
+C 173, 232, 244
+F 58, 90, 64
 
         1111111111111111111111111
         10S0000000111001110000111
