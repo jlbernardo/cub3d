@@ -6,7 +6,7 @@
 /*   By: julberna <julberna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 19:29:07 by aperis-p          #+#    #+#             */
-/*   Updated: 2024/04/21 23:50:26 by julberna         ###   ########.fr       */
+/*   Updated: 2024/04/23 16:36:25 by julberna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,12 @@ void	get_colors(t_game *cub)
 	while (*temp)
 	{
 		trimmed = ft_strtrim(*temp, " ");
-		if (!ft_strncmp("C", trimmed, 1) && (keys & (1 << 1)) < 1)
+		if (!ft_strncmp("C ", trimmed, 2) && (keys & (1 << 1)) < 1)
 		{
 			if (rgb_to_hex(cub, trimmed, 'C'))
 				keys |= (1 << 1);
 		}
-		if (!ft_strncmp("F", trimmed, 1) && (keys & (1 << 0)) < 1)
+		if (!ft_strncmp("F ", trimmed, 2) && (keys & (1 << 0)) < 1)
 		{
 			if (rgb_to_hex(cub, trimmed, 'F'))
 				keys |= 1;
