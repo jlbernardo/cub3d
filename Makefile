@@ -48,6 +48,11 @@ $(LIBFT):
 	@if ! [ $(T_LIB) ]; then echo "$(BLU) Creating libft library.$(DFL)";fi
 	@make -C libft/ -s --no-print-directory
 
+run: all
+	@clear
+	@./$(NAME) phases/02-valid_map.cub
+	@make clean
+
 clean:
 	@rm -rf $(ODIR)
 	@echo "$(BLU) All objects were deleted.$(DFL)"
